@@ -1,0 +1,65 @@
+{
+  "id": "forex_session_clock",
+  "name": "Forex Session Clock",
+  "category": "trade-visuals",
+  "version": 2,
+  "when_to_pick": "A 24-hour UTC timeline of the four FX trading sessions (Sydney / Tokyo / London / New York) shown as colored bands on one track, with the high-liquidity OVERLAP windows highlighted (the Tokyo+Sydney and especially the London+New York overlap). A live vertical marker sweeps to the current UTC time and the open sessions are called out. The bands render server-side, so the timeline is fully readable even before JS runs. Use it to explain why intraday FX strategies cluster around the London/NY overlap, when liquidity and volatility peak, and which hours are dead.",
+  "tags": ["forex", "sessions", "timeline", "overlap", "liquidity", "utc"],
+  "audience_fit": ["forex"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["sessions"],
+    "properties": {
+      "title": {
+        "type": "string",
+        "default": "Forex trading sessions (UTC)",
+        "maxLength": 60,
+        "description": "Heading for the timeline, e.g. 'When each FX session is open (UTC)'."
+      },
+      "sessions": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 6,
+        "description": "The trading sessions to plot on the 24h track, in display order. Times are integer UTC hours (0-24); a session that wraps midnight (e.g. Sydney 21:00-06:00) is fine — set start greater than end.",
+        "items": {
+          "type": "object",
+          "required": ["name", "start", "end", "tone"],
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string", "maxLength": 14, "description": "Session name, e.g. 'London'." },
+            "city": { "type": "string", "maxLength": 18, "description": "Optional city/zone label shown under the name, e.g. 'GMT/BST'." },
+            "start": { "type": "integer", "minimum": 0, "maximum": 24, "description": "Open hour in UTC (0-24)." },
+            "end": { "type": "integer", "minimum": 0, "maximum": 24, "description": "Close hour in UTC (0-24). If end <= start the session wraps past midnight." },
+            "tone": {
+              "type": "string",
+              "enum": ["sydney", "tokyo", "london", "newyork", "accent", "warning"],
+              "description": "Color tone for the band (maps to a theme-aware token); use one per session."
+            }
+          }
+        }
+      },
+      "overlaps": {
+        "type": "array",
+        "maxItems": 4,
+        "description": "High-liquidity overlap windows to highlight on the track, e.g. London+New York 12:00-16:00. Optional; if omitted no overlaps are drawn.",
+        "items": {
+          "type": "object",
+          "required": ["label", "start", "end"],
+          "additionalProperties": false,
+          "properties": {
+            "label": { "type": "string", "maxLength": 26, "description": "Short overlap label, e.g. 'London + New York'." },
+            "start": { "type": "integer", "minimum": 0, "maximum": 24, "description": "Overlap open hour in UTC." },
+            "end": { "type": "integer", "minimum": 0, "maximum": 24, "description": "Overlap close hour in UTC." },
+            "note": { "type": "string", "maxLength": 40, "description": "Optional one-liner, e.g. 'Peak liquidity & volatility'." }
+          }
+        }
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 240,
+        "description": "One or two sentences delivering the takeaway — name the specific overlap window and why it matters for intraday execution (liquidity, tighter spreads, larger ranges)."
+      }
+    }
+  }
+}

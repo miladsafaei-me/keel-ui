@@ -1,0 +1,10 @@
+{
+  "question": "A bot wins 80% of its trades but uses a 1:5 reward-to-risk ratio — every win banks $20, every loss costs $100. Over 100 trades, what is the expected outcome?",
+  "options": [
+    {"text": "Profitable. An 80% win rate is far above breakeven, so it can't lose money.", "correct": false},
+    {"text": "Break-even. The high win rate exactly offsets the poor reward-to-risk ratio.", "correct": false},
+    {"text": "A net loss. The math: 80 wins x $20 = $1,600 vs 20 losses x $100 = $2,000.", "correct": true},
+    {"text": "Impossible to say without knowing the broker's spread and commission.", "correct": false}
+  ],
+  "explanation": "Win rate alone never tells you if an edge exists — you have to weight it by reward-to-risk. Expected value per trade = 0.80 x (+$20) - 0.20 x ($100) = +$16 - $20 = <strong>-$4 per trade</strong>. Across 100 trades that's a <strong>-$400</strong> loss, before any spread or commission. This is the classic trap of high-win-rate strategies: a glossy 80% hit rate hides a negative edge the moment the losers are five times the size of the winners."
+}

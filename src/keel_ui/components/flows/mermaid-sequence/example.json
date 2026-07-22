@@ -1,0 +1,4 @@
+{
+  "source": "sequenceDiagram\n    autonumber\n    participant TV as TradingView\n    participant Bot as SignalBots\n    participant Brk as Broker API\n    TV->>Bot: BUY EURUSD alert\n    Note over Bot: Verify HMAC + risk\n    Bot->>Brk: Place market order\n    alt Order accepted\n        Brk-->>Bot: Filled at 1.08412\n        Bot-->>TV: Position open\n    else Margin reject\n        Brk-->>Bot: Rejected (422)\n        Bot-->>TV: Stayed flat\n    end\n    Note over TV,Brk: Alert to fill in under 120 ms",
+  "caption": "A TradingView alert clears the bot and broker in three hops. The slowest leg is almost always the broker's risk gate, not the network wire."
+}

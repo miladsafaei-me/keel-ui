@@ -1,0 +1,21 @@
+<div class="cp-html-block cp-html-block-formula">
+<figure class="cp-formula">
+    <div class="cp-formula__rail" aria-hidden="true"></div>
+    <div class="cp-formula__main">
+        {% if label %}
+        <figcaption class="cp-formula__label">
+            <span class="cp-formula__label-dot" aria-hidden="true"></span>
+            <span class="cp-formula__label-text">{{ label }}</span>
+            <span class="cp-formula__chip" aria-hidden="true">fx</span>
+        </figcaption>
+        {% endif %}
+        <div class="cp-formula__body">{{ body|safe }}</div>
+        {% if note %}
+        <div class="cp-formula__note">
+            <span class="cp-formula__note-marker" aria-hidden="true">where</span>
+            <span class="cp-formula__note-text">{{ note|safe }}</span>
+        </div>
+        {% endif %}
+    </div>
+</figure>
+</div>

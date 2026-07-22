@@ -1,0 +1,29 @@
+<div class="cp-html-block cp-html-block-hierarchy">
+<figure class="cp-hier" id="{{ instance_id }}-root">
+    {% if heading %}<figcaption class="cp-hier__heading">{{ heading }}</figcaption>{% endif %}
+    {% if apex %}
+    <div class="cp-hier__apex-row">
+        <div class="cp-hier__node cp-hier__node--apex cp-hier__node--{{ apex.tone|default:'accent' }}">
+            <span class="cp-hier__title">{{ apex.title }}</span>
+            {% if apex.note %}<span class="cp-hier__note">{{ apex.note }}</span>{% endif %}
+        </div>
+    </div>
+    <span class="cp-hier__spine" aria-hidden="true"></span>
+    {% endif %}
+    {% for level in levels %}
+    <div class="cp-hier__level">
+        {% if level.label %}<span class="cp-hier__tier-label">{{ level.label }}</span>{% endif %}
+        <div class="cp-hier__row{% if apex or not forloop.first %} cp-hier__row--branched{% endif %}">
+            {% for node in level.nodes %}
+            <div class="cp-hier__node cp-hier__node--{{ node.tone|default:'accent' }}">
+                <span class="cp-hier__title">{{ node.title }}</span>
+                {% if node.note %}<span class="cp-hier__note">{{ node.note }}</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if not forloop.last %}<span class="cp-hier__spine" aria-hidden="true"></span>{% endif %}
+    {% endfor %}
+    {% if caption %}<p class="cp-hier__caption">{{ caption }}</p>{% endif %}
+</figure>
+</div>

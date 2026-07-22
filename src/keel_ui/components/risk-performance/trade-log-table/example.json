@@ -1,0 +1,15 @@
+{
+  "caption": "10-trade sample from a mean-reversion bot. Note the cluster of small wins broken by one larger loss — typical 65% win rate / 1:1 R:R shape.",
+  "trades": [
+    {"date": "2026-04-22 09:15", "symbol": "EURUSD", "side": "buy",  "entry": 1.0832, "exit": 1.0845, "pips": 13,  "pnl": 65.00},
+    {"date": "2026-04-22 11:40", "symbol": "GBPUSD", "side": "sell", "entry": 1.2548, "exit": 1.2560, "pips": -12, "pnl": -60.00},
+    {"date": "2026-04-22 14:05", "symbol": "USDJPY", "side": "buy",  "entry": 152.18, "exit": 152.31, "pips": 13,  "pnl": 65.00},
+    {"date": "2026-04-23 08:20", "symbol": "EURUSD", "side": "sell", "entry": 1.0856, "exit": 1.0840, "pips": 16,  "pnl": 80.00},
+    {"date": "2026-04-23 10:55", "symbol": "AUDUSD", "side": "buy",  "entry": 0.6612, "exit": 0.6597, "pips": -15, "pnl": -75.00},
+    {"date": "2026-04-23 13:30", "symbol": "GBPJPY", "side": "buy",  "entry": 191.22, "exit": 191.45, "pips": 23,  "pnl": 115.00},
+    {"date": "2026-04-24 09:00", "symbol": "EURUSD", "side": "buy",  "entry": 1.0848, "exit": 1.0825, "pips": -23, "pnl": -115.00},
+    {"date": "2026-04-24 12:15", "symbol": "USDCHF", "side": "sell", "entry": 0.8801, "exit": 0.8789, "pips": 12,  "pnl": 60.00},
+    {"date": "2026-04-24 15:40", "symbol": "EURGBP", "side": "buy",  "entry": 0.8624, "exit": 0.8638, "pips": 14,  "pnl": 70.00},
+    {"date": "2026-04-25 08:45", "symbol": "USDJPY", "side": "buy",  "entry": 152.42, "exit": 152.57, "pips": 15,  "pnl": 75.00}
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "anatomy_diagram",
+  "name": "Anatomy Diagram (labeled breakdown)",
+  "category": "structure-maps",
+  "version": 1,
+  "when_to_pick": "Teach the parts of a single visual subject by labeling them. A central inline-SVG subject (e.g. a candlestick, an order ticket, a chart pattern) sits in the middle and callout cards point to its parts with leader lines. Best for 'anatomy of X' / 'parts of a Y' explainers where the reader must connect each named part to its location on the picture. Pick the built-in 'candlestick' subject for OHLC explainers, or supply your own inline SVG via subject_svg for any other object.",
+  "tags": ["anatomy", "diagram", "labeled", "breakdown", "callouts", "candlestick", "explainer"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["parts"],
+    "properties": {
+      "title": {
+        "type": "string",
+        "maxLength": 120,
+        "description": "Optional heading shown above the diagram."
+      },
+      "subtitle": {
+        "type": "string",
+        "maxLength": 200,
+        "description": "Optional one-line caption under the title."
+      },
+      "subject": {
+        "type": "string",
+        "enum": ["candlestick", "custom"],
+        "default": "candlestick",
+        "description": "Which central subject to draw. 'candlestick' renders a built-in bullish OHLC candle SVG. 'custom' renders the inline SVG provided in subject_svg."
+      },
+      "subject_svg": {
+        "type": "string",
+        "description": "Trusted inline SVG markup for the central subject, used only when subject='custom'. Rendered with |safe — must be a complete <svg ...>...</svg> string authored by the pipeline (never user input). Use a 0 0 200 240 viewBox and cp-* CSS variables via fill/stroke for theme safety."
+      },
+      "subject_label": {
+        "type": "string",
+        "maxLength": 60,
+        "description": "Optional small label rendered under the central subject (e.g. 'Bullish candle')."
+      },
+      "parts": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 6,
+        "description": "The labeled parts. Each gets a callout card and a leader line to its position.",
+        "items": {
+          "type": "object",
+          "required": ["label", "position"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 48,
+              "description": "Short name of the part (e.g. 'Upper wick')."
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 220,
+              "description": "Optional one-or-two-sentence explanation of the part."
+            },
+            "position": {
+              "type": "string",
+              "enum": ["top-left", "top-right", "bottom-left", "bottom-right", "left", "right"],
+              "description": "Which corner/side the callout card sits on. The leader line runs from the card toward the center of the subject."
+            },
+            "tone": {
+              "type": "string",
+              "enum": ["default", "buy", "sell", "accent", "warning"],
+              "default": "default",
+              "description": "Color accent for the callout's marker dot and leader line. Use 'buy'/'sell' for directional OHLC parts."
+            }
+          }
+        }
+      }
+    }
+  }
+}

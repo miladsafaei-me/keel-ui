@@ -1,0 +1,27 @@
+<div class="cp-html-block cp-html-block-code-block">
+  <figure class="cp-codeblock" id="{{ instance_id }}-root"{% if show_line_numbers %} data-cp-linenums="1"{% endif %}>
+    <header class="cp-codeblock__bar">
+      <span class="cp-codeblock__dots" aria-hidden="true">
+        <span class="cp-codeblock__dot"></span>
+        <span class="cp-codeblock__dot"></span>
+        <span class="cp-codeblock__dot"></span>
+      </span>
+      <span class="cp-codeblock__lang">{{ language }}</span>
+      {% if filename %}<span class="cp-codeblock__file">{{ filename }}</span>{% endif %}
+      <button type="button" class="cp-codeblock__copy" id="{{ instance_id }}-copy" aria-label="Copy code to clipboard">
+        <svg class="cp-codeblock__copy-icon cp-codeblock__copy-icon--copy" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+          <rect x="5.25" y="5.25" width="8.5" height="8.5" rx="1.75" stroke="currentColor" stroke-width="1.4"></rect>
+          <path d="M10.5 2.75H4.25a1.5 1.5 0 0 0-1.5 1.5v6.25" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+        </svg>
+        <svg class="cp-codeblock__copy-icon cp-codeblock__copy-icon--done" viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+          <path d="M3.5 8.5l3 3 6-6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span class="cp-codeblock__copy-label">Copy</span>
+      </button>
+    </header>
+    <div class="cp-codeblock__body">
+      <pre class="cp-codeblock__pre"><code class="cp-codeblock__code" id="{{ instance_id }}-code">{{ code }}</code></pre>
+    </div>
+    {% if caption %}<figcaption class="cp-codeblock__caption">{{ caption }}</figcaption>{% endif %}
+  </figure>
+</div>

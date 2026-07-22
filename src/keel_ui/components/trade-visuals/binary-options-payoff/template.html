@@ -1,0 +1,16 @@
+<div class="cp-html-block cp-html-block-binary-payoff">
+<div class="cp-binary-payoff" id="{{ instance_id }}-root"
+     data-cp-strike="{{ strike|default:100 }}"
+     data-cp-payout="{{ payout_pct|default:78 }}"
+     data-cp-stake="{{ stake|default:100 }}">
+    <h4 class="cp-binary-payoff__title">{{ title|default:"Call vs Put binary payoff at expiry" }}</h4>
+    <div class="cp-binary-payoff__chart-wrap">
+        <svg class="cp-binary-payoff__svg" id="{{ instance_id }}-svg" viewBox="0 0 600 260" role="img" aria-label="Binary call vs put payoff at expiry"></svg>
+    </div>
+    <div class="cp-binary-payoff__legend">
+        <span class="cp-binary-payoff__legend-call">━ Call payoff</span>
+        <span class="cp-binary-payoff__legend-put">━ Put payoff</span>
+        <span>x-axis: underlying price at expiry • y-axis: P&amp;L per ${{ stake|default:100 }} staked</span>
+    </div>
+</div>
+</div>

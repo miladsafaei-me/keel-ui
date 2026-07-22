@@ -1,0 +1,11 @@
+{
+  "heading": "From signal view to funded trader — where leads drop off",
+  "unit": "leads",
+  "stages": [
+    { "label": "Viewed a free signal", "value": 10000, "tone": "accent" },
+    { "label": "Clicked through to a broker", "value": 4200, "tone": "accent", "note": "42% act on the signal" },
+    { "label": "Registered an account", "value": 1500, "tone": "warning", "note": "Sign-up friction bites here" },
+    { "label": "Funded and placed a trade", "value": 620, "tone": "success", "note": "The lead that actually earns IB commission" }
+  ],
+  "caption": "Every bar is sized against the 10,000 who saw a signal. The biggest leak is click-to-registration — the strongest place to add support in the trader's own language."
+}

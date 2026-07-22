@@ -1,0 +1,11 @@
+{
+  "heading": "How one leader trade is copied and scaled",
+  "leader": { "title": "Lead strategy account", "trade": "BUY EUR/USD - risks 2% - 1.00 lot on $50k" },
+  "followers_label": "Mirrored to each follower's balance",
+  "followers": [
+    { "title": "Follower - $3,000", "position": "0.06 lot - same 2% risk" },
+    { "title": "Follower - $10,000", "position": "0.20 lot - same 2% risk" },
+    { "title": "Follower - $25,000", "position": "0.50 lot - same 2% risk" }
+  ],
+  "caption": "Copy trading mirrors the leader's trade onto every follower, sized to each account's own balance - so all copiers take the same 2% risk, not the same lot size."
+}

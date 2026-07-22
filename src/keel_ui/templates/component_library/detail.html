@@ -1,0 +1,83 @@
+{% extends "component_library/_base.html" %}
+
+{% block cl_title %}{{ component.name }}{% endblock %}
+
+{% block cl_main %}
+<article class="cl-component">
+    <header class="cl-component__header">
+        <div class="cl-component__breadcrumb">
+            <a href="{% url 'component_library:index' %}">Component Library</a>
+            <span aria-hidden="true">/</span>
+            <span>{{ component.category|title }}</span>
+        </div>
+        <div class="cl-component__title-row">
+            <h1>{{ component.name }}</h1>
+            <code class="cl-component__id">{{ component.id }}</code>
+        </div>
+        <p class="cl-component__lead">{{ component.when_to_pick }}</p>
+        <ul class="cl-component__meta">
+            <li><strong>Category:</strong> {{ component.category }}</li>
+            <li><strong>Version:</strong> {{ component.version }}</li>
+            {% if component.tags %}
+                <li><strong>Tags:</strong>
+                    {% for tag in component.tags %}<span class="cl-tag">{{ tag }}</span>{% endfor %}
+                </li>
+            {% endif %}
+            {% if component.audience_fit %}
+                <li><strong>Audience:</strong>
+                    {% for a in component.audience_fit %}<span class="cl-tag cl-tag--audience">{{ a }}</span>{% endfor %}
+                </li>
+            {% endif %}
+            {% if component.dependencies %}
+                <li><strong>Dependencies:</strong>
+                    {% for d in component.dependencies %}<span class="cl-tag cl-tag--dep">{{ d }}</span>{% endfor %}
+                </li>
+            {% endif %}
+        </ul>
+    </header>
+
+    <section class="cl-component__section">
+        <h2>Live Preview</h2>
+        {% if render_error %}
+            <div class="cl-error">
+                <strong>Render error.</strong>
+                <pre>{{ render_error }}</pre>
+            </div>
+        {% else %}
+            <div class="cl-preview-frame">
+                <div class="cl-preview-frame__chrome">
+                    <span class="cl-preview-frame__dot"></span>
+                    <span class="cl-preview-frame__dot"></span>
+                    <span class="cl-preview-frame__dot"></span>
+                    <span class="cl-preview-frame__hint">prefers-color-scheme follows your OS</span>
+                </div>
+                <div class="cl-preview-frame__body">
+                    {{ rendered_html }}
+                </div>
+            </div>
+        {% endif %}
+    </section>
+
+    <section class="cl-component__section">
+        <h2>Example Spec <button type="button" class="cl-copy-btn" data-cl-copy="example">Copy</button></h2>
+        <pre class="cl-code-block" id="cl-example-code"><code>{{ example_json }}</code></pre>
+    </section>
+
+    <section class="cl-component__section">
+        <h2>JSON Schema <button type="button" class="cl-copy-btn" data-cl-copy="schema">Copy</button></h2>
+        <pre class="cl-code-block" id="cl-schema-code"><code>{{ schema_json }}</code></pre>
+    </section>
+
+    <section class="cl-component__section">
+        <h2>Manifest <button type="button" class="cl-copy-btn" data-cl-copy="manifest">Copy</button></h2>
+        <pre class="cl-code-block" id="cl-manifest-code"><code>{{ manifest_json }}</code></pre>
+    </section>
+
+    {% if not render_error %}
+    <section class="cl-component__section">
+        <h2>Rendered HTML <button type="button" class="cl-copy-btn" data-cl-copy="html">Copy</button></h2>
+        <pre class="cl-code-block" id="cl-html-code"><code>{{ rendered_raw }}</code></pre>
+    </section>
+    {% endif %}
+</article>
+{% endblock %}

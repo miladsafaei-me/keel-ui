@@ -1,0 +1,42 @@
+{
+  "id": "code_block",
+  "name": "Code Block",
+  "category": "reference",
+  "version": 2,
+  "when_to_pick": "Show actual code the reader can copy and run — MQL4/5 expert-advisor snippets, TradingView Pine Script, Python ccxt order placement, a webhook payload, a CLI command. Use for a focused excerpt (a function, a loop, a config), not a whole file; long programs belong in a gist. The polished header carries a language chip + optional filename; readers get a one-click copy button, and optional line numbers help you reference specific lines in the surrounding prose.",
+  "tags": ["code", "snippet", "reference", "pine-script", "python", "mql", "copy"],
+  "audience_fit": ["forex", "crypto", "prop-firm", "binary"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["language", "code"],
+    "properties": {
+      "language": {
+        "type": "string",
+        "maxLength": 24,
+        "description": "Language label shown in the header chip, e.g. 'pine', 'python', 'mql5', 'javascript', 'bash', 'json'. Displayed uppercase."
+      },
+      "filename": {
+        "type": "string",
+        "maxLength": 80,
+        "description": "Optional file/context name shown beside the language chip, e.g. 'rsi_reversion.pine' or 'webhook.json'."
+      },
+      "code": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4000,
+        "description": "The raw source to display. Newlines (\\n) separate lines; tabs are rendered. Auto-escaped — do not pass HTML."
+      },
+      "show_line_numbers": {
+        "type": "boolean",
+        "description": "Render a gutter of line numbers (default false). Turn on when the prose references specific lines."
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 200,
+        "description": "Optional one-line takeaway shown under the block, e.g. what the snippet does or the key idea to notice."
+      }
+    }
+  }
+}

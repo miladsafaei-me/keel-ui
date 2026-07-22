@@ -1,0 +1,11 @@
+{
+  "title": "Round-turn cost on a raw-spread EUR/USD trade (1 standard lot)",
+  "unit": "USD",
+  "segments": [
+    { "label": "Spread", "value": 1.5, "tone": "accent" },
+    { "label": "Commission", "value": 7.0, "tone": "warning" },
+    { "label": "Swap (1 night)", "value": 2.8, "tone": "danger" },
+    { "label": "Slippage (est.)", "value": 1.2, "tone": "neutral" }
+  ],
+  "caption": "On a raw-spread account the headline 0.1-pip spread is the smallest piece — commission dominates the all-in cost, and an overnight hold adds swap on top."
+}

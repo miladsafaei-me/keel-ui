@@ -1,0 +1,129 @@
+<div class="cp-html-block cp-html-block-session-clock">
+<div class="cp-fxsc" id="{{ instance_id }}-root">
+    <div class="cp-fxsc__head">
+        <div class="cp-fxsc__heading">
+            <span class="cp-fxsc__title">{{ title|default:"Forex trading sessions (UTC)" }}</span>
+            <span class="cp-fxsc__sub">24-hour clock &middot; times in UTC</span>
+        </div>
+        <span class="cp-fxsc__now" id="{{ instance_id }}-now">
+            <span class="cp-fxsc__now-pulse" aria-hidden="true"></span>UTC timeline
+        </span>
+    </div>
+
+    <div class="cp-fxsc__board">
+        {% comment %} Label column for each lane, kept in DOM order with the lanes so rows align. {% endcomment %}
+        <div class="cp-fxsc__labels">
+            <span class="cp-fxsc__rail-spacer" aria-hidden="true"></span>
+            {% for s in sessions %}
+            <span class="cp-fxsc__lane-label cp-fxsc__lane-label--{{ s.tone }}">
+                <span class="cp-fxsc__lane-dot" aria-hidden="true"></span>
+                <span class="cp-fxsc__lane-name">{{ s.name }}{% if s.city %}<em>{{ s.city }}</em>{% endif %}</span>
+            </span>
+            {% endfor %}
+            <span class="cp-fxsc__axis-spacer" aria-hidden="true"></span>
+        </div>
+
+        {% comment %} Plotting region — every left/width % below is a true % of the 24h track. {% endcomment %}
+        <div class="cp-fxsc__plot" id="{{ instance_id }}-plot">
+            {% comment %} Marker rail: a dedicated strip above the lanes so the now-dot + label never overlap band text. {% endcomment %}
+            <div class="cp-fxsc__rail" aria-hidden="true"></div>
+
+            <div class="cp-fxsc__grid" aria-hidden="true">
+                <span class="cp-fxsc__gridline" style="left:0%"></span>
+                <span class="cp-fxsc__gridline" style="left:12.5%"></span>
+                <span class="cp-fxsc__gridline" style="left:25%"></span>
+                <span class="cp-fxsc__gridline" style="left:37.5%"></span>
+                <span class="cp-fxsc__gridline cp-fxsc__gridline--noon" style="left:50%"></span>
+                <span class="cp-fxsc__gridline" style="left:62.5%"></span>
+                <span class="cp-fxsc__gridline" style="left:75%"></span>
+                <span class="cp-fxsc__gridline" style="left:87.5%"></span>
+                <span class="cp-fxsc__gridline cp-fxsc__gridline--end" style="left:100%"></span>
+            </div>
+
+            {% if overlaps %}
+            {% for o in overlaps %}
+            <span class="cp-fxsc__overlap{% if forloop.last %} cp-fxsc__overlap--peak{% endif %}" style="left:calc({{ o.start }} / 24 * 100%);width:calc(({{ o.end }} - {{ o.start }}) / 24 * 100%)">
+                <span class="cp-fxsc__overlap-cap" aria-hidden="true"></span>
+            </span>
+            {% endfor %}
+            {% endif %}
+
+            <div class="cp-fxsc__lanes">
+                {% for s in sessions %}
+                <div class="cp-fxsc__lane-track cp-fxsc__lane-track--{{ s.tone }}">
+                    {% if s.end > s.start %}
+                    {% comment %} Width bucket gates the label: <4h hides it, 4-6h shows the compact start-hour form, >=7h shows the full range. {% endcomment %}
+                    <span class="cp-fxsc__band cp-fxsc__band--w{% if s.end < s.start|add:4 %}xs{% elif s.end < s.start|add:7 %}sm{% else %}lg{% endif %}" style="left:calc({{ s.start }} / 24 * 100%);width:calc(({{ s.end }} - {{ s.start }}) / 24 * 100%)">
+                        <span class="cp-fxsc__band-time">
+                            <span class="cp-fxsc__band-time-full">{{ s.start }}:00&ndash;{{ s.end }}:00</span>
+                            <span class="cp-fxsc__band-time-min">{{ s.start }}:00</span>
+                        </span>
+                    </span>
+                    {% else %}
+                    {% comment %} Wrapped session: left arm runs start->24, right arm runs 0->end. Each arm sized independently. {% endcomment %}
+                    <span class="cp-fxsc__band cp-fxsc__band--wrap-l cp-fxsc__band--w{% if s.start > 20 %}xs{% elif s.start > 17 %}sm{% else %}lg{% endif %}" style="left:calc({{ s.start }} / 24 * 100%);width:calc((24 - {{ s.start }}) / 24 * 100%)">
+                        <span class="cp-fxsc__band-time">
+                            <span class="cp-fxsc__band-time-full">{{ s.start }}:00&ndash;24:00</span>
+                            <span class="cp-fxsc__band-time-min">{{ s.start }}:00</span>
+                        </span>
+                    </span>
+                    <span class="cp-fxsc__band cp-fxsc__band--wrap-r cp-fxsc__band--w{% if s.end < 4 %}xs{% elif s.end < 7 %}sm{% else %}lg{% endif %}" style="left:0%;width:calc({{ s.end }} / 24 * 100%)">
+                        <span class="cp-fxsc__band-time">
+                            <span class="cp-fxsc__band-time-full">00:00&ndash;{{ s.end }}:00</span>
+                            <span class="cp-fxsc__band-time-min">&ndash;{{ s.end }}:00</span>
+                        </span>
+                    </span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <span class="cp-fxsc__now-marker" id="{{ instance_id }}-marker" hidden>
+                <span class="cp-fxsc__now-stem" aria-hidden="true"></span>
+                <span class="cp-fxsc__now-dot" aria-hidden="true"></span>
+            </span>
+
+            <div class="cp-fxsc__axis" aria-hidden="true">
+                <span style="left:0%">00</span>
+                <span style="left:12.5%">03</span>
+                <span style="left:25%">06</span>
+                <span style="left:37.5%">09</span>
+                <span style="left:50%">12</span>
+                <span style="left:62.5%">15</span>
+                <span style="left:75%">18</span>
+                <span style="left:87.5%">21</span>
+                <span class="cp-fxsc__axis--end" style="left:100%">24</span>
+            </div>
+        </div>
+    </div>
+
+    {% if overlaps %}
+    <div class="cp-fxsc__overlaps">
+        {% for o in overlaps %}
+        <div class="cp-fxsc__overlap-chip{% if forloop.last %} cp-fxsc__overlap-chip--peak{% endif %}">
+            <span class="cp-fxsc__overlap-hatch" aria-hidden="true"></span>
+            <span class="cp-fxsc__overlap-text">
+                <strong>{{ o.label }}</strong>
+                <span class="cp-fxsc__overlap-window">{{ o.start }}:00&ndash;{{ o.end }}:00 UTC{% if o.note %} &middot; {{ o.note }}{% endif %}</span>
+            </span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="cp-fxsc__legend">
+        {% for s in sessions %}
+        <span class="cp-fxsc__legend-item cp-fxsc__legend-item--{{ s.tone }}">
+            <span class="cp-fxsc__swatch" aria-hidden="true"></span>{{ s.name }}
+        </span>
+        {% endfor %}
+        {% if overlaps %}
+        <span class="cp-fxsc__legend-item cp-fxsc__legend-item--overlap">
+            <span class="cp-fxsc__swatch cp-fxsc__swatch--overlap" aria-hidden="true"></span>Overlap (peak liquidity)
+        </span>
+        {% endif %}
+    </div>
+
+    {% if caption %}<p class="cp-fxsc__caption">{{ caption }}</p>{% endif %}
+</div>
+</div>

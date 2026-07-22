@@ -1,0 +1,13 @@
+<div class="cp-html-block cp-html-block-backtest-panel">
+<div class="cp-metrics-panel">
+    <h4 class="cp-metrics-panel__title">{{ title }}{% if period %}<span class="cp-metrics-panel__period">{{ period }}</span>{% endif %}</h4>
+    <div class="cp-metrics-grid">
+        {% for m in metrics %}
+        <div class="cp-metric">
+            <div class="cp-metric__label">{{ m.label }}</div>
+            <div class="cp-metric__value{% if m.verdict == 'good' %} cp-metric__value--good{% elif m.verdict == 'bad' %} cp-metric__value--bad{% elif m.verdict == 'warn' %} cp-metric__value--warn{% endif %}">{{ m.value }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>

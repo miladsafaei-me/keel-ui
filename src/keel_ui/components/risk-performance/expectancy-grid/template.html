@@ -1,0 +1,8 @@
+<div class="cp-html-block cp-html-block-expectancy-grid">
+<div class="cp-heatmap-wrap">
+    <h4>{{ title|default:"Profitability heatmap — win rate × R:R" }}</h4>
+    <div id="{{ instance_id }}-grid" class="cp-heatmap-grid"
+         style="grid-template-columns:48px repeat({{ win_rates|length|default:10 }}, 1fr)"></div>
+    <div id="{{ instance_id }}-readout" class="cp-heatmap-readout">Hover a cell to see the expected value per $100 risked.</div>
+</div>
+</div>

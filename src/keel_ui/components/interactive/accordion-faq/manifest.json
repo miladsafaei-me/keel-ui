@@ -1,0 +1,30 @@
+{
+  "id": "accordion_faq",
+  "name": "Accordion FAQ",
+  "category": "interactive",
+  "version": 1,
+  "when_to_pick": "Surface 3-10 question-answer pairs at the end of an article. Each row is collapsed by default; click to expand. Search engines pick this up as FAQPage schema when wrapped in JSON-LD (article-level concern, not component-level).",
+  "tags": ["faq", "accordion", "qa"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["items"],
+    "properties": {
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 12,
+        "items": {
+          "type": "object",
+          "required": ["question", "answer"],
+          "properties": {
+            "question":  { "type": "string", "maxLength": 200 },
+            "answer":    { "type": "string", "maxLength": 1200, "description": "HTML allowed." },
+            "open_by_default": { "type": "boolean", "default": false }
+          }
+        }
+      }
+    }
+  }
+}

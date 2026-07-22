@@ -1,0 +1,33 @@
+{
+  "id": "formula_block",
+  "name": "Formula Block",
+  "category": "reference",
+  "version": 1,
+  "when_to_pick": "Display a single key formula — Kelly fraction, expected value, Sharpe ratio, position size, R-multiple, pip value — as a standout reference block. Use when one equation is the centerpiece and deserves large monospace typography, an accent rail, and a 'where' note defining its variables. For a runnable code snippet use code_block instead; for multiple stacked equations use one formula_block per equation.",
+  "tags": ["formula", "math", "equation", "reference"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["body"],
+    "additionalProperties": false,
+    "properties": {
+      "label": {
+        "type": "string",
+        "maxLength": 70,
+        "description": "Short name of the formula, shown as an uppercase label chip above the equation (e.g. 'Kelly criterion — optimal position size')."
+      },
+      "body": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 400,
+        "description": "The formula itself, as trusted inline HTML (rendered with |safe). Wrap each variable name in <var>X</var> so it gets the accent italic styling; <sup>/<sub> for exponents/indices and <span class=\"cp-formula__op\">(</span> for muted grouping operators are supported. HTML entities like &minus; &times; &divide; &asymp; &middot; render the proper math glyphs."
+      },
+      "note": {
+        "type": "string",
+        "maxLength": 480,
+        "description": "Optional explanatory note, shown after a 'where' marker, defining each variable and (ideally) a one-line worked example. Trusted inline HTML allowed: <var>, <strong>, <sup>/<sub>, and math entities. Keep it tight — definitions plus one numeric example."
+      }
+    }
+  }
+}

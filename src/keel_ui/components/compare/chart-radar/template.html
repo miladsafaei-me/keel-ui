@@ -1,0 +1,7 @@
+<figure class="cp-figure cp-figure-chart-interactive">
+    <div class="cp-chartjs-wrapper" style="position:relative;height:420px">
+        <canvas id="{{ instance_id }}"
+                data-cp-chart="{% cp_radar_config title axes candidates max_value|default:100 %}"></canvas>
+    </div>
+    {% if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
+</figure>

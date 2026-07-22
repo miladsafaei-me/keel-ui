@@ -1,0 +1,46 @@
+{
+  "variant": "default",
+  "columns": ["Category", "Best for", "Execution speed", "Control", "Typical cost", "Effort"],
+  "rows": [
+    {
+      "cells": [
+        {"text": "Signal providers", "bold": true},
+        {"text": "Beginners; manual override"},
+        {"text": "Slow (manual) or fast (with webhook executor)"},
+        {"text": "High", "tone": "success"},
+        {"text": "$20–200/mo"},
+        {"text": "Medium"}
+      ]
+    },
+    {
+      "cells": [
+        {"text": "Expert Advisors", "bold": true},
+        {"text": "Technical users; fast execution"},
+        {"text": "Fast", "tone": "success"},
+        {"text": "High (open-source) / Low (closed)"},
+        {"text": "$99–499 one-time"},
+        {"text": "High setup, low ongoing"}
+      ]
+    },
+    {
+      "cells": [
+        {"text": "Copy trading", "bold": true},
+        {"text": "Hands-off; mirror a master"},
+        {"text": "Decent (platform-dependent)"},
+        {"text": "Low"},
+        {"text": "20–30% perf fee + sub"},
+        {"text": "Minimal", "tone": "success"}
+      ]
+    },
+    {
+      "cells": [
+        {"text": "Fully managed", "bold": true},
+        {"text": "Set-and-forget; high net worth"},
+        {"text": "N/A (manager-dependent)"},
+        {"text": "Lowest", "tone": "danger"},
+        {"text": "~30% perf + high-water mark"},
+        {"text": "None", "tone": "success"}
+      ]
+    }
+  ]
+}

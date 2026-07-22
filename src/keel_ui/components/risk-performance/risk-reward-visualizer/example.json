@@ -1,0 +1,9 @@
+{
+  "title": "EUR/USD long — 30-pip stop, 60-pip target",
+  "instrument": "EUR/USD",
+  "entry_default": 1.0850,
+  "sl_default": 1.0820,
+  "tp_default": 1.0910,
+  "decimals": 4,
+  "caption": "At a 1:2 reward-to-risk ratio you only need to be right 33% of the time to break even — winners pay for two losers. Drag the stop wider and watch that break-even win rate climb."
+}

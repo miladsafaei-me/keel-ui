@@ -1,0 +1,19 @@
+{
+  "variant": "informational",
+  "info": {
+    "live_label": "Live data · auto-updated",
+    "question": "Bitcoin price right now",
+    "answer": "$67,432",
+    "answer_unit": "USD",
+    "delta": "+2.34% today",
+    "delta_dir": "up",
+    "context": [
+      { "label": "24h high", "value": "$68,210" },
+      { "label": "24h low", "value": "$65,870" },
+      { "label": "Updated", "value": "14:32 UTC" },
+      { "label": "Volume (24h)", "value": "$42.1B" }
+    ],
+    "sparkline": [65980, 66120, 65840, 66510, 66280, 66740, 67010, 66820, 67250, 67480, 67190, 67620, 67432],
+    "source": "Source: CoinGecko · refreshes every 30s"
+  }
+}

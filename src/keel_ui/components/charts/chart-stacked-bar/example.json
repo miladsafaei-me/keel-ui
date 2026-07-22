@@ -1,0 +1,15 @@
+{
+  "title": "Monthly P&L decomposition — gross pips vs trading costs",
+  "caption": "The green bars look like a winning system. Stack the slippage and commission drag on top and the same six months net just +65 pips — costs ate roughly 95% of the gross edge.",
+  "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  "datasets": [
+    {"label": "Gross gain",  "tone": "success", "data": [180, 220, 95, 260, 310, 175]},
+    {"label": "Slippage",    "tone": "warning", "data": [-90, -75, -110, -85, -95, -80]},
+    {"label": "Commissions", "tone": "danger",  "data": [-100, -120, -85, -110, -130, -95]}
+  ],
+  "summary": [
+    {"label": "Gross edge",  "value": "+1,240 pips", "note": "Before any execution cost", "tone": "success"},
+    {"label": "Cost drag",   "value": "-1,175 pips", "note": "Slippage + commissions",     "tone": "danger"},
+    {"label": "Net result",  "value": "+65 pips",    "note": "What actually hit the account","tone": "warning"}
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "backtest_metrics_panel",
+  "name": "Backtest Metrics Panel",
+  "category": "risk-performance",
+  "version": 1,
+  "when_to_pick": "Show a full backtest report card: every metric a trader looks at (Sharpe, Sortino, Calmar, max DD, recovery factor, etc.) with a per-metric verdict color (good/bad/warn). Use when teaching what to look for in a backtest, or when reviewing a specific strategy.",
+  "tags": ["backtest", "metrics", "scorecard", "diagnostic"],
+  "audience_fit": ["forex", "crypto", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["title", "metrics"],
+    "properties": {
+      "title":  { "type": "string", "maxLength": 80 },
+      "period": { "type": "string", "maxLength": 60 },
+      "metrics": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 16,
+        "items": {
+          "type": "object",
+          "required": ["label", "value"],
+          "properties": {
+            "label":   { "type": "string", "maxLength": 40 },
+            "value":   { "type": "string", "maxLength": 24 },
+            "verdict": { "type": "string", "enum": ["good", "bad", "warn", "neutral"], "default": "neutral" }
+          }
+        }
+      }
+    }
+  }
+}

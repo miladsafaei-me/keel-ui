@@ -1,0 +1,12 @@
+{
+  "variant": "essential",
+  "question": "What's the realistic minimum monthly capital to run a trading bot?",
+  "heading": "$500 covers margin and one round-trip per day. Below that, broker fees eat your edge before the strategy gets a chance.",
+  "details": [
+    { "label": "Capital floor", "value": "$500" },
+    { "label": "Avg broker fee", "value": "$0.85/trade" },
+    { "label": "Trades/day (median)", "value": "3.2" },
+    { "label": "Break-even edge", "value": "0.4%" }
+  ],
+  "source": "Based on fee schedules from IBKR, Alpaca, OANDA · sampled May 2026"
+}

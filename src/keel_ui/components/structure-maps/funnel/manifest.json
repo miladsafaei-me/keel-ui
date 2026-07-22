@@ -1,0 +1,35 @@
+{
+  "id": "funnel",
+  "name": "Conversion Funnel",
+  "category": "structure-maps",
+  "version": 1,
+  "when_to_pick": "Show how a population shrinks across the ordered stages of a journey — visitors -> sign-ups -> funded accounts -> active traders, signal-views -> broker clicks -> registrations -> deposits, or an IB recruitment funnel (leads -> calls -> sign-ups -> producing sub-IBs). Each stage is a proportional bar (width = its share of the top stage) with the count and the percent of the entry that survives to it, so the drop-off between steps is obvious. Pick this when the STORY is attrition through a sequence; for a non-shrinking ordered process use how_it_works_steps, and for parts of one whole use chart_doughnut.",
+  "tags": ["funnel", "conversion", "drop-off", "acquisition", "ib", "journey", "attrition"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["stages"],
+    "properties": {
+      "heading": { "type": "string", "maxLength": 90, "description": "Optional heading above the funnel." },
+      "unit": { "type": "string", "maxLength": 12, "description": "Optional unit/suffix shown after each value, e.g. 'leads', 'users', '$'." },
+      "stages": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 6,
+        "description": "Ordered stages from widest (top, the entry population) to narrowest. The FIRST stage should be the largest — every bar is sized relative to it.",
+        "items": {
+          "type": "object",
+          "required": ["label", "value"],
+          "properties": {
+            "label": { "type": "string", "maxLength": 40, "description": "Stage name, e.g. 'Viewed a signal', 'Registered', 'Funded'." },
+            "value": { "type": "number", "minimum": 0, "description": "Count reaching this stage. The first stage is treated as 100%." },
+            "note": { "type": "string", "maxLength": 80, "description": "Optional short annotation for the stage." },
+            "tone": { "type": "string", "enum": ["accent", "success", "warning", "danger", "neutral"], "default": "accent", "description": "Bar colour. Default 'accent'." }
+          }
+        }
+      },
+      "caption": { "type": "string", "maxLength": 260, "description": "Optional one-line takeaway under the funnel." }
+    }
+  }
+}

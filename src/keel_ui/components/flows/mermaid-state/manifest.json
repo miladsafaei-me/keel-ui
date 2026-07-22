@@ -1,0 +1,27 @@
+{
+  "id": "mermaid_state",
+  "name": "State Diagram",
+  "category": "flows",
+  "version": 1,
+  "when_to_pick": "Visualize a state machine — a finite set of named states with explicit transitions. Ideal for an automated bot's operational lifecycle (idle → scanning → in-trade → closing → cooldown, plus a halted error state), an order's lifecycle (pending → working → filled/cancelled → reconciled), or a prop-firm challenge progression (phase 1 → phase 2 → funded → breach). Pick this over a flowchart when the subject is 'what mode is it in right now and how does it move between modes', not 'how do I decide'. Use classDef with 8-digit-hex fills to color states by meaning (active/green, risk/red, waiting/blue).",
+  "tags": ["diagram", "state-machine", "lifecycle", "bot", "automation"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": ["mermaid"],
+  "schema": {
+    "type": "object",
+    "required": ["source"],
+    "properties": {
+      "source": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 4000,
+        "description": "Raw mermaid source starting with 'stateDiagram-v2'. Use composite states (state \"Label\" as Id { ... }) to group sub-machines. Color states by meaning with classDef + class. NEVER use rgba(R,G,B,A) inside classDef or style (commas break the parser) — use 8-digit hex (#RRGGBBAA). Do NOT set a text color: property in classDef; the renderer strips it so node text always inherits the theme-correct color in both light and dark."
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 240,
+        "description": "One-sentence takeaway that names the 'aha' — e.g. which transition is the one readers most often get wrong."
+      }
+    }
+  }
+}

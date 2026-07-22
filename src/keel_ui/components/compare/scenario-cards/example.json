@@ -1,0 +1,27 @@
+{
+  "heading": "Gold (XAU/USD) — next-quarter outlook",
+  "scenarios": [
+    {
+      "label": "Bear case",
+      "target": "$2,180",
+      "probability": 25,
+      "tone": "bearish",
+      "points": ["Fed holds rates higher for longer", "Dollar strengthens on hot inflation", "Risk-on rotation out of safe havens"]
+    },
+    {
+      "label": "Base case",
+      "target": "$2,350 – $2,420",
+      "probability": 50,
+      "tone": "neutral",
+      "points": ["Rates drift lower into year-end", "Central-bank buying stays firm", "Range-bound with a mild upward bias"]
+    },
+    {
+      "label": "Bull case",
+      "target": "$2,550",
+      "probability": 25,
+      "tone": "bullish",
+      "points": ["Faster rate cuts than expected", "Geopolitical risk premium returns", "ETF inflows accelerate"]
+    }
+  ],
+  "caption": "Targets are scenario-based, not predictions — size positions for the range and let the signal confirm which path price is taking."
+}

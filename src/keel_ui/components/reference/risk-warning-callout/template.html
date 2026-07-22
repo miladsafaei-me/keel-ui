@@ -1,0 +1,21 @@
+<div class="cp-html-block cp-html-block-riskwarn">
+<aside class="cp-riskwarn" role="note" aria-labelledby="{{ instance_id }}-title">
+  <span class="cp-riskwarn__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+      <path d="M12 3.2 1.8 20.4a1.4 1.4 0 0 0 1.2 2.1h18a1.4 1.4 0 0 0 1.2-2.1L12 3.2Z" fill="currentColor" fill-opacity="0.16" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M12 9.4v4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="12" cy="17.4" r="1.15" fill="currentColor"/>
+    </svg>
+  </span>
+  <div class="cp-riskwarn__main">
+    <p class="cp-riskwarn__heading" id="{{ instance_id }}-title">{{ heading|default:"Risk Warning" }}</p>
+    <div class="cp-riskwarn__body">{{ body|safe }}</div>
+    <a class="cp-riskwarn__link" href="/risk-warning">
+      <span class="cp-riskwarn__link-text">{{ link_text|default:"Read the full risk warning" }}</span>
+      <svg class="cp-riskwarn__link-arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M3.2 8h9.2M8.4 3.6 12.8 8l-4.4 4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</aside>
+</div>

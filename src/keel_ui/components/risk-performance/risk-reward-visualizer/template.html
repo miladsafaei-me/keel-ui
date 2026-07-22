@@ -1,0 +1,72 @@
+<div class="cp-html-block cp-html-block-rrv">
+<div class="cp-rrv" id="{{ instance_id }}-root"
+     data-cp-dec="{{ decimals|default:4 }}"
+     data-cp-entry="{{ entry_default|default:'1.0850' }}"
+     data-cp-sl="{{ sl_default|default:'1.0820' }}"
+     data-cp-tp="{{ tp_default|default:'1.0910' }}"
+     data-cp-instrument="{{ instrument|default:'EUR/USD' }}">
+    <div class="cp-rrv__head">
+        <h4 class="cp-rrv__title">{{ title|default:"Risk : Reward visualizer" }}</h4>
+        <span class="cp-rrv__dir" id="{{ instance_id }}-dir" data-dir="long">Long setup</span>
+    </div>
+
+    <div class="cp-calc__inputs cp-rrv__inputs">
+        <label class="cp-calc__label">
+            <span class="cp-calc__label-text">Entry</span>
+            <input id="{{ instance_id }}-e" type="number" value="{{ entry_default|default:'1.0850' }}" step="0.0001" inputmode="decimal" class="cp-calc__input">
+        </label>
+        <label class="cp-calc__label">
+            <span class="cp-calc__label-text">Stop loss</span>
+            <input id="{{ instance_id }}-sl" type="number" value="{{ sl_default|default:'1.0820' }}" step="0.0001" inputmode="decimal" class="cp-calc__input">
+        </label>
+        <label class="cp-calc__label">
+            <span class="cp-calc__label-text">Take profit</span>
+            <input id="{{ instance_id }}-tp" type="number" value="{{ tp_default|default:'1.0910' }}" step="0.0001" inputmode="decimal" class="cp-calc__input">
+        </label>
+    </div>
+
+    <div class="cp-rrv__stage">
+        <div class="cp-rrv__bands" id="{{ instance_id }}-bands">
+            {% comment %} Static fallback geometry (EUR/USD long, R:R ≈ 1:2) so the figure is never blank before JS runs. JS recomputes for live inputs. {% endcomment %}
+            <div class="cp-rrv__band cp-rrv__band--reward" style="top:0%;height:66.67%">
+                <span class="cp-rrv__band-tag">Reward zone</span>
+                <span class="cp-rrv__band-amt">+0.0060</span>
+            </div>
+            <div class="cp-rrv__band cp-rrv__band--risk" style="top:66.67%;height:33.33%">
+                <span class="cp-rrv__band-tag">Risk zone</span>
+                <span class="cp-rrv__band-amt">−0.0030</span>
+            </div>
+        </div>
+        <div class="cp-rrv__ladder" id="{{ instance_id }}-ladder">
+            <div class="cp-rrv__line cp-rrv__line--tp" style="top:0%"><span class="cp-rrv__pill">TP 1.0910</span></div>
+            <div class="cp-rrv__line cp-rrv__line--entry" style="top:66.67%"><span class="cp-rrv__pill">Entry 1.0850</span></div>
+            <div class="cp-rrv__line cp-rrv__line--sl" style="top:100%"><span class="cp-rrv__pill">SL 1.0820</span></div>
+        </div>
+    </div>
+
+    <div class="cp-rrv__ratio" id="{{ instance_id }}-ratiowrap" data-good="true">
+        <div class="cp-rrv__ratio-meta">
+            <span class="cp-rrv__ratio-label">Reward-to-risk ratio</span>
+            <span class="cp-rrv__ratio-note" id="{{ instance_id }}-note">You make 2.0x what you risk</span>
+        </div>
+        <div class="cp-rrv__ratio-value" id="{{ instance_id }}-rr">1 : 2.00</div>
+    </div>
+
+    <div class="cp-rrv__summary">
+        <div class="cp-rrv__cell cp-rrv__cell--risk">
+            <div class="cp-rrv__cell-label">Risk (1R)</div>
+            <div class="cp-rrv__cell-value" id="{{ instance_id }}-risk">0.0030</div>
+        </div>
+        <div class="cp-rrv__cell cp-rrv__cell--reward">
+            <div class="cp-rrv__cell-label">Reward</div>
+            <div class="cp-rrv__cell-value" id="{{ instance_id }}-reward">0.0060</div>
+        </div>
+        <div class="cp-rrv__cell">
+            <div class="cp-rrv__cell-label">Break-even win rate</div>
+            <div class="cp-rrv__cell-value" id="{{ instance_id }}-be">33.3%</div>
+        </div>
+    </div>
+
+    {% if caption %}<p class="cp-rrv__caption">{{ caption }}</p>{% endif %}
+</div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "label": "Crypto Fear & Greed Index",
+  "value": 72,
+  "min": 0,
+  "max": 100,
+  "zones": [
+    { "upTo": 25, "tone": "sell", "label": "Extreme Fear" },
+    { "upTo": 45, "tone": "danger", "label": "Fear" },
+    { "upTo": 55, "tone": "neutral", "label": "Neutral" },
+    { "upTo": 75, "tone": "success", "label": "Greed" },
+    { "upTo": 100, "tone": "buy", "label": "Extreme Greed" }
+  ],
+  "caption": "At 72 the market sits in Greed — crowd sentiment is bullish but stretched. Historically these readings precede shallow pullbacks more often than fresh lows, so it is a context gauge, not a timing signal."
+}

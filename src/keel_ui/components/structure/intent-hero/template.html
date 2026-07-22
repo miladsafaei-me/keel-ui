@@ -1,0 +1,141 @@
+<div class="cp-html-block cp-html-block-intent-hero">
+{% if variant == "informational" %}
+<article class="cp-ihero cp-ihero--info" id="{{ instance_id }}-root">
+  <div class="cp-ihero__info-main">
+    {% if info.live_label %}<span class="cp-ihero__live">{{ info.live_label }}</span>{% endif %}
+    {% if info.question %}<p class="cp-ihero__question">{{ info.question }}</p>{% endif %}
+    <h1 class="cp-ihero__answer">{{ info.answer }}{% if info.answer_unit %}<span class="cp-ihero__answer-unit">{{ info.answer_unit }}</span>{% endif %}</h1>
+    {% if info.delta %}
+    <span class="cp-ihero__delta cp-ihero__delta--{{ info.delta_dir|default:'up' }}">
+      <svg class="cp-ihero__delta-icon" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+        {% if info.delta_dir == "down" %}<path d="M6 10L2 5h8z"/>{% else %}<path d="M6 2l4 5H2z"/>{% endif %}
+      </svg>
+      {{ info.delta }}
+    </span>
+    {% endif %}
+    {% if info.context %}
+    <div class="cp-ihero__context">
+      {% for c in info.context %}
+      <div class="cp-ihero__context-item">
+        <span class="cp-ihero__context-label">{{ c.label }}</span>
+        <span class="cp-ihero__context-value">{{ c.value }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="cp-ihero__spark">
+    <svg class="cp-ihero__spark-svg" viewBox="0 0 220 90" preserveAspectRatio="none" role="img" aria-label="Recent trend" focusable="false">
+      <path class="cp-ihero__spark-fill" d=""></path>
+      <polyline class="cp-ihero__spark-line" points="" fill="none"></polyline>
+      <circle class="cp-ihero__spark-dot" r="4" cx="0" cy="0"></circle>
+    </svg>
+    <span class="cp-ihero__spark-data" data-spark="{{ info.sparkline|join:',' }}"></span>
+  </div>
+
+  {% if info.source %}<span class="cp-ihero__source">{{ info.source }}</span>{% endif %}
+</article>
+
+{% elif variant == "commercial" %}
+<article class="cp-ihero cp-ihero--commercial">
+  {% if commercial.pain %}<p class="cp-ihero__pain">{{ commercial.pain }}</p>{% endif %}
+
+  <div class="cp-ihero__pick">
+    {% if commercial.pick.logo %}<div class="cp-ihero__logo">{{ commercial.pick.logo }}</div>{% endif %}
+    <div class="cp-ihero__pick-body">
+      <h1 class="cp-ihero__name">{{ commercial.pick.name }}{% if commercial.pick.name_suffix %}<span class="cp-ihero__name-suffix">{{ commercial.pick.name_suffix }}</span>{% endif %}</h1>
+      <ul class="cp-ihero__reasons">
+        {% for r in commercial.pick.reasons %}<li>{{ r }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% if commercial.pick.score %}
+    <div class="cp-ihero__score">
+      <div class="cp-ihero__score-value cp-ihero__score-value--verdict">{{ commercial.pick.score }}</div>
+      {% if commercial.pick.score_label %}<div class="cp-ihero__score-label">{{ commercial.pick.score_label }}</div>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+
+  {% if commercial.runners %}
+  <div class="cp-ihero__runners">
+    {% for run in commercial.runners %}
+    <div class="cp-ihero__runner">
+      <span class="cp-ihero__runner-rank">{{ run.rank }}</span>
+      <span class="cp-ihero__runner-name">{{ run.name }}</span>
+      {% if run.note %}<span class="cp-ihero__runner-note">{{ run.note }}</span>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if commercial.meta or commercial.cta_label %}
+  <div class="cp-ihero__cmeta">
+    {% if commercial.meta %}<span>{{ commercial.meta }}</span>{% endif %}
+    {% if commercial.cta_label %}<span class="cp-ihero__cmeta-cta">{{ commercial.cta_label }} &rarr;</span>{% endif %}
+  </div>
+  {% endif %}
+</article>
+
+{% elif variant == "transactional" %}
+<article class="cp-ihero cp-ihero--transactional">
+  {% if transactional.eyebrow %}<span class="cp-ihero__eyebrow">{{ transactional.eyebrow }}</span>{% endif %}
+  <h1 class="cp-ihero__headline">{{ transactional.headline|safe }}</h1>
+  {% if transactional.sub %}<p class="cp-ihero__sub">{{ transactional.sub }}</p>{% endif %}
+
+  <div class="cp-ihero__form" role="group" aria-label="Sign up (demo)">
+    <input class="cp-ihero__input" type="email" placeholder="{{ transactional.email_placeholder|default:'you@example.com' }}" aria-label="Email address" disabled>
+    <span class="cp-ihero__btn" role="button" aria-disabled="true">
+      {{ transactional.button_label|default:"Get started" }}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <path d="M3 7h8M8 3l4 4-4 4"/>
+      </svg>
+    </span>
+  </div>
+
+  {% if transactional.reassure %}<p class="cp-ihero__reassure">{{ transactional.reassure }}</p>{% endif %}
+
+  {% if transactional.trust %}
+  <div class="cp-ihero__trust">
+    {% for t in transactional.trust %}
+    <div class="cp-ihero__trust-item">
+      {% if t.icon %}<div class="cp-ihero__trust-icon">{{ t.icon }}</div>{% endif %}
+      <div class="cp-ihero__trust-text">
+        <strong>{{ t.value }}</strong>
+        <span>{{ t.label }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>
+
+{% elif variant == "navigational" %}
+<article class="cp-ihero cp-ihero--navigational">
+  <div class="cp-ihero__nav-main">
+    {% if navigational.breadcrumb %}
+    <nav class="cp-ihero__breadcrumb" aria-label="Breadcrumb">
+      {% for seg in navigational.breadcrumb %}<span>{{ seg }}</span>{% endfor %}
+    </nav>
+    {% endif %}
+    <h1 class="cp-ihero__nav-title">{{ navigational.title }}</h1>
+    {% if navigational.desc %}<p class="cp-ihero__nav-desc">{{ navigational.desc }}</p>{% endif %}
+  </div>
+
+  <a class="cp-ihero__nav-cta" href="{{ navigational.cta.href|default:'#' }}">
+    {{ navigational.cta.label }}
+    <svg class="cp-ihero__nav-cta-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <path d="M3 7h8M8 3l4 4-4 4"/>
+    </svg>
+  </a>
+
+  {% if navigational.related %}
+  <div class="cp-ihero__related">
+    <span class="cp-ihero__related-label">{{ navigational.related.label|default:"Related destinations" }}</span>
+    {% for link in navigational.related.links %}<a class="cp-ihero__related-link" href="{{ link.href|default:'#' }}">{{ link.label }}</a>{% endfor %}
+  </div>
+  {% endif %}
+</article>
+{% endif %}
+</div>

@@ -1,0 +1,53 @@
+{
+  "id": "comparison_table",
+  "name": "Comparison Table",
+  "category": "compare",
+  "version": 1,
+  "when_to_pick": "Compare 2-6 items across 2-8 dimensions so the reader can scan side-by-side. Use the `green_red` variant when there are exactly two columns representing 'good' vs 'bad'. Cells support an optional tone ('success' / 'danger' / 'warning') for inline emphasis.",
+  "tags": ["comparison", "table", "decision-aid"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["columns", "rows"],
+    "properties": {
+      "variant": {
+        "type": "string",
+        "enum": ["default", "green_red"],
+        "default": "default"
+      },
+      "columns": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 8,
+        "items": { "type": "string" },
+        "description": "Column header labels. May contain inline HTML (e.g. emoji)."
+      },
+      "rows": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": ["cells"],
+          "properties": {
+            "cells": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": { "type": "string" },
+                  "bold": { "type": "boolean", "default": false },
+                  "tone": {
+                    "type": "string",
+                    "enum": ["success", "danger", "warning", "muted"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

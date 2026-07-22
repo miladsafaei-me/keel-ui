@@ -1,0 +1,41 @@
+<div class="cp-html-block cp-html-block-kpi-sparkline">
+<div class="cp-kpi" id="{{ instance_id }}-root" data-cp-kpi>
+  <div class="cp-kpi__grid" data-count="{{ cards|length }}">
+    {% for c in cards %}
+    {% firstof c.tone c.delta_dir "flat" as tone %}
+    <div class="cp-kpi__card cp-kpi__card--{{ tone }}">
+      <div class="cp-kpi__head">
+        <span class="cp-kpi__label">{{ c.label }}</span>
+        {% if c.delta %}
+        <span class="cp-kpi__delta cp-kpi__delta--{{ c.delta_dir|default:'flat' }}">
+          <span class="cp-kpi__arrow" aria-hidden="true">{% if c.delta_dir == "up" %}&#9650;{% elif c.delta_dir == "down" %}&#9660;{% else %}&#9644;{% endif %}</span>
+          <span class="cp-kpi__delta-text">{{ c.delta }}</span>
+        </span>
+        {% endif %}
+      </div>
+      <div class="cp-kpi__value">{{ c.value }}</div>
+      {% if c.hint %}<div class="cp-kpi__hint">{{ c.hint }}</div>{% endif %}
+      {% if c.spark %}
+      <div class="cp-kpi__spark">
+        <svg class="cp-kpi__svg" viewBox="0 0 100 34" preserveAspectRatio="none" role="img"
+             aria-label="{{ c.label }} recent trend" focusable="false">
+          <defs>
+            <linearGradient id="{{ instance_id }}-fill-{{ forloop.counter }}" x1="0" y1="0" x2="0" y2="1">
+              <stop class="cp-kpi__fill-top" offset="0%"></stop>
+              <stop class="cp-kpi__fill-bot" offset="100%"></stop>
+            </linearGradient>
+          </defs>
+          <line class="cp-kpi__baseline" x1="0" y1="33.5" x2="100" y2="33.5"></line>
+          <path class="cp-kpi__area" d="" fill="url(#{{ instance_id }}-fill-{{ forloop.counter }})"></path>
+          <polyline class="cp-kpi__line" points="" fill="none"></polyline>
+          <circle class="cp-kpi__dot" r="2.1" cx="0" cy="0"></circle>
+        </svg>
+        <span class="cp-kpi__spark-data" data-spark="{{ c.spark|join:',' }}"></span>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% if caption %}<p class="cp-kpi__caption">{{ caption }}</p>{% endif %}
+</div>
+</div>

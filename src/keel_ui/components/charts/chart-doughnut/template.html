@@ -1,0 +1,25 @@
+<figure class="cp-figure cp-doughnut" id="{{ instance_id }}-root">
+    <div class="cp-doughnut__card">
+        <div class="cp-doughnut__head">
+            <span class="cp-doughnut__eyebrow">{{ eyebrow|default:"Composition" }}</span>
+            {% if title %}<h4 class="cp-doughnut__title">{{ title }}</h4>{% endif %}
+        </div>
+
+        <div class="cp-doughnut__body">
+            <div class="cp-doughnut__plot">
+                <canvas id="{{ instance_id }}"
+                        data-cp-doughnut-labels="{{ labels|to_attr_json }}"
+                        data-cp-doughnut-values="{{ values|to_attr_json }}"
+                        data-cp-doughnut-prefix="{{ value_prefix|default:'' }}"
+                        data-cp-doughnut-suffix="{{ value_suffix|default:'' }}"></canvas>
+                <div class="cp-doughnut__center" aria-hidden="true">
+                    <span class="cp-doughnut__center-value" id="{{ instance_id }}-total">&nbsp;</span>
+                    <span class="cp-doughnut__center-label">{{ total_label|default:"Total" }}</span>
+                </div>
+            </div>
+
+            <ul class="cp-doughnut__legend" id="{{ instance_id }}-legend" role="list"></ul>
+        </div>
+    </div>
+    {% if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
+</figure>

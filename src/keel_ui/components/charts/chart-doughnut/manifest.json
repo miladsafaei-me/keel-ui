@@ -1,0 +1,61 @@
+{
+  "id": "chart_doughnut",
+  "name": "Doughnut Chart",
+  "category": "charts",
+  "version": 1,
+  "when_to_pick": "Show how one whole splits into parts when the relative SHARE of each part is the story, not its exact value — capital allocation across instruments, where a monthly trading budget goes, win/loss/break-even mix, or risk spread across strategies. The card frames a crisp HTML title, a center total in the hole, and a legible value+share legend so the reader gets the composition at a glance. Cap at 6 slices; reach for chart_bar when you need to compare two series, or chart_stacked_bar when parts also accumulate across a time axis.",
+  "tags": ["chart", "composition", "share", "allocation", "donut"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": ["chartjs"],
+  "schema": {
+    "type": "object",
+    "required": ["title", "labels", "values"],
+    "additionalProperties": false,
+    "properties": {
+      "title": {
+        "type": "string",
+        "maxLength": 120,
+        "description": "Chart heading, rendered as crisp HTML above the plot. Name the whole and the unit, e.g. 'Where a $5,000 trading account is allocated'."
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 240,
+        "description": "One-sentence takeaway below the chart. State what the split reveals (the dominant share, an imbalance, a rule of thumb) rather than restating the slices."
+      },
+      "eyebrow": {
+        "type": "string",
+        "maxLength": 32,
+        "description": "Optional uppercase kicker above the title, e.g. 'Allocation' or 'Cost breakdown'. Defaults to 'Composition'."
+      },
+      "total_label": {
+        "type": "string",
+        "maxLength": 28,
+        "description": "Optional label under the center total in the doughnut hole, e.g. 'Total account' or 'Monthly cost'. Defaults to 'Total'."
+      },
+      "value_prefix": {
+        "type": "string",
+        "maxLength": 4,
+        "description": "Optional unit prefix prepended to every value in the legend and center total, e.g. '$'. Leave empty for unit-less or percentage data."
+      },
+      "value_suffix": {
+        "type": "string",
+        "maxLength": 6,
+        "description": "Optional unit suffix appended to every value in the legend and center total, e.g. '%' or ' pips'. Leave empty for currency."
+      },
+      "labels": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 6,
+        "items": { "type": "string" },
+        "description": "Slice names, one per value, in the same order as values. Keep them short (1-3 words) so the legend stays on one line."
+      },
+      "values": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 6,
+        "items": { "type": "number", "minimum": 0 },
+        "description": "One non-negative number per label, in the same order as labels. Length must equal labels.length. Shares are computed from the total automatically."
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "mermaid_flowchart",
+  "name": "Flowchart",
+  "category": "flows",
+  "version": 1,
+  "when_to_pick": "Visualize a decision tree or branching process with 4-15 nodes. Best for 'how do you decide X' content where the reader benefits from following arrows. Use classDef accept/reject/warn (defined as 8-digit hex fills, never rgba) to highlight terminal nodes.",
+  "tags": ["diagram", "flowchart", "decision"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": ["mermaid"],
+  "schema": {
+    "type": "object",
+    "required": ["source"],
+    "properties": {
+      "source": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 4000,
+        "description": "Raw mermaid source starting with 'flowchart TD' or similar. NEVER use rgba(R,G,B,A) inside classDef or style — use 8-digit hex (#RRGGBBAA)."
+      },
+      "caption": { "type": "string", "maxLength": 240 }
+    }
+  }
+}

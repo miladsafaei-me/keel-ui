@@ -1,0 +1,45 @@
+{
+  "id": "timeline",
+  "name": "Timeline",
+  "category": "flows",
+  "version": 1,
+  "when_to_pick": "Walk the reader through a sequenced process with phases. Set orientation='vertical' (default) for a stacked list that holds longer bodies and a marker per step — best for rollouts, multi-week plans, or step-by-step procedures; the last step can be toned 'danger'/'warning' to call out kill-criteria / stop conditions. Set orientation='horizontal' for a compact left-to-right band of 3-6 short phases that read as a flow (e.g. a trading day: premarket -> London open -> NY close); keep titles and bodies short in this mode. For discrete numbered actions (do this, then that) use how_it_works_steps; for branching logic use decision-tree.",
+  "tags": ["timeline", "process", "steps", "horizontal", "vertical", "phases"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["steps"],
+    "properties": {
+      "orientation": {
+        "type": "string",
+        "enum": ["vertical", "horizontal"],
+        "default": "vertical",
+        "description": "Layout direction. 'vertical' (default) stacks steps top-to-bottom and supports a per-step marker plus longer bodies. 'horizontal' lays 3-6 short phases left-to-right as a flow band; keep titles <= ~40 chars and bodies <= ~160 chars in this mode."
+      },
+      "steps": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 8,
+        "items": {
+          "type": "object",
+          "required": ["title", "body"],
+          "properties": {
+            "marker": {
+              "type": "string",
+              "maxLength": 3,
+              "description": "Short marker text shown in the circle. If omitted, the step's position (1, 2, 3, ...) is used."
+            },
+            "title": { "type": "string", "maxLength": 100 },
+            "body": { "type": "string", "maxLength": 400 },
+            "tone": {
+              "type": "string",
+              "enum": ["default", "danger", "warning", "success"],
+              "default": "default"
+            }
+          }
+        }
+      }
+    }
+  }
+}

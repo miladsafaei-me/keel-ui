@@ -1,0 +1,25 @@
+<div class="cp-html-block cp-html-block-checklist">
+<div class="cp-checklist" id="{{ instance_id }}-root" data-complete="false">
+    <div class="cp-checklist__head">
+        <h4 class="cp-checklist__title">{{ title }}</h4>
+        <span class="cp-checklist__count" data-cp-progress aria-live="polite">0&#8202;/&#8202;{{ items|length }}</span>
+    </div>
+    <div class="cp-checklist__track" role="progressbar" aria-label="Checklist progress" aria-valuemin="0" aria-valuemax="{{ items|length }}" aria-valuenow="0">
+        <span class="cp-checklist__fill" data-cp-fill style="width:0%"></span>
+    </div>
+    <ul class="cp-checklist__items">
+        {% for it in items %}
+        <li class="cp-checklist__item" data-checked="false" tabindex="0" role="checkbox" aria-checked="false">
+            <span class="cp-checklist__box" aria-hidden="true">
+                <svg class="cp-checklist__tick" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="cp-checklist__label">{{ it|safe }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <p class="cp-checklist__done" data-cp-done aria-live="polite">
+        <span class="cp-checklist__done-icon" aria-hidden="true">&#9733;</span>
+        Checklist complete &mdash; you&rsquo;re cleared to proceed.
+    </p>
+</div>
+</div>

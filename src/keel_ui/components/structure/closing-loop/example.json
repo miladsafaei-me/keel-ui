@@ -1,0 +1,16 @@
+{
+  "variant": "transactional",
+  "loop_lead": "You opened this",
+  "loop_from": "wanting to skip the broker setup pain",
+  "loop_mid": "here's the",
+  "loop_to": "one-click path",
+  "title": "Skip the broker config. Go from signup to <em>first live signal</em> in 4 minutes.",
+  "sub": "Free for 14 days, no credit card up front, and we never see your broker password.",
+  "cta": { "label": "Start your free trial", "href": "/signup" },
+  "sub_cta": "Or <a href=\"/demo\">book a 15-min demo</a> if you'd rather see it first.",
+  "trust": [
+    { "icon": "⚡", "metric": "9ms", "label": "verified latency" },
+    { "icon": "★", "metric": "4.8/5", "label": "from 2,400+ traders" },
+    { "icon": "🛡", "metric": "SOC 2", "label": "Type II certified" }
+  ]
+}

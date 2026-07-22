@@ -1,0 +1,42 @@
+{
+  "id": "kpi_sparkline_card",
+  "name": "KPI / Stat Cards",
+  "category": "charts",
+  "version": 2,
+  "when_to_pick": "Hand the reader 1-6 headline performance numbers at a glance — win rate, profit factor, max drawdown, average R, Sharpe. Each card shows a big value with an optional signed delta arrow and an optional short hint. Add a `spark` series to a card to draw an inline trend sparkline where the recent direction matters as much as the number. This is THE headline-numbers component (it absorbed the old key-stats grid): use point values alone for a clean stat scorecard, or add sparklines when you have a short series per metric. For a single bounded 0-100 score use gauge_meter; for many rows of attributes use comparison_table.",
+  "tags": ["kpi", "stats", "sparkline", "scorecard", "metrics", "trend"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["cards"],
+    "properties": {
+      "cards": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 6,
+        "description": "One to six metric cards rendered in a responsive grid.",
+        "items": {
+          "type": "object",
+          "required": ["label", "value"],
+          "properties": {
+            "label": { "type": "string", "maxLength": 40, "description": "Metric name, e.g. 'Win rate'." },
+            "value": { "type": "string", "maxLength": 30, "description": "Headline value as a display string, e.g. '62.4%' or '+0.41R'." },
+            "delta": { "type": "string", "maxLength": 24, "description": "Optional change vs prior period, e.g. '+1.8 pp' or '-0.06R'. Shown next to a direction arrow." },
+            "delta_dir": { "type": "string", "enum": ["up", "down", "flat"], "default": "flat", "description": "Direction of the delta. up=improving (green/buy), down=worsening (red/sell), flat=unchanged. NOTE: meaning is direction-of-movement; for metrics where lower is better (e.g. drawdown), still set 'up' if the number rose — use the optional 'tone' to color the value if you need to flag good/bad separately." },
+            "hint": { "type": "string", "maxLength": 80, "description": "Optional one-line context under the value, e.g. 'Across 240 trades'." },
+            "spark": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 60,
+              "items": { "type": "number" },
+              "description": "Optional recent values, oldest first. When present, drawn as an auto-scaled inline sparkline (6-16 points reads best). Omit for a plain point-value stat card."
+            },
+            "tone": { "type": "string", "enum": ["buy", "sell", "accent", "neutral"], "description": "Optional semantic accent driving the sparkline color, top edge bar, and value tint. buy=green, sell=red, accent=brand blue, neutral=subtle. Defaults to following delta_dir (up=buy, down=sell, flat=neutral). Use buy/sell only for genuine directional metrics." }
+          }
+        }
+      },
+      "caption": { "type": "string", "maxLength": 140, "description": "Optional short caption shown under the grid, e.g. the period the figures cover." }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="cp-html-block cp-html-block-element-card">
+{% if variant == "essential" %}
+<article class="cp-ecard cp-ecard--essential" id="{{ instance_id }}-root">
+  <span class="cp-ecard__role">
+    <svg class="cp-ecard__role-icon" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M3 6.5 5 8.5 9 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Essential answer
+  </span>
+  {% if question %}<p class="cp-ecard__question">{{ question }}</p>{% endif %}
+  <h3 class="cp-ecard__answer">{{ heading }}</h3>
+  {% if details %}
+  <div class="cp-ecard__detail">
+    {% for item in details %}
+    <div class="cp-ecard__detail-item">
+      <span class="cp-ecard__detail-label">{{ item.label }}</span>
+      <span class="cp-ecard__detail-value">{{ item.value }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% if source %}
+  <p class="cp-ecard__source">
+    <span class="cp-ecard__source-tick" aria-hidden="true">
+      <svg viewBox="0 0 12 12" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M2.5 6.2 4.7 8.4 9.5 3.6"/></svg>
+    </span>
+    {{ source }}
+  </p>
+  {% endif %}
+</article>
+{% else %}
+<details class="cp-ecard cp-ecard--complementary" id="{{ instance_id }}-root"{% if open_by_default %} open{% endif %}>
+  <summary class="cp-ecard__toggle" aria-controls="{{ instance_id }}-body">
+    <span class="cp-ecard__toggle-left">
+      <span class="cp-ecard__role cp-ecard__role--comp">
+        <svg class="cp-ecard__role-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false"><circle cx="6" cy="6" r="4.5"/><path d="M6 4v2M6 8v.5" stroke-linecap="round"/></svg>
+        Optional
+      </span>
+      <span class="cp-ecard__toggle-title">{{ heading }}</span>
+    </span>
+    <span class="cp-ecard__toggle-icon" aria-hidden="true">
+      <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" focusable="false"><path d="M3 4.5l3 3 3-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </summary>
+  <div class="cp-ecard__body" id="{{ instance_id }}-body">
+    <div class="cp-ecard__body-inner">
+      {% if body %}{{ body|safe }}{% endif %}
+      {% if supporting %}<div class="cp-ecard__supporting">{{ supporting|safe }}</div>{% endif %}
+    </div>
+  </div>
+</details>
+{% endif %}
+</div>

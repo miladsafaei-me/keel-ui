@@ -1,0 +1,40 @@
+{
+  "id": "drawdown_chart",
+  "name": "Drawdown Chart",
+  "category": "risk-performance",
+  "version": 1,
+  "when_to_pick": "Show the underwater equity curve — how deep and how long each drawdown lasted. Use after the article has discussed the difference between average return and worst-case drawdown. Always renders below zero with red fill.",
+  "tags": ["chart", "drawdown", "risk", "underwater"],
+  "audience_fit": ["forex", "crypto", "prop-firm"],
+  "dependencies": ["chartjs"],
+  "schema": {
+    "type": "object",
+    "required": ["title", "labels", "values"],
+    "properties": {
+      "title":   { "type": "string", "maxLength": 120 },
+      "caption": { "type": "string", "maxLength": 240 },
+      "y_label": { "type": "string", "default": "Drawdown (%)" },
+      "labels":  { "type": "array", "minItems": 3, "items": { "type": "string" } },
+      "values":  {
+        "type": "array",
+        "minItems": 3,
+        "items": { "type": "number", "maximum": 0 },
+        "description": "Drawdown values, 0 = no drawdown, negative = underwater (-25 means down 25%)."
+      },
+      "markers": {
+        "type": "array",
+        "maxItems": 4,
+        "description": "Optional labelled dots anchored to x-axis points — e.g. peak, trough, recovery.",
+        "items": {
+          "type": "object",
+          "required": ["at", "label"],
+          "properties": {
+            "at":    { "type": "string", "description": "An x-axis label from `labels` to anchor the marker to." },
+            "label": { "type": "string", "maxLength": 24 },
+            "tone":  { "type": "string", "enum": ["peak", "trough", "recovery", "accent", "neutral"], "default": "accent" }
+          }
+        }
+      }
+    }
+  }
+}

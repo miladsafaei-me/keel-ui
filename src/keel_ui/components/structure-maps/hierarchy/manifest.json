@@ -1,0 +1,55 @@
+{
+  "id": "hierarchy",
+  "name": "Hierarchy / Tier Diagram",
+  "category": "structure-maps",
+  "version": 2,
+  "when_to_pick": "Show a top-down structure of who sits above whom, or how tiers stack — most useful for the IB model (a Master IB above several sub-IBs above their traders), a partnership/commission hierarchy, account or membership tiers (Bronze -> Silver -> Gold), or a prop-firm progression of account sizes. An optional single apex node sits at the top; each level below is a row of one or more nodes, joined by branching connector lines. Pick this when the relationship is hierarchical (levels of an org/tier); for a sequence of actions use how_it_works_steps, for branching decisions use decision-tree, and for attrition through stages use funnel.",
+  "tags": ["hierarchy", "tier", "org-chart", "ib", "master-ib", "structure", "levels", "pyramid"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["levels"],
+    "properties": {
+      "heading": { "type": "string", "maxLength": 90, "description": "Optional heading above the diagram." },
+      "apex": {
+        "type": "object",
+        "description": "Optional single node at the very top (e.g. the Master IB). Omit for a plain stack of tiers.",
+        "required": ["title"],
+        "properties": {
+          "title": { "type": "string", "maxLength": 36 },
+          "note": { "type": "string", "maxLength": 60 },
+          "tone": { "type": "string", "enum": ["accent", "success", "warning", "danger", "neutral"], "default": "accent" }
+        }
+      },
+      "levels": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 4,
+        "description": "Ordered levels from top to bottom. Each level is a row of sibling nodes.",
+        "items": {
+          "type": "object",
+          "required": ["nodes"],
+          "properties": {
+            "label": { "type": "string", "maxLength": 32, "description": "Optional tier label shown above the row, e.g. 'Sub-IBs', 'Traders', 'Gold tier'." },
+            "nodes": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 5,
+              "items": {
+                "type": "object",
+                "required": ["title"],
+                "properties": {
+                  "title": { "type": "string", "maxLength": 32 },
+                  "note": { "type": "string", "maxLength": 60 },
+                  "tone": { "type": "string", "enum": ["accent", "success", "warning", "danger", "neutral"], "default": "accent" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "caption": { "type": "string", "maxLength": 260 }
+    }
+  }
+}

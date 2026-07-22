@@ -1,0 +1,93 @@
+<div class="cp-html-block cp-html-block-beat-section">
+<article class="cp-beat cp-beat--{{ variant }}" id="{{ instance_id }}-root">
+
+  <span class="cp-beat__tag">
+    {% if variant == "problem_named" %}
+      <svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 3v3.5M6 8.5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    {% elif variant == "tension_rises" %}
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 9l3-3 2 2 3-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    {% elif variant == "partial_resolution" %}
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 1v3M6 8v3M1 6h3M8 6h3" stroke-linecap="round"/></svg>
+    {% elif variant == "full_payoff" %}
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 6.5L5 8.5L9 4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    {% else %}
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 6h6M7 3l3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    {% endif %}
+    {{ beat_label }}
+  </span>
+
+  {% if variant == "partial_resolution" and progress %}
+  <div class="cp-beat__progress">
+    <span>{{ progress.label }}</span>
+    <div class="cp-beat__progress-bar"><div class="cp-beat__progress-fill" data-percent="{{ progress.percent }}"></div></div>
+  </div>
+  {% endif %}
+
+  <h3 class="cp-beat__heading">{{ heading }}</h3>
+
+  {% if variant == "next_action" %}
+
+    {% if body %}<p class="cp-beat__body">{{ body|safe }}</p>{% endif %}
+    {% if steps %}
+    <ol class="cp-beat__steps">
+      {% for step in steps %}<li class="cp-beat__step">
+        <div class="cp-beat__step-body">
+          <strong class="cp-beat__step-title">{{ step.title }}</strong>
+          {% if step.detail %}<small class="cp-beat__step-detail">{{ step.detail|safe }}</small>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+    {% if cta %}
+    <a class="cp-beat__cta" href="{{ cta.href }}">
+      {{ cta.label }}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 7h8M8 3l4 4-4 4"/></svg>
+    </a>
+    {% endif %}
+
+  {% else %}
+
+    <p class="cp-beat__body">{{ body|safe }}</p>
+
+    {% if variant == "problem_named" and stat %}
+    <div class="cp-beat__stat">
+      <strong>{{ stat.value }}</strong>{{ stat.label }}
+    </div>
+    {% endif %}
+
+    {% if variant == "tension_rises" and pullquote %}
+    <blockquote class="cp-beat__pullquote">{{ pullquote }}</blockquote>
+    {% endif %}
+
+    {% if variant == "partial_resolution" and workflow %}
+    <div class="cp-beat__workflow">
+      {% for wstep in workflow %}<div class="cp-beat__workflow-step cp-beat__workflow-step--{{ wstep.state|default:'upcoming' }}">
+        <span class="cp-beat__workflow-num">{{ forloop.counter }}</span>{{ wstep.label }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if variant == "full_payoff" and answer_card %}
+    <div class="cp-beat__answer{% if not answer_card.metric %} cp-beat__answer--no-metric{% endif %}">
+      <div class="cp-beat__answer-main">
+        <div class="cp-beat__answer-label">{{ answer_card.label }}</div>
+        <h4 class="cp-beat__answer-text">{{ answer_card.answer }}</h4>
+        {% if answer_card.meta %}<p class="cp-beat__answer-meta">{{ answer_card.meta }}</p>{% endif %}
+      </div>
+      {% if answer_card.metric %}
+      <div class="cp-beat__answer-metric">
+        <div class="cp-beat__answer-metric-value">{{ answer_card.metric.value }}</div>
+        <div class="cp-beat__answer-metric-label">{{ answer_card.metric.label }}</div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  {% endif %}
+
+  {% if hook %}<p class="cp-beat__hook">{{ hook }}</p>{% endif %}
+
+</article>
+</div>

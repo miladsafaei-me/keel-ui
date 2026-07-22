@@ -1,0 +1,44 @@
+{
+  "id": "order_book_ladder",
+  "name": "Order Book Ladder",
+  "category": "trade-visuals",
+  "version": 2,
+  "when_to_pick": "Show a static snapshot of an order book (bid ladder + ask ladder + last price). Use when explaining liquidity, spread, market impact, or how a bot's order interacts with the book. Static data (mock) — no live feed.",
+  "tags": ["order-book", "market-depth", "liquidity"],
+  "audience_fit": ["crypto", "forex", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["symbol", "last_price", "bids", "asks"],
+    "properties": {
+      "symbol":     { "type": "string", "maxLength": 16 },
+      "last_price": { "type": "number" },
+      "asks": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": ["price", "size"],
+          "properties": {
+            "price": { "type": "number" },
+            "size":  { "type": "number" }
+          }
+        }
+      },
+      "bids": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": ["price", "size"],
+          "properties": {
+            "price": { "type": "number" },
+            "size":  { "type": "number" }
+          }
+        }
+      }
+    }
+  }
+}

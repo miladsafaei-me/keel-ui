@@ -1,0 +1,19 @@
+{
+  "id": "binary_options_payoff",
+  "name": "Binary Options Payoff Diagram",
+  "category": "trade-visuals",
+  "version": 1,
+  "when_to_pick": "Visualize the discontinuous payoff curve of a binary option — flat at -stake below the strike, flat at +payout above. Two-line SVG plot for Call and Put. Helps readers see why binary risk is bounded but win-rate must be high to be profitable.",
+  "tags": ["binary", "payoff", "diagram"],
+  "audience_fit": ["binary"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "title":         { "type": "string", "default": "Call vs Put binary payoff at expiry", "maxLength": 80 },
+      "strike":        { "type": "number", "default": 100 },
+      "payout_pct":    { "type": "number", "minimum": 50, "maximum": 95, "default": 78 },
+      "stake":         { "type": "number", "minimum": 1, "default": 100 }
+    }
+  }
+}

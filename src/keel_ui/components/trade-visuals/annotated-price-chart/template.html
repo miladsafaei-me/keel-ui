@@ -1,0 +1,42 @@
+<div class="cp-html-block cp-html-block-aprice">
+{% with sid=instance_id|add:"-series" lid=instance_id|add:"-levels" zid=instance_id|add:"-zones" coid=instance_id|add:"-callouts" %}
+<figure class="cp-aprice" id="{{ instance_id }}-root"
+        data-cp-type="{{ chart_type|default:'candles' }}"
+        data-cp-dec="{{ decimals|default_if_none:'4' }}"
+        data-cp-legend="{% if legend|default:True %}1{% else %}0{% endif %}">
+    {% if title or instrument or timeframe %}
+    <figcaption class="cp-aprice__head">
+        {% if title %}<span class="cp-aprice__title">{{ title }}</span>{% endif %}
+        <span class="cp-aprice__chips">
+            {% if instrument %}<span class="cp-aprice__chip cp-aprice__chip--sym">{{ instrument }}</span>{% endif %}
+            {% if timeframe %}<span class="cp-aprice__chip">{{ timeframe }}</span>{% endif %}
+        </span>
+    </figcaption>
+    {% endif %}
+
+    <div class="cp-aprice__stage" id="{{ instance_id }}-stage" role="img"
+         aria-label="{% if title %}{{ title }}{% else %}Annotated price chart with entry, stop-loss and take-profit levels{% endif %}">
+        {% comment %} JS renders the real SVG synchronously into this host. A lightweight grid skeleton paints first so the box is never empty during parse. {% endcomment %}
+        <svg class="cp-aprice__skeleton" viewBox="0 0 880 380" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <line class="cp-aprice__grid" x1="14" y1="100" x2="698" y2="100"></line>
+            <line class="cp-aprice__grid" x1="14" y1="190" x2="698" y2="190"></line>
+            <line class="cp-aprice__grid" x1="14" y1="280" x2="698" y2="280"></line>
+            <line class="cp-aprice__divider" x1="705" y1="24" x2="705" y2="356"></line>
+        </svg>
+    </div>
+
+    {% if legend|default:True %}
+    <div class="cp-aprice__legend" id="{{ instance_id }}-legend" hidden>
+        {% comment %} Populated by JS from the levels actually present. {% endcomment %}
+    </div>
+    {% endif %}
+
+    {% if caption %}<p class="cp-aprice__caption">{{ caption }}</p>{% endif %}
+
+    {{ series|json_script:sid }}
+    {{ levels|json_script:lid }}
+    {{ zones|default:""|json_script:zid }}
+    {{ callouts|default:""|json_script:coid }}
+</figure>
+{% endwith %}
+</div>

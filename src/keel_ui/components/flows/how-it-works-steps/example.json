@@ -1,0 +1,25 @@
+{
+  "heading": "How a TradingView alert reaches your broker in 4 steps",
+  "steps": [
+    {
+      "title": "Strategy fires an alert",
+      "body": "Your TradingView strategy triggers on a confirmed setup (e.g. EUR/USD crosses the 50 EMA) and emits an alert with the order payload.",
+      "icon": "signal"
+    },
+    {
+      "title": "Webhook posts to SignalBots",
+      "body": "TradingView sends the alert as a JSON webhook to your unique SignalBots endpoint, authenticated by a secret key.",
+      "icon": "webhook"
+    },
+    {
+      "title": "Risk filter validates the order",
+      "body": "SignalBots checks lot size, max open positions and daily-loss limits, rejecting anything outside your rules before it ever leaves.",
+      "icon": "shield"
+    },
+    {
+      "title": "Order lands at your broker",
+      "body": "The validated order routes to your MT4/MT5 account in under 10 ms and a fill confirmation returns to your dashboard.",
+      "icon": "bolt"
+    }
+  ]
+}

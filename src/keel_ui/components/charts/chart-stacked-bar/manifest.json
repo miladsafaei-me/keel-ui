@@ -1,0 +1,58 @@
+{
+  "id": "chart_stacked_bar",
+  "name": "Stacked Bar Chart",
+  "category": "charts",
+  "version": 1,
+  "when_to_pick": "Show how a running total breaks down into stacked components across a time axis or discrete categories — monthly net P&L decomposed into gross pips vs commissions vs slippage, equity contribution by strategy, or cost composition over time. Best when BOTH the cumulative total and the share of each part carry the point; the optional summary strip lets you headline the net result the stack proves.",
+  "tags": ["chart", "stacked", "composition", "cumulative", "comparison", "pnl"],
+  "audience_fit": ["forex", "crypto", "prop-firm"],
+  "dependencies": ["chartjs"],
+  "schema": {
+    "type": "object",
+    "required": ["title", "labels", "datasets"],
+    "additionalProperties": false,
+    "properties": {
+      "title":   { "type": "string", "maxLength": 120, "description": "Chart heading, rendered as crisp HTML above the plot (not inside the canvas)." },
+      "caption": { "type": "string", "maxLength": 240, "description": "One sentence below the chart that states the takeaway the stack proves." },
+      "labels":  {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 12,
+        "items": { "type": "string" },
+        "description": "Category / time-bucket labels along the x-axis (e.g. months, strategies)."
+      },
+      "datasets": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 5,
+        "description": "Each entry is one stacked segment. Use a positive tone (success/accent) for what adds to the total and danger/warning for what subtracts, so the stack reads as a composition.",
+        "items": {
+          "type": "object",
+          "required": ["label", "data"],
+          "additionalProperties": false,
+          "properties": {
+            "label": { "type": "string", "description": "Legend name for this segment." },
+            "data":  { "type": "array", "items": { "type": "number" }, "description": "One value per x-axis label; negatives stack below zero." },
+            "tone":  { "type": "string", "enum": ["accent", "success", "danger", "warning", "purple", "neutral"], "default": "accent" }
+          }
+        }
+      },
+      "summary": {
+        "type": "array",
+        "maxItems": 4,
+        "description": "Optional headline stat cards above the plot that state the net result the stack reveals (e.g. Net result, Cost drag, Best month). Author-supplied so the aha is explicit, not buried in the bars.",
+        "items": {
+          "type": "object",
+          "required": ["label", "value"],
+          "additionalProperties": false,
+          "properties": {
+            "label": { "type": "string", "maxLength": 28, "description": "Short stat name, e.g. 'Net result'." },
+            "value": { "type": "string", "maxLength": 24, "description": "Pre-formatted value with sign and unit, e.g. '-10 pips' or '+1,212 pips'." },
+            "note":  { "type": "string", "maxLength": 48, "description": "Optional one-line context under the value." },
+            "tone":  { "type": "string", "enum": ["success", "danger", "warning", "accent", "neutral"], "default": "neutral" }
+          }
+        }
+      }
+    }
+  }
+}

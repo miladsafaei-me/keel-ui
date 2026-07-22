@@ -1,0 +1,55 @@
+<div class="cp-html-block cp-html-block-gauge">
+<figure class="cp-gauge" id="{{ instance_id }}-root"
+        data-cp-value="{{ value }}"
+        data-cp-min="{{ min|default:0 }}"
+        data-cp-max="{{ max|default:100 }}"
+        data-cp-unit="{{ unit|default:'' }}">
+    {% with zones_id=instance_id|add:"-zonesdata" %}{{ zones|default_if_none:''|json_script:zones_id }}{% endwith %}
+
+    <div class="cp-gauge__dial">
+        <svg class="cp-gauge__svg" viewBox="0 0 400 218" role="img"
+             aria-label="{{ label }} gauge" preserveAspectRatio="xMidYMid meet">
+            {% comment %} Track + zone bands + needle are (re)built by JS into these groups; the static markup below is a sensible neutral fallback so the figure is never blank or broken before JS runs. {% endcomment %}
+            <path class="cp-gauge__track" d="M 30 200 A 170 170 0 0 1 370 200"
+                  fill="none" stroke-linecap="round"></path>
+            <g class="cp-gauge__zones" id="{{ instance_id }}-zones">
+                <path class="cp-gauge__zone cp-gauge__zone--accent"
+                      d="M 30 200 A 170 170 0 0 1 370 200"
+                      fill="none" stroke-linecap="round"></path>
+            </g>
+            <g class="cp-gauge__ticks" id="{{ instance_id }}-ticks" aria-hidden="true"></g>
+            <g class="cp-gauge__needle" id="{{ instance_id }}-needle" style="transform:rotate(0deg)">
+                <line class="cp-gauge__needle-arm" x1="200" y1="200" x2="200" y2="60"></line>
+                <circle class="cp-gauge__needle-hub" cx="200" cy="200" r="12"></circle>
+                <circle class="cp-gauge__needle-hub-dot" cx="200" cy="200" r="4.5"></circle>
+            </g>
+        </svg>
+
+        <div class="cp-gauge__scale" aria-hidden="true">
+            <span class="cp-gauge__scale-end" id="{{ instance_id }}-smin">{{ min|default:0 }}</span>
+            <span class="cp-gauge__scale-end" id="{{ instance_id }}-smax">{{ max|default:100 }}</span>
+        </div>
+    </div>
+
+    <div class="cp-gauge__readout">
+        <div class="cp-gauge__value-line">
+            <span class="cp-gauge__value" id="{{ instance_id }}-value">{{ value }}{{ unit|default:'' }}</span>
+            <span class="cp-gauge__zone-tag" id="{{ instance_id }}-zonetag" data-tone="accent"></span>
+        </div>
+        <span class="cp-gauge__label">{{ label }}</span>
+    </div>
+
+    {% if zones %}
+    <ul class="cp-gauge__legend" id="{{ instance_id }}-legend">
+        {% for z in zones %}{% if z.label %}
+        <li class="cp-gauge__legend-item">
+            <span class="cp-gauge__legend-dot cp-gauge__legend-dot--{{ z.tone }}" aria-hidden="true"></span>
+            <span class="cp-gauge__legend-name">{{ z.label }}</span>
+        </li>
+        {% endif %}{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if caption %}<figcaption class="cp-gauge__caption">{{ caption }}</figcaption>{% endif %}
+</figure>
+</div>

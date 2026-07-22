@@ -1,0 +1,15 @@
+<div class="cp-html-block cp-html-block-decision-tree">
+  <figure class="cp-dtree" id="{{ instance_id }}-root">
+    {% if title %}<figcaption class="cp-dtree__title">{{ title }}</figcaption>{% endif %}
+    <script type="application/json" id="{{ instance_id }}-data">{{ root|to_json }}</script>
+    <div class="cp-dtree__scroll">
+      <div class="cp-dtree__canvas" id="{{ instance_id }}-canvas" role="img" aria-label="{% if title %}{{ title }}{% else %}Trading decision tree{% endif %}"></div>
+    </div>
+    <div class="cp-dtree__legend" aria-hidden="true">
+      <span class="cp-dtree__key"><span class="cp-dtree__swatch cp-dtree__swatch--success"></span>Take it</span>
+      <span class="cp-dtree__key"><span class="cp-dtree__swatch cp-dtree__swatch--warning"></span>Proceed with care</span>
+      <span class="cp-dtree__key"><span class="cp-dtree__swatch cp-dtree__swatch--danger"></span>Skip / stand aside</span>
+    </div>
+    {% if caption %}<figcaption class="cp-dtree__caption">{{ caption }}</figcaption>{% endif %}
+  </figure>
+</div>

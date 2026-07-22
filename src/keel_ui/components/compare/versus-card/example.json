@@ -1,0 +1,24 @@
+{
+  "heading": "Manual signals vs Automated bot",
+  "left": {
+    "title": "Manual signals",
+    "points": [
+      "You confirm each setup before risking capital",
+      "Reads context a fixed ruleset misses (news, sentiment)",
+      "Execution lags the alert — slippage on fast moves",
+      "Caps out at the hours you can actually watch the screen"
+    ],
+    "verdict": "Best while you're still learning the edge by hand."
+  },
+  "right": {
+    "title": "Automated bot",
+    "points": [
+      "Fires entries in under 10ms, no hesitation",
+      "Trades 24/5 across every session without fatigue",
+      "Backtested rules stay consistent under drawdown",
+      "Only as good as the strategy and risk caps you give it"
+    ],
+    "verdict": "Best once your rules are proven and worth scaling."
+  },
+  "winner": "right"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "scenario_cards",
+  "name": "Scenario Cards (Bull / Base / Bear)",
+  "category": "compare",
+  "version": 1,
+  "when_to_pick": "Lay out a forecast or outlook as 2-4 side-by-side scenarios — classically bearish / base / bullish — each with a price target or outcome, an optional probability, and the drivers that would make it play out. Pick this for any market-forecast, price-projection or 'what could happen next' section where the point is the RANGE of outcomes and what tips the balance, not a single number. Tone each card by direction (bullish=up/green, bearish=down/red, neutral=base). For a head-to-head of two named options use versus_card; for many rows of attributes use comparison_table.",
+  "tags": ["scenario", "forecast", "outlook", "bull-bear", "price-target", "projection", "probability"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["scenarios"],
+    "properties": {
+      "heading": { "type": "string", "maxLength": 90, "description": "Optional heading, e.g. 'Gold — 3-month outlook'." },
+      "scenarios": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 4,
+        "items": {
+          "type": "object",
+          "required": ["label", "target"],
+          "properties": {
+            "label": { "type": "string", "maxLength": 28, "description": "Scenario name, e.g. 'Bull case', 'Base case', 'Bear case'." },
+            "target": { "type": "string", "maxLength": 40, "description": "The headline outcome — a price target, range, or one-line result." },
+            "probability": { "type": "number", "minimum": 0, "maximum": 100, "description": "Optional likelihood as a percent (0-100)." },
+            "points": {
+              "type": "array",
+              "maxItems": 4,
+              "items": { "type": "string", "maxLength": 110 },
+              "description": "Optional drivers/conditions that would produce this scenario."
+            },
+            "tone": { "type": "string", "enum": ["bullish", "neutral", "bearish"], "default": "neutral", "description": "Direction colour: bullish=up/green, bearish=down/red, neutral=base." }
+          }
+        }
+      },
+      "caption": { "type": "string", "maxLength": 260 }
+    }
+  }
+}

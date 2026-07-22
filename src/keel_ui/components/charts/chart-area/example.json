@@ -1,0 +1,8 @@
+{
+  "title": "Equity curve — $10,000 starting balance, 12-month backtest",
+  "caption": "Compounding turns a 4% monthly edge into +60% over the year, even with two visible drawdowns.",
+  "y_label": "Account balance ($)",
+  "tone": "success",
+  "labels": ["Start", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12"],
+  "values": [10000, 10380, 10820, 10610, 11050, 11550, 12110, 12690, 13260, 12950, 13720, 14750, 16040]
+}

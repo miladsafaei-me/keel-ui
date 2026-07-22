@@ -1,0 +1,23 @@
+<div class="cp-html-block cp-html-block-funnel">
+<figure class="cp-funnel" id="{{ instance_id }}-root">
+    {% if heading %}<figcaption class="cp-funnel__heading">{{ heading }}</figcaption>{% endif %}
+    <div class="cp-funnel__stages">
+        {% with top=stages.0.value %}
+        {% for stage in stages %}
+        <div class="cp-funnel__stage cp-funnel__stage--{{ stage.tone|default:'accent' }}">
+            <div class="cp-funnel__row">
+                <span class="cp-funnel__label">{{ stage.label }}</span>
+                <span class="cp-funnel__value">{{ stage.value }}{% if unit %} {{ unit }}{% endif %}</span>
+            </div>
+            <div class="cp-funnel__bar-wrap">
+                <span class="cp-funnel__bar" style="width:{% widthratio stage.value top 100 %}%"></span>
+                <span class="cp-funnel__pct">{% widthratio stage.value top 100 %}%</span>
+            </div>
+            {% if stage.note %}<p class="cp-funnel__note">{{ stage.note }}</p>{% endif %}
+        </div>
+        {% endfor %}
+        {% endwith %}
+    </div>
+    {% if caption %}<p class="cp-funnel__caption">{{ caption }}</p>{% endif %}
+</figure>
+</div>

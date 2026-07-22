@@ -1,0 +1,20 @@
+{% if orientation == 'horizontal' %}
+<div class="cp-html-block cp-html-block-timeline-h">
+<div class="cp-timeline-h">
+    {% for step in steps %}
+    <div class="cp-timeline-h__step{% if step.tone == 'danger' %} cp-timeline-h__step--danger{% elif step.tone == 'warning' %} cp-timeline-h__step--warning{% elif step.tone == 'success' %} cp-timeline-h__step--success{% endif %}">
+        <h5>{{ step.title|safe }}</h5>
+        <p>{{ step.body|safe }}</p>
+    </div>
+    {% endfor %}
+</div>
+</div>
+{% else %}
+<div class="cp-html-block cp-html-block-timeline">
+    <ol>
+        {% for step in steps %}
+        <li><span class="cp-timeline-marker{% if step.tone == 'danger' %} cp-timeline-marker--danger{% elif step.tone == 'warning' %} cp-timeline-marker--warning{% elif step.tone == 'success' %} cp-timeline-marker--success{% endif %}">{% if step.marker %}{{ step.marker }}{% else %}{{ forloop.counter }}{% endif %}</span><strong>{{ step.title|safe }}</strong> {{ step.body|safe }}</li>
+        {% endfor %}
+    </ol>
+</div>
+{% endif %}

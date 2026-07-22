@@ -1,0 +1,10 @@
+{
+  "title": "Breakout bot — 200 trades, one strategy",
+  "caption": "12-pip target, 8-pip stop, 10-candle time exit. Press Play and watch win rate swing early, then settle — a single run never reveals the true edge; only the long-run average does.",
+  "pair_label": "EUR/USD · M5",
+  "candles_total": 90,
+  "take_profit_pips": 12,
+  "stop_loss_pips": 8,
+  "max_hold_candles": 10,
+  "speed_default_ms": 160
+}

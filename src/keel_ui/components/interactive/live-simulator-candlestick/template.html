@@ -1,0 +1,43 @@
+<div class="cp-html-block cp-html-block-live_simulator">
+<div class="cp-sim cp-sim--candle" id="{{ instance_id }}-root">
+    <div class="cp-sim__header">
+        <div class="cp-sim__heading">
+            <div class="cp-sim__title">{{ title|default:"Live bot simulator" }}</div>
+            <div class="cp-sim__meta">
+                <span class="cp-sim__pair">{{ pair_label|default:"EUR/USD · M5" }}</span>
+                <span class="cp-sim__status" id="{{ instance_id }}-status" data-state="idle">
+                    <span class="cp-sim__status-dot"></span><span id="{{ instance_id }}-status-text">Ready</span>
+                </span>
+            </div>
+        </div>
+        <div class="cp-sim__controls">
+            <div class="cp-sim__speed">
+                <label for="{{ instance_id }}-speed">Speed</label>
+                <input id="{{ instance_id }}-speed" type="range" class="cp-calc__slider cp-sim__slider" min="50" max="500" step="50" value="{{ speed_default_ms|default:180 }}" aria-label="Playback speed">
+            </div>
+            <button id="{{ instance_id }}-play" class="cp-sim__btn cp-sim__btn--primary" type="button">
+                <span class="cp-sim__btn-ic" aria-hidden="true">▶</span><span id="{{ instance_id }}-play-label">Play</span>
+            </button>
+            <button id="{{ instance_id }}-reset" class="cp-sim__btn" type="button">
+                <span class="cp-sim__btn-ic" aria-hidden="true">↻</span><span>Reset</span>
+            </button>
+        </div>
+    </div>
+    <div class="cp-sim__canvas-wrap">
+        <svg id="{{ instance_id }}-svg" viewBox="0 0 760 280" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Candlestick price chart with bot trade markers"></svg>
+        <div class="cp-sim__legend">
+            <span class="cp-sim__legend-item"><span class="cp-sim__legend-dot cp-sim__legend-dot--long"></span>Buy entry</span>
+            <span class="cp-sim__legend-item"><span class="cp-sim__legend-dot cp-sim__legend-dot--short"></span>Sell entry</span>
+            <span class="cp-sim__legend-item"><span class="cp-sim__legend-dot cp-sim__legend-dot--exit"></span>Exit</span>
+        </div>
+    </div>
+    <div class="cp-sim__stats">
+        <div class="cp-sim__stat"><div class="cp-sim__stat-label">Trades</div><div id="{{ instance_id }}-trades" class="cp-sim__stat-value">0</div></div>
+        <div class="cp-sim__stat"><div class="cp-sim__stat-label">Win rate</div><div id="{{ instance_id }}-wr" class="cp-sim__stat-value cp-sim__stat-value--accent">—</div></div>
+        <div class="cp-sim__stat"><div class="cp-sim__stat-label">Avg win</div><div id="{{ instance_id }}-aw" class="cp-sim__stat-value cp-sim__stat-value--buy">0</div></div>
+        <div class="cp-sim__stat"><div class="cp-sim__stat-label">Avg loss</div><div id="{{ instance_id }}-al" class="cp-sim__stat-value cp-sim__stat-value--sell">0</div></div>
+        <div class="cp-sim__stat cp-sim__stat--wide"><div class="cp-sim__stat-label">Net P&amp;L (pips)</div><div id="{{ instance_id }}-pnl" class="cp-sim__stat-value">0</div></div>
+    </div>
+    <p class="cp-sim__caption">{{ caption|default:"Same bot, same rules. Random price walk — win rate and P&L converge to the strategy's expected value only over many runs." }}</p>
+</div>
+</div>

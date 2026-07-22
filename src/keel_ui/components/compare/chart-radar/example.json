@@ -1,0 +1,11 @@
+{
+  "title": "Bot platform scorecard (0-100, higher is better)",
+  "caption": "Each platform optimizes for a different shape — match the radar to your priorities.",
+  "max_value": 100,
+  "axes": ["Latency", "Customizability", "Backtest depth", "Broker coverage", "Ease of setup", "Community"],
+  "candidates": [
+    {"label": "MetaTrader 5",     "data": [85, 75, 70, 95, 55, 90], "tone": "accent"},
+    {"label": "TradingView pine", "data": [55, 90, 60, 85, 90, 95], "tone": "success"},
+    {"label": "Python + ccxt",    "data": [95, 95, 95, 70, 30, 70], "tone": "warning"}
+  ]
+}

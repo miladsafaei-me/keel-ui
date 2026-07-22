@@ -1,0 +1,18 @@
+<div class="cp-html-block cp-html-block-accordion-faq">
+<div class="cp-accordion" id="{{ instance_id }}-root">
+    {% for item in items %}
+    <div class="cp-accordion__item{% if item.open_by_default %} is-open{% endif %}" data-open="{% if item.open_by_default %}true{% else %}false{% endif %}">
+        <button type="button" class="cp-accordion__header" id="{{ instance_id }}-h-{{ forloop.counter }}" aria-expanded="{% if item.open_by_default %}true{% else %}false{% endif %}" aria-controls="{{ instance_id }}-b-{{ forloop.counter }}">
+            <span class="cp-accordion__num" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
+            <span class="cp-accordion__q">{{ item.question }}</span>
+            <span class="cp-accordion__chevron" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+        </button>
+        <div class="cp-accordion__body" id="{{ instance_id }}-b-{{ forloop.counter }}" role="region" aria-labelledby="{{ instance_id }}-h-{{ forloop.counter }}">
+            <div class="cp-accordion__body-inner"><p>{{ item.answer|safe }}</p></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>

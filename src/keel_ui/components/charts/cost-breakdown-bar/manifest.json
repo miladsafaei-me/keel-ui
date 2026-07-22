@@ -1,0 +1,60 @@
+{
+  "id": "cost_breakdown_bar",
+  "name": "Trading Cost Breakdown Bar",
+  "category": "charts",
+  "version": 1,
+  "when_to_pick": "Show how the all-in cost of a single trade splits across its components — spread, commission, swap/financing and optional slippage — as one horizontal stacked bar where each segment's width is proportional to its share of the total. A colour-coded legend lists every segment with its value and percentage, and the all-in TOTAL is shown prominently. Pure HTML/CSS (no JS, renders instantly). Pick it when explaining the true cost of trading, comparing raw-spread+commission vs all-in-spread accounts, breaking down round-turn cost, illustrating overnight financing/carry, or showing why a tight headline spread is not the whole picture.",
+  "tags": ["cost", "spread", "commission", "swap", "slippage", "fees", "stacked-bar", "breakdown", "round-turn"],
+  "audience_fit": ["forex", "crypto", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "maxLength": 80,
+        "description": "Heading above the bar. Optional."
+      },
+      "unit": {
+        "type": "string",
+        "enum": ["pips", "USD", "points", "bps", "%"],
+        "default": "USD",
+        "description": "Unit shown after each value and on the total. 'pips'/'points' for spread-style costs, 'USD' for money, 'bps'/'%' for relative cost."
+      },
+      "segments": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 5,
+        "description": "Cost components, in display order left-to-right. Widths are computed automatically from value as a share of the summed total.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string",
+              "maxLength": 32,
+              "description": "Segment name, e.g. 'Spread', 'Commission', 'Swap', 'Slippage'."
+            },
+            "value": {
+              "type": "number",
+              "minimum": 0,
+              "description": "Cost contributed by this component, in the chosen unit. Must be >= 0."
+            },
+            "tone": {
+              "type": "string",
+              "enum": ["accent", "warning", "danger", "neutral", "success"],
+              "default": "accent",
+              "description": "Semantic colour. 'accent'=spread, 'warning'=commission, 'danger'=swap/financing cost, 'neutral'=slippage/other, 'success'=a rebate or credit shown as a cost component."
+            }
+          },
+          "required": ["label", "value"]
+        }
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 260,
+        "description": "Optional one-line takeaway shown under the bar (plain text)."
+      }
+    },
+    "required": ["segments"]
+  }
+}

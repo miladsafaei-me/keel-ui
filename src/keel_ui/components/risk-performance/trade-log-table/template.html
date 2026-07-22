@@ -1,0 +1,29 @@
+<div class="cp-html-block cp-html-block-trade-log">
+<table class="cp-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Symbol</th>
+            <th>Side</th>
+            <th>Entry</th>
+            <th>Exit</th>
+            <th>Pips</th>
+            <th>P&amp;L ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in trades %}
+        <tr>
+            <td class="cp-mono">{{ t.date }}</td>
+            <td class="cp-mono">{{ t.symbol }}</td>
+            <td>{% if t.side == "buy" %}<span class="cp-tag-buy">BUY</span>{% else %}<span class="cp-tag-sell">SELL</span>{% endif %}</td>
+            <td class="cp-mono">{{ t.entry }}</td>
+            <td class="cp-mono">{{ t.exit }}</td>
+            <td class="cp-mono"><span class="{% if t.pips >= 0 %}cp-success-text{% else %}cp-danger-text{% endif %}">{% if t.pips >= 0 %}+{% endif %}{{ t.pips }}</span></td>
+            <td class="cp-mono"><span class="{% if t.pnl >= 0 %}cp-success-text{% else %}cp-danger-text{% endif %}">{% if t.pnl >= 0 %}+${{ t.pnl }}{% else %}-${{ t.pnl|stringformat:".2f"|cut:"-" }}{% endif %}</span></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if caption %}<p class="cp-figure-caption">{{ caption }}</p>{% endif %}
+</div>

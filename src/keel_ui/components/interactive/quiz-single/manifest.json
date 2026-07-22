@@ -1,0 +1,33 @@
+{
+  "id": "quiz_single",
+  "name": "Single-Question Quiz",
+  "category": "interactive",
+  "version": 1,
+  "when_to_pick": "Insert a one-question check at the end of a tricky section to confirm the reader actually internalized the concept. Best for misconception traps where the intuitive answer is wrong. After the reader picks, it marks the correct option green and their wrong pick red, shows a pass/fail result line, and reveals a 'Why' explanation. Use when there is exactly one right answer and the wrong answers represent real, tempting mistakes.",
+  "tags": ["quiz", "knowledge-check", "engagement"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["question", "options", "explanation"],
+    "properties": {
+      "question": { "type": "string", "minLength": 5, "maxLength": 240, "description": "The single quiz question (plain text). Pose a real misconception trap." },
+      "options": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 5,
+        "description": "Answer choices in display order. EXACTLY ONE must have correct=true. Aim for 4 options where the wrong ones are tempting, plausible mistakes.",
+        "items": {
+          "type": "object",
+          "required": ["text", "correct"],
+          "additionalProperties": false,
+          "properties": {
+            "text":    { "type": "string", "maxLength": 200, "description": "Option label. Trusted inline HTML allowed (e.g. <strong>, <code>) — rendered with |safe." },
+            "correct": { "type": "boolean", "description": "True for the single correct answer; false otherwise." }
+          }
+        }
+      },
+      "explanation": { "type": "string", "minLength": 10, "maxLength": 500, "description": "Shown after answering, under a 'Why' label. Explain why the correct answer is right and why the trap fails. Trusted inline HTML allowed (e.g. <strong>) — rendered with |safe." }
+    }
+  }
+}

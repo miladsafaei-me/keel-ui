@@ -1,0 +1,15 @@
+<div class="cp-html-block cp-html-block-before-after">
+<div class="cp-before-after">
+    <div class="cp-before-after__compare">
+        <div class="cp-before-after__side cp-before-after__side--before">
+            <h5>{{ before_title|default:"Before" }}</h5>
+            {{ before|safe }}
+        </div>
+        <div class="cp-before-after__side cp-before-after__side--after">
+            <h5>{{ after_title|default:"After" }}</h5>
+            {{ after|safe }}
+        </div>
+    </div>
+    {% if caption %}<div class="cp-before-after__caption">{{ caption }}</div>{% endif %}
+</div>
+</div>

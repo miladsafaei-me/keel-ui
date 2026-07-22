@@ -1,0 +1,10 @@
+{
+  "items": [
+    {"question": "What minimum capital should I start with?", "answer": "<strong>$2,000–$5,000 is the practical floor for a managed strategy.</strong> Below that, fixed costs — subscription plus a VPS — eat too much of the edge. Slippage and commission hit a $1,000 account the same way they hit a $50,000 one, so small balances lose proportionally more to friction.", "open_by_default": true},
+    {"question": "Do I need to know how to code?", "answer": "No. Signal providers, copy trading, and fully-managed bots all require zero code. Only an Expert Advisor you build yourself needs scripting — and even then, no-code builders like StrategyQuant can generate the logic for you."},
+    {"question": "Can any bot guarantee a profit?", "answer": "No. Any tool claiming certain returns is either misleading you or running a scheme. Real strategies have losing streaks, drawdowns, and sensitivity to broker conditions. The honest framing is a statistical edge measured across hundreds of trades — never certainty on a single trade."},
+    {"question": "How are bots taxed on my returns?", "answer": "The same way any trading gain is — there is no special bot rate. In most jurisdictions, realized profits are capital gains or income depending on holding period and frequency. Keep a full trade log and confirm the local treatment with a tax professional before filing."},
+    {"question": "What happens during high-impact news?", "answer": "Most well-built bots run a news freeze: they pause 15–30 minutes before scheduled events like NFP, CPI, or central-bank decisions. Spread widening and slippage during those windows can wipe out a thin edge, so sitting out is usually the safer call."},
+    {"question": "Is automated trading legal?", "answer": "Yes, in every major market — the US, EU, UK, Australia, and Singapore all permit it. Individual brokers and prop firms may still restrict bot use, so always read the broker terms and the prop-firm rulebook before you deploy a strategy on a live account."}
+  ]
+}

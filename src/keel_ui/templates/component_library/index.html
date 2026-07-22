@@ -1,0 +1,37 @@
+{% extends "component_library/_base.html" %}
+
+{% block cl_title %}Welcome{% endblock %}
+
+{% block cl_main %}
+<div class="cl-welcome">
+    <h1>Component Library</h1>
+    <p class="cl-welcome__lead">
+        A catalog of visual components used by the content pipeline. Each component is a
+        self-contained widget with a JSON Schema, a template, and a worked example. The
+        pipeline's visual-spec step picks components by id and supplies a matching spec; the
+        renderer expands the template.
+    </p>
+    {% if empty %}
+        <div class="cl-empty">
+            <h2>No components yet</h2>
+            <p>
+                Add component folders under
+                <code>content-pipeline/components/&lt;category&gt;/&lt;id&gt;/</code> and reload.
+            </p>
+        </div>
+    {% else %}
+        <div class="cl-category-grid">
+            {% for cat in sidebar_categories %}
+                <section class="cl-category-card">
+                    <h2>{{ cat.label }} <span class="cl-category-card__count">{{ cat.components|length }}</span></h2>
+                    <ul>
+                        {% for comp in cat.components %}
+                            <li><a href="{% url 'component_library:detail' comp.url_slug %}">{{ comp.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

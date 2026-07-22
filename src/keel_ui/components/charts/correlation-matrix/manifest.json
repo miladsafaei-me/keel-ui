@@ -1,0 +1,35 @@
+{
+  "id": "correlation_matrix",
+  "name": "Correlation Matrix",
+  "category": "charts",
+  "version": 1,
+  "when_to_pick": "Show the pairwise correlations between 3-10 instruments (FX pairs, crypto, indices, metals) as a heatmap. Use it to expose hidden over-exposure — e.g. long EUR/USD + long GBP/USD at +0.86 is really one EUR-weighted bet, not diversification. Cells use a theme-aware diverging scale: green for positive (aligned) correlation, red for negative (inverse), faint neutral near zero, with an axis legend. Pass a square matrix whose rows/cols match the symbols order; the diagonal is always 1.",
+  "tags": ["correlation", "matrix", "heatmap", "diversification", "risk"],
+  "audience_fit": ["forex", "crypto", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["title", "symbols", "matrix"],
+    "properties": {
+      "title":   { "type": "string", "maxLength": 100, "description": "Heading, e.g. 'FX & metals correlation — 30-day rolling'." },
+      "caption": { "type": "string", "maxLength": 240, "description": "One or two sentences that deliver the takeaway — name the specific pairs and their correlation, and the risk they imply (over-exposure / hidden concentration)." },
+      "symbols": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 10,
+        "description": "Instrument labels in the same order as the matrix rows AND columns. Keep them short (e.g. 'EUR/USD', 'XAU/USD', 'BTC/USD').",
+        "items": { "type": "string", "maxLength": 16 }
+      },
+      "matrix": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 10,
+        "description": "Square correlation matrix, one inner array per symbol (row order = symbols order). Values in [-1, 1]; the diagonal should be 1 and the matrix symmetric.",
+        "items": {
+          "type": "array",
+          "items": { "type": "number", "minimum": -1, "maximum": 1 }
+        }
+      }
+    }
+  }
+}

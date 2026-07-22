@@ -1,0 +1,176 @@
+{
+  "id": "annotated_price_chart",
+  "name": "Annotated Price Chart",
+  "category": "trade-visuals",
+  "version": 1,
+  "when_to_pick": "Show a worked trade setup on a real-looking price chart: a price series (line or candlesticks) overlaid with annotation lines and zones — an entry level, a stop-loss line or zone (red/sell), a take-profit line or zone (green/buy), plus optional support/resistance levels and free-floating text callouts pinned to a candle. Pick it when you are walking the reader through a specific setup (a breakout long, a range fade, a pullback entry) and you want them to SEE where entry, risk and reward sit relative to structure — not just read numbers in a table. Static, dependency-free inline SVG: it renders the full chart on first paint with no chart library and no blank frame. Use the risk_reward_visualizer instead when you only need the proportional entry/SL/TP ladder without price action; use a Chart.js line/area chart when the point is the data trend itself rather than an annotated setup.",
+  "tags": ["price-chart", "annotation", "trade-setup", "entry", "stop-loss", "take-profit", "support-resistance", "breakout", "candlestick", "svg"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["series", "levels"],
+    "properties": {
+      "title": {
+        "type": "string",
+        "maxLength": 90,
+        "description": "Heading above the chart, e.g. 'EUR/USD — breakout long above range high'."
+      },
+      "instrument": {
+        "type": "string",
+        "maxLength": 24,
+        "description": "Instrument symbol shown in the header chip (display only), e.g. 'EUR/USD', 'BTC/USDT'."
+      },
+      "timeframe": {
+        "type": "string",
+        "maxLength": 16,
+        "description": "Timeframe label shown in the header chip (display only), e.g. '4H', 'Daily', '15m'."
+      },
+      "chart_type": {
+        "type": "string",
+        "enum": ["line", "candles"],
+        "default": "candles",
+        "description": "Render the series as a single price line/area ('line') or as OHLC candlesticks ('candles'). When 'candles', each series item must be an OHLC object; when 'line', each item is a number (close) — or an OHLC object whose close is used."
+      },
+      "series": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 120,
+        "description": "The price series, oldest first. For chart_type 'line' use plain numbers (closes). For 'candles' use OHLC objects.",
+        "items": {
+          "oneOf": [
+            {
+              "type": "number",
+              "description": "A close price (line mode)."
+            },
+            {
+              "type": "object",
+              "required": ["o", "h", "l", "c"],
+              "additionalProperties": false,
+              "properties": {
+                "o": { "type": "number", "description": "Open price." },
+                "h": { "type": "number", "description": "High price." },
+                "l": { "type": "number", "description": "Low price." },
+                "c": { "type": "number", "description": "Close price." }
+              }
+            }
+          ]
+        }
+      },
+      "decimals": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 8,
+        "default": 4,
+        "description": "Price precision for level labels (4 for FX majors, 2 for indices/stocks, 0–2 for crypto large caps)."
+      },
+      "levels": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 8,
+        "description": "Horizontal annotation lines drawn across the chart at a price. Order does not matter; they are positioned by price.",
+        "items": {
+          "type": "object",
+          "required": ["price", "label", "tone"],
+          "additionalProperties": false,
+          "properties": {
+            "price": {
+              "type": "number",
+              "description": "Price at which the horizontal line sits. Should fall within (or near) the series' min/max for best framing."
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 40,
+              "description": "Short label for the line's pill, e.g. 'Entry', 'Stop-loss', 'Take-profit', 'Range high (R)'."
+            },
+            "tone": {
+              "type": "string",
+              "enum": ["entry", "stop", "target", "support", "resistance", "neutral"],
+              "description": "Semantic styling: 'entry' (accent), 'stop' (red/sell), 'target' (green/buy), 'support'/'resistance' (neutral structural lines), 'neutral' (muted). Drives color, not position."
+            },
+            "style": {
+              "type": "string",
+              "enum": ["solid", "dashed", "dotted"],
+              "default": "dashed",
+              "description": "Line stroke style."
+            },
+            "side": {
+              "type": "string",
+              "enum": ["left", "right"],
+              "default": "right",
+              "description": "Which end of the line the price pill is anchored to, to avoid overlapping pills."
+            }
+          }
+        }
+      },
+      "zones": {
+        "type": "array",
+        "maxItems": 4,
+        "description": "Optional shaded horizontal price bands (a region between two prices), e.g. the risk band entry→stop or the reward band entry→target.",
+        "items": {
+          "type": "object",
+          "required": ["from", "to", "tone"],
+          "additionalProperties": false,
+          "properties": {
+            "from": { "type": "number", "description": "One edge price of the band." },
+            "to": { "type": "number", "description": "The other edge price of the band." },
+            "tone": {
+              "type": "string",
+              "enum": ["risk", "reward", "neutral"],
+              "description": "'risk' shades red (entry→stop), 'reward' shades green (entry→target), 'neutral' shades muted."
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 28,
+              "description": "Optional tag shown inside the band, e.g. 'Risk', 'Reward'."
+            }
+          }
+        }
+      },
+      "callouts": {
+        "type": "array",
+        "maxItems": 5,
+        "description": "Optional free-floating text labels pinned to a specific candle/point index, e.g. marking the breakout candle.",
+        "items": {
+          "type": "object",
+          "required": ["index", "text"],
+          "additionalProperties": false,
+          "properties": {
+            "index": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "0-based index into 'series' the callout points at."
+            },
+            "text": {
+              "type": "string",
+              "maxLength": 48,
+              "description": "Short callout text, e.g. 'Breakout candle', 'Pullback fills'."
+            },
+            "anchor": {
+              "type": "string",
+              "enum": ["above", "below"],
+              "default": "above",
+              "description": "Place the callout above or below the candle/point."
+            },
+            "tone": {
+              "type": "string",
+              "enum": ["accent", "buy", "sell", "neutral"],
+              "default": "accent",
+              "description": "Marker dot + connector color for the callout."
+            }
+          }
+        }
+      },
+      "legend": {
+        "type": "boolean",
+        "default": true,
+        "description": "Show the compact legend row (entry / stop / target swatches) under the chart when corresponding levels exist."
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 280,
+        "description": "Optional one-line takeaway shown under the chart (plain text)."
+      }
+    }
+  }
+}

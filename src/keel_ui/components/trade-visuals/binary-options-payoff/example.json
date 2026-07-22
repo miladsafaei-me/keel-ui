@@ -1,0 +1,6 @@
+{
+  "title": "Call vs Put binary payoff at expiry",
+  "strike": 100,
+  "payout_pct": 78,
+  "stake": 100
+}

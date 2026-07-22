@@ -1,0 +1,38 @@
+<div class="cp-html-block cp-html-block-costbar">
+<figure class="cp-costbar" id="{{ instance_id }}-root">
+    {% if title %}<figcaption class="cp-costbar__title">{{ title }}</figcaption>{% endif %}
+
+    <div class="cp-costbar__track" role="img"
+         aria-label="Stacked breakdown of per-trade trading cost by component.">
+        {% for seg in segments %}
+        <div class="cp-costbar__seg cp-costbar__seg--{{ seg.tone|default:'accent' }}"
+             style="flex-grow:{{ seg.value }}"
+             title="{{ seg.label }}: {{ seg.value }} {{ unit|default:'USD' }}">
+            <span class="cp-costbar__seg-label">{{ seg.label }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cp-costbar__scale" aria-hidden="true">
+        <span class="cp-costbar__scale-tick">0</span>
+        <span class="cp-costbar__scale-cap">All-in cost</span>
+    </div>
+
+    <ul class="cp-costbar__legend">
+        {% for seg in segments %}
+        <li class="cp-costbar__item cp-costbar__item--{{ seg.tone|default:'accent' }}">
+            <span class="cp-costbar__swatch" aria-hidden="true"></span>
+            <span class="cp-costbar__item-label">{{ seg.label }}</span>
+            <span class="cp-costbar__item-value">{{ seg.value }}<span class="cp-costbar__item-unit"> {{ unit|default:'USD' }}</span></span>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="cp-costbar__total">
+        <span class="cp-costbar__total-label">Total cost per trade</span>
+        <span class="cp-costbar__total-value" id="{{ instance_id }}-total">—<span class="cp-costbar__total-unit"> {{ unit|default:'USD' }}</span></span>
+    </div>
+
+    {% if caption %}<p class="cp-costbar__caption">{{ caption }}</p>{% endif %}
+</figure>
+</div>

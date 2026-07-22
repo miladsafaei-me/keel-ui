@@ -1,0 +1,24 @@
+<div class="cp-html-block cp-html-block-copy-flow">
+<figure class="cp-hier" id="{{ instance_id }}-root">
+  {% if heading %}<figcaption class="cp-hier__heading">{{ heading }}</figcaption>{% endif %}
+  <div class="cp-hier__apex-row">
+    <div class="cp-hier__node cp-hier__node--apex cp-hier__node--accent">
+      <span class="cp-hier__title">{{ leader.title }}</span>
+      {% if leader.trade %}<span class="cp-hier__note">{{ leader.trade }}</span>{% endif %}
+    </div>
+  </div>
+  <span class="cp-hier__spine" aria-hidden="true"></span>
+  <div class="cp-hier__level">
+    <span class="cp-hier__tier-label">{{ followers_label|default:"Mirrored to followers" }}</span>
+    <div class="cp-hier__row">
+      {% for f in followers %}
+      <div class="cp-hier__node cp-hier__node--success">
+        <span class="cp-hier__title">{{ f.title }}</span>
+        <span class="cp-hier__note">{{ f.position }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if caption %}<p class="cp-hier__caption">{{ caption }}</p>{% endif %}
+</figure>
+</div>

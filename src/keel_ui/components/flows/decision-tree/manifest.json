@@ -1,0 +1,78 @@
+{
+  "id": "decision_tree",
+  "name": "Decision Tree Diagram",
+  "category": "flows",
+  "version": 2,
+  "when_to_pick": "Show a branching trading decision as a fully-rendered top-down tree the reader can take in at a glance: a root decision, labelled branches (e.g. Yes / No, conditions met / not met), and terminal verdict cards toned success (take the trade / favourable path) or danger (skip it / risk path). Use to turn an 'it depends' rule into a visible flowchart of every path and outcome. This is a static HTML/CSS tree (no Mermaid), so it renders identically in print, RSS, and dark/light themes.",
+  "tags": ["decision-tree", "flowchart", "branching", "checklist", "rules"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["root"],
+    "properties": {
+      "title": {
+        "type": "string",
+        "maxLength": 90,
+        "description": "Optional heading shown above the tree (e.g. 'Should I take this breakout trade?')."
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 220,
+        "description": "Optional one-line takeaway shown under the tree, delivering the aha."
+      },
+      "root": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "$defs": {
+      "node": {
+        "type": "object",
+        "required": ["kind", "label"],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["decision", "outcome"],
+            "description": "'decision' = a branching question/condition node with children; 'outcome' = a terminal verdict card (no children)."
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "Node text. For a decision: the question/condition. For an outcome: the verdict headline."
+          },
+          "detail": {
+            "type": "string",
+            "maxLength": 240,
+            "description": "Optional secondary line. For a decision: a clarifying hint. For an outcome: the action / reasoning."
+          },
+          "tone": {
+            "type": "string",
+            "enum": ["default", "success", "danger", "warning"],
+            "default": "default",
+            "description": "Outcome emphasis: success = green favourable path, danger = red skip/risk path, warning = amber caution. Decisions are usually 'default'."
+          },
+          "branches": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 4,
+            "description": "Children of a decision node. Each branch has a short edge label (e.g. 'Yes', 'No', '> 1.5R') and a child node.",
+            "items": {
+              "type": "object",
+              "required": ["label", "node"],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "maxLength": 28,
+                  "description": "Edge label printed on the connector (kept short so it never wraps)."
+                },
+                "node": {
+                  "$ref": "#/$defs/node"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

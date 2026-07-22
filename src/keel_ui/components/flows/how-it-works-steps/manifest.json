@@ -1,0 +1,39 @@
+{
+  "id": "how_it_works_steps",
+  "name": "How-it-works steps",
+  "category": "flows",
+  "version": 1,
+  "when_to_pick": "Explain a short ordered process (3-6 steps) as connected numbered cards — e.g. how a TradingView webhook reaches a broker, how a deposit clears, or how a bot opens a trade. Pick this when each step is a discrete action with a one-line description and the sequence (1 -> 2 -> 3) is the point. For a time-axis (clock/quarters) use the timeline components instead; for branching logic use decision-tree.",
+  "tags": ["steps", "how-it-works", "process", "numbered", "sequence", "onboarding"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["steps"],
+    "properties": {
+      "heading": {
+        "type": "string",
+        "maxLength": 90,
+        "description": "Optional heading shown above the step sequence, e.g. 'How a TradingView alert reaches your broker'."
+      },
+      "steps": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 6,
+        "items": {
+          "type": "object",
+          "required": ["title", "body"],
+          "properties": {
+            "title": { "type": "string", "maxLength": 42 },
+            "body": { "type": "string", "maxLength": 150 },
+            "icon": {
+              "type": "string",
+              "enum": ["signal", "webhook", "shield", "bolt", "check", "chart", "bell", "key"],
+              "description": "Optional small icon hint rendered as inline SVG in the step's number badge area. One of: signal, webhook, shield, bolt, check, chart, bell, key."
+            }
+          }
+        }
+      }
+    }
+  }
+}

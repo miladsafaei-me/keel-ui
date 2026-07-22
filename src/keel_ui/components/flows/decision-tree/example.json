@@ -1,0 +1,48 @@
+{
+  "title": "Should I take this breakout trade?",
+  "caption": "A breakout earns a position only when volume confirms the move and the stop still leaves room for a 1.5R+ target. Every other path is a stand-aside.",
+  "root": {
+    "kind": "decision",
+    "label": "Price closed beyond the level",
+    "detail": "Resistance or support broken on the entry timeframe",
+    "branches": [
+      {
+        "label": "Volume > 1.5x avg",
+        "node": {
+          "kind": "decision",
+          "label": "Does the stop fit a 1.5R+ target?",
+          "detail": "Risk to the last swing vs. the next structure",
+          "branches": [
+            {
+              "label": "Yes",
+              "node": {
+                "kind": "outcome",
+                "tone": "success",
+                "label": "Enter on the retest",
+                "detail": "Risk 1% of equity, stop below the broken level, scale out at 1.5R and 3R."
+              }
+            },
+            {
+              "label": "No, too tight",
+              "node": {
+                "kind": "outcome",
+                "tone": "warning",
+                "label": "Wait for a pullback",
+                "detail": "Reward is too thin. Drop a timeframe and look for a better-priced entry."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "label": "Volume thin / flat",
+        "node": {
+          "kind": "outcome",
+          "tone": "danger",
+          "label": "Stand aside, likely a fakeout",
+          "detail": "A breakout on weak volume usually traps. No position; set an alert for a re-test on rising volume."
+        }
+      }
+    ]
+  }
+}

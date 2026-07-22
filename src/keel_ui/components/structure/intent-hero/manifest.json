@@ -1,0 +1,379 @@
+{
+  "id": "intent_hero",
+  "name": "Intent Hero (Search-Intent Intro)",
+  "category": "structure",
+  "version": 1,
+  "when_to_pick": "Open an article with an above-the-fold hero matched to what the searcher actually came for, instead of a generic featured image. Choose the 'variant' from the post's search intent: 'informational' (answer-first) when the user wants one discrete fact NOW — current price, today's win rate, latency stat: it shows the question, a huge numeric answer with delta, a 4-cell context grid, an inline sparkline from a numbers array, and a source line. 'commercial' (top-pick + why) for 'best X' / 'X vs Y' / 'top N' comparison queries: a pain line, a crowned editor's-pick card with name, 1-5 reasons and an optional short QUALITATIVE verdict badge (what it's best FOR — never a fabricated numeric rating), up to 4 runner-up rows, and a meta/CTA footer. 'transactional' (CTA-first) for signup / free-trial / upgrade pages where the user has decided to act: eyebrow, headline (em-emphasis allowed), subline, a presentational email field + button (NO real submit), a reassurance line, and up to 4 trust items. 'navigational' (destination card) when the user searched for a known place ('SignalBots admin panel'): breadcrumb, title, description, a primary CTA, and a row of related links. Use exactly once per article, at the very top. For mid-article calls-to-action use a callout; for plain headline stats use kpi_sparkline_card.",
+  "tags": [
+    "hero",
+    "intro",
+    "search-intent",
+    "above-the-fold",
+    "answer-first",
+    "cta",
+    "comparison",
+    "breadcrumb"
+  ],
+  "audience_fit": [
+    "forex",
+    "crypto",
+    "binary",
+    "prop-firm",
+    "stocks"
+  ],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": [
+      "variant"
+    ],
+    "properties": {
+      "variant": {
+        "type": "string",
+        "enum": [
+          "informational",
+          "commercial",
+          "transactional",
+          "navigational"
+        ],
+        "description": "Which hero treatment to render, chosen from the article's search intent. Each variant uses its own field set below (all other fields are ignored)."
+      },
+      "info": {
+        "type": "object",
+        "description": "Fields for variant 'informational' (answer-first hero).",
+        "required": [
+          "question",
+          "answer",
+          "sparkline"
+        ],
+        "properties": {
+          "live_label": {
+            "type": "string",
+            "maxLength": 48,
+            "description": "Small uppercase pulse-dot label, e.g. 'Live data · auto-updated'. Omit to hide the live indicator."
+          },
+          "question": {
+            "type": "string",
+            "maxLength": 90,
+            "description": "The searcher's question restated, e.g. 'Bitcoin price right now'."
+          },
+          "answer": {
+            "type": "string",
+            "maxLength": 24,
+            "description": "The big numeric answer as a display string, e.g. '$67,432'."
+          },
+          "answer_unit": {
+            "type": "string",
+            "maxLength": 12,
+            "description": "Optional small unit suffix after the answer, e.g. 'USD'."
+          },
+          "delta": {
+            "type": "string",
+            "maxLength": 32,
+            "description": "Optional signed change shown as a pill, e.g. '+2.34% today'."
+          },
+          "delta_dir": {
+            "type": "string",
+            "enum": [
+              "up",
+              "down"
+            ],
+            "default": "up",
+            "description": "Direction of the delta pill. up=green/buy with up-triangle, down=red/sell with down-triangle."
+          },
+          "context": {
+            "type": "array",
+            "maxItems": 4,
+            "description": "Optional supporting context cells (e.g. 24h high/low, volume, updated time).",
+            "items": {
+              "type": "object",
+              "required": [
+                "label",
+                "value"
+              ],
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "maxLength": 28,
+                  "description": "Context label, e.g. '24h high'."
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "description": "Context value, e.g. '$68,210' or 'EA / API access on your account'."
+                }
+              }
+            }
+          },
+          "sparkline": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 80,
+            "items": {
+              "type": "number"
+            },
+            "description": "Recent values, oldest first. Drawn as an auto-scaled inline SVG sparkline (line + soft fill + end dot). 8-24 points reads best."
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "Optional source / freshness line shown bottom-right, e.g. 'Source: CoinGecko · refreshes every 30s'."
+          }
+        }
+      },
+      "commercial": {
+        "type": "object",
+        "description": "Fields for variant 'commercial' (top-pick + why hero).",
+        "required": [
+          "pick"
+        ],
+        "properties": {
+          "pain": {
+            "type": "string",
+            "maxLength": 160,
+            "description": "Optional one-line pain point that validates the search, shown above the pick card."
+          },
+          "pick": {
+            "type": "object",
+            "required": [
+              "name",
+              "reasons"
+            ],
+            "properties": {
+              "logo": {
+                "type": "string",
+                "maxLength": 4,
+                "description": "Optional 1-3 char monogram for the pick's logo tile, e.g. 'SB'."
+              },
+              "name": {
+                "type": "string",
+                "maxLength": 48,
+                "description": "Name of the recommended pick, e.g. 'SignalBots Pro'."
+              },
+              "name_suffix": {
+                "type": "string",
+                "maxLength": 40,
+                "description": "Optional muted suffix after the name, e.g. '— our pick for 2026'."
+              },
+              "reasons": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 5,
+                "items": {
+                  "type": "string",
+                  "maxLength": 60
+                },
+                "description": "Short check-marked reasons it wins."
+              },
+              "score": {
+                "type": "string",
+                "maxLength": 32,
+                "description": "Optional short QUALITATIVE verdict badge — what this pick is best FOR, e.g. 'Best for scalping', 'Top US pick', 'API-first'. NEVER a fabricated numeric rating (no '9.4', no '/10' review score): we do not invent ratings (no-stats policy). Omit it unless a genuine one-phrase verdict adds clarity."
+              },
+              "score_label": {
+                "type": "string",
+                "maxLength": 24,
+                "description": "Optional short caption under the verdict badge, e.g. 'Our take' or 'Best for'. Not a rating label — never 'Editor score' or anything implying a numeric grade."
+              }
+            }
+          },
+          "runners": {
+            "type": "array",
+            "maxItems": 4,
+            "description": "Optional runner-up rows shown below the pick.",
+            "items": {
+              "type": "object",
+              "required": [
+                "rank",
+                "name"
+              ],
+              "properties": {
+                "rank": {
+                  "type": "string",
+                  "maxLength": 6,
+                  "description": "Rank marker, e.g. '#2'."
+                },
+                "name": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "description": "Runner-up NAME only — a real broker/product/platform name, e.g. 'OANDA' or 'FP Markets'. This is a name, NOT a description: never a phrase like 'Market-maker + slick app (great for beginners)'. Put any 'good for X' nuance in the optional 'note' field."
+                },
+                "note": {
+                  "type": "string",
+                  "maxLength": 28,
+                  "description": "Optional short qualitative tag for this runner, e.g. 'Best for API' or 'US-legal'. A complete standalone phrase — never a fabricated numeric score, never a cut-off fragment."
+                }
+              }
+            }
+          },
+          "meta": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "Optional footer meta line, e.g. how/when it was tested."
+          },
+          "cta_label": {
+            "type": "string",
+            "maxLength": 36,
+            "description": "Optional footer CTA text, e.g. 'See full comparison'. An arrow is appended automatically. Presentational only — no link."
+          }
+        }
+      },
+      "transactional": {
+        "type": "object",
+        "description": "Fields for variant 'transactional' (CTA-first hero). The email field + button are presentational only; there is no real submit.",
+        "required": [
+          "headline"
+        ],
+        "properties": {
+          "eyebrow": {
+            "type": "string",
+            "maxLength": 40,
+            "description": "Optional pill eyebrow above the headline, e.g. 'Free 14-day trial'."
+          },
+          "headline": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Headline as trusted inline HTML — wrap an emphasized phrase in <em>…</em> to accent-color it. Rendered with |safe; only <em>, <strong>, <br> expected.",
+            "x-safe": true
+          },
+          "sub": {
+            "type": "string",
+            "maxLength": 220,
+            "description": "Optional supporting subline."
+          },
+          "email_placeholder": {
+            "type": "string",
+            "maxLength": 48,
+            "default": "you@example.com",
+            "description": "Placeholder text for the presentational email field."
+          },
+          "button_label": {
+            "type": "string",
+            "maxLength": 32,
+            "default": "Get started",
+            "description": "Label on the presentational button (an arrow is appended automatically)."
+          },
+          "reassure": {
+            "type": "string",
+            "maxLength": 160,
+            "description": "Optional reassurance line under the form, e.g. refund / cancel terms."
+          },
+          "trust": {
+            "type": "array",
+            "maxItems": 4,
+            "description": "Optional trust items shown in a row below the form.",
+            "items": {
+              "type": "object",
+              "required": [
+                "value",
+                "label"
+              ],
+              "properties": {
+                "icon": {
+                  "type": "string",
+                  "maxLength": 4,
+                  "description": "Optional short glyph/emoji for the trust tile, e.g. '★'."
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 24,
+                  "description": "Trust headline, e.g. '4.8 / 5'."
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 36,
+                  "description": "Trust sublabel, e.g. '2,400+ traders'."
+                }
+              }
+            }
+          }
+        }
+      },
+      "navigational": {
+        "type": "object",
+        "description": "Fields for variant 'navigational' (destination card).",
+        "required": [
+          "title",
+          "cta"
+        ],
+        "properties": {
+          "breadcrumb": {
+            "type": "array",
+            "maxItems": 6,
+            "items": {
+              "type": "string",
+              "maxLength": 40
+            },
+            "description": "Optional breadcrumb segments, root first, e.g. ['signalbots.ai', 'admin-os', 'cms']."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 60,
+            "description": "Destination title, e.g. 'Admin Console'."
+          },
+          "desc": {
+            "type": "string",
+            "maxLength": 220,
+            "description": "Optional one- or two-line description of the destination."
+          },
+          "cta": {
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxLength": 36,
+                "description": "Primary CTA text, e.g. 'Open console' (arrow appended automatically)."
+              },
+              "href": {
+                "type": "string",
+                "maxLength": 300,
+                "description": "Optional href for the primary CTA. Defaults to '#'."
+              }
+            }
+          },
+          "related": {
+            "type": "object",
+            "description": "Optional row of related destination links.",
+            "required": [
+              "links"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxLength": 36,
+                "default": "Related destinations",
+                "description": "Uppercase label before the links."
+              },
+              "links": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 8,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "label"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "maxLength": 36,
+                      "description": "Related link text, e.g. 'Client dashboard'."
+                    },
+                    "href": {
+                      "type": "string",
+                      "maxLength": 300,
+                      "description": "Optional href. Defaults to '#'."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

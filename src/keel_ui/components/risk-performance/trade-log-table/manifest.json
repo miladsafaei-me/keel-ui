@@ -1,0 +1,35 @@
+{
+  "id": "trade_log_table",
+  "name": "Trade Log Table",
+  "category": "risk-performance",
+  "version": 1,
+  "when_to_pick": "Show a realistic sample of a bot's trade log so readers see what win/loss distribution actually looks like — not just summary stats. Columns: date, symbol, side, entry, exit, pips, P&L. Highlights buy/sell tags and per-row P&L tone.",
+  "tags": ["table", "trade-log", "track-record"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["trades"],
+    "properties": {
+      "caption": { "type": "string", "maxLength": 240 },
+      "trades": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 30,
+        "items": {
+          "type": "object",
+          "required": ["date", "symbol", "side", "entry", "exit", "pips", "pnl"],
+          "properties": {
+            "date":   { "type": "string", "maxLength": 20 },
+            "symbol": { "type": "string", "maxLength": 16 },
+            "side":   { "type": "string", "enum": ["buy", "sell"] },
+            "entry":  { "type": "number" },
+            "exit":   { "type": "number" },
+            "pips":   { "type": "number" },
+            "pnl":    { "type": "number" }
+          }
+        }
+      }
+    }
+  }
+}

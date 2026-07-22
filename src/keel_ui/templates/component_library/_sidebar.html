@@ -1,0 +1,29 @@
+{% load static %}
+<aside class="cl-sidebar" aria-label="Component library navigation">
+    <header class="cl-sidebar__header">
+        <a href="{% url 'component_library:index' %}" class="cl-sidebar__brand">
+            <span class="cl-sidebar__brand-mark">CL</span>
+            <span class="cl-sidebar__brand-text">
+                <strong>Component Library</strong>
+                <span class="cl-sidebar__subtitle">{{ total_count }} components</span>
+            </span>
+        </a>
+    </header>
+    <nav class="cl-sidebar__nav">
+        {% for cat in sidebar_categories %}
+            <section class="cl-sidebar__group">
+                <h3 class="cl-sidebar__group-title">{{ cat.label }}</h3>
+                <ul class="cl-sidebar__list">
+                    {% for comp in cat.components %}
+                        <li>
+                            <a href="{% url 'component_library:detail' comp.url_slug %}"
+                               class="cl-sidebar__link{% if comp.active %} cl-sidebar__link--active{% endif %}">
+                                {{ comp.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endfor %}
+    </nav>
+</aside>

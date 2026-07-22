@@ -1,0 +1,42 @@
+{
+  "id": "copy_trade_flow",
+  "name": "Copy-Trade Flow",
+  "category": "structure-maps",
+  "version": 1,
+  "when_to_pick": "Show how a copy-trading (mirror-trading) relationship works: one leader/strategy account places a trade, and it is mirrored to each follower's account scaled to THEIR balance/risk — so the reader sees the proportional one-to-many mirroring, not just an org chart. The leader card shows the master trade; each follower card shows the position that trade becomes on that account. Pick it for copy-trading / mirror-trading / PAMM-style content explaining how copying allocates and scales. For a generic org/tier structure use hierarchy; for the step-by-step setup use how_it_works_steps.",
+  "tags": ["copy-trading", "mirror-trading", "leader", "follower", "pamm", "allocation", "scaling"],
+  "audience_fit": ["forex", "crypto", "stocks", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["leader", "followers"],
+    "properties": {
+      "heading": { "type": "string", "maxLength": 90, "description": "Optional heading above the diagram." },
+      "leader": {
+        "type": "object",
+        "required": ["title"],
+        "description": "The leader / strategy account whose trades are copied.",
+        "properties": {
+          "title": { "type": "string", "maxLength": 36, "description": "Leader account name, e.g. 'Lead strategy account'." },
+          "trade": { "type": "string", "maxLength": 60, "description": "The master trade being copied, e.g. 'BUY EUR/USD - risks 2% - 1.00 lot on $50k'." }
+        }
+      },
+      "followers_label": { "type": "string", "maxLength": 40, "default": "Mirrored to followers", "description": "Tier label shown above the follower row." },
+      "followers": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 4,
+        "description": "The follower accounts the trade is mirrored to.",
+        "items": {
+          "type": "object",
+          "required": ["title", "position"],
+          "properties": {
+            "title": { "type": "string", "maxLength": 36, "description": "Follower account, e.g. 'Follower - $3,000'." },
+            "position": { "type": "string", "maxLength": 60, "description": "The scaled mirror on this account, e.g. '0.06 lot - same 2% risk'." }
+          }
+        }
+      },
+      "caption": { "type": "string", "maxLength": 260, "description": "Optional one-line takeaway under the diagram." }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variant": "full_payoff",
+  "beat_label": "The answer",
+  "heading": "The minimum bar for a low-latency claim that survives real conditions",
+  "body": "After testing 14 bot and broker pairs over six months, only one pattern held up under live load: signals routed through a co-located gateway, paired with a broker that <strong>publishes per-account rate limits</strong> and supports WebSocket order push. Everything else is marketing.",
+  "answer_card": {
+    "label": "Verified threshold",
+    "answer": "Co-located gateway + WebSocket broker + published rate limits",
+    "meta": "14 bots, 6 brokers, 180-day live test",
+    "metric": {
+      "value": "9ms",
+      "label": "95th percentile, real users"
+    }
+  },
+  "hook": "Knowing the bar is one thing — meeting it is the next step."
+}

@@ -1,0 +1,17 @@
+<div class="cp-html-block cp-html-block-ib-tiers">
+<div class="cp-tiers" id="{{ instance_id }}-root">
+  {% if title %}<p class="cp-tiers__title">{{ title }}</p>{% endif %}
+  <div class="cp-tiers__grid" data-count="{{ tiers|length }}">
+    {% for t in tiers %}
+    <div class="cp-tiers__card{% if t.recommended %} cp-tiers__card--on{% endif %}">
+      {% if t.recommended %}<span class="cp-tiers__badge">Recommended</span>{% endif %}
+      <span class="cp-tiers__tier">{{ t.name }}</span>
+      <span class="cp-tiers__threshold">{{ threshold_label|default:"Monthly volume" }}: {{ t.threshold }}</span>
+      <span class="cp-tiers__rate">{{ t.rate }}</span>
+      {% if t.payout %}<span class="cp-tiers__payout">{{ payout_label|default:"Example payout" }}: {{ t.payout }}</span>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% if caption %}<p class="cp-tiers__caption">{{ caption }}</p>{% endif %}
+</div>
+</div>

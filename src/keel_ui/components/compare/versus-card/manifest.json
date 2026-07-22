@@ -1,0 +1,57 @@
+{
+  "id": "versus_card",
+  "name": "Versus Card (Head-to-Head)",
+  "category": "compare",
+  "version": 1,
+  "when_to_pick": "Frame a binary choice the reader is weighing as a direct face-off — two named options, A vs B, with a central VS badge, 2-5 short points per side, and a one-line verdict each. Use it when the post pits two concrete things against each other (manual signals vs automated bot, market order vs limit order, scalping vs swing, ECN vs market-maker broker) and you want the contrast to read instantly. Set winner to crown a recommended side. For more than ~5 attributes per side, or when you need cell-by-cell attribute alignment, prefer comparison_table; for two states of one thing (before vs after) use before_after.",
+  "tags": ["versus", "vs", "head-to-head", "comparison", "decision-aid"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["left", "right"],
+    "properties": {
+      "heading": {
+        "type": "string",
+        "maxLength": 80,
+        "description": "Optional heading shown above the face-off, e.g. 'Manual signals vs Automated bot'."
+      },
+      "left": {
+        "type": "object",
+        "required": ["title", "points"],
+        "properties": {
+          "title": { "type": "string", "maxLength": 40, "description": "Name of the left option." },
+          "points": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "items": { "type": "string", "maxLength": 110 },
+            "description": "Short bullet points characterizing the left option."
+          },
+          "verdict": { "type": "string", "maxLength": 90, "description": "Optional one-line bottom-line for the left option." }
+        }
+      },
+      "right": {
+        "type": "object",
+        "required": ["title", "points"],
+        "properties": {
+          "title": { "type": "string", "maxLength": 40, "description": "Name of the right option." },
+          "points": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "items": { "type": "string", "maxLength": 110 },
+            "description": "Short bullet points characterizing the right option."
+          },
+          "verdict": { "type": "string", "maxLength": 90, "description": "Optional one-line bottom-line for the right option." }
+        }
+      },
+      "winner": {
+        "type": "string",
+        "enum": ["left", "right", "none"],
+        "default": "none",
+        "description": "Which side to highlight as the recommended pick. 'none' keeps both neutral."
+      }
+    }
+  }
+}

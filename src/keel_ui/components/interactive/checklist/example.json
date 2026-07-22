@@ -1,0 +1,13 @@
+{
+  "title": "Pre-deployment checklist: before you take a bot live",
+  "items": [
+    "Backtest covers ≥2 years and ≥1,000 trades on out-of-sample data",
+    "Kill criteria are written down: max daily loss, max drawdown, broker-condition triggers",
+    "VPS is co-located with the broker and latency is measured under 50ms",
+    "News freeze configured: 15–30 min around NFP, CPI, and central-bank releases",
+    "Position sizing matches account size (Fixed-1% or Half Kelly, never Full Kelly)",
+    "Backtest slippage and spread assumptions match live broker conditions ±20%",
+    "Logging captures every order, fill, partial, and reject with timestamps",
+    "A weekly review reminder is on the calendar"
+  ]
+}

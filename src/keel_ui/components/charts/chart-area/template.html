@@ -1,0 +1,7 @@
+<figure class="cp-figure cp-figure-chart-interactive">
+    <div class="cp-chartjs-wrapper" style="position:relative;height:380px">
+        <canvas id="{{ instance_id }}"
+                data-cp-chart="{% if datasets %}{% cp_chart_config 'line' title labels datasets %}{% else %}{% cp_area_config title labels values tone|default:'success' y_label|default:'' %}{% endif %}"></canvas>
+    </div>
+    {% if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
+</figure>

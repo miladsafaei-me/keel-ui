@@ -1,0 +1,25 @@
+<div class="cp-html-block cp-html-block-limit">
+<figure class="cp-limit" id="{{ instance_id }}-root">
+    {% if heading %}<figcaption class="cp-limit__heading">{{ heading }}</figcaption>{% endif %}
+    <ul class="cp-limit__rows">
+        {% for row in rows %}
+        {% widthratio row.value row.limit 100 as pct_s %}{% with pct=pct_s|add:0 %}
+        <li class="cp-limit__row">
+            <div class="cp-limit__head">
+                <span class="cp-limit__label">{{ row.label }}</span>
+                <span class="cp-limit__nums"><strong>{{ row.value }}</strong> / {{ row.limit }}{% if row.unit %} {{ row.unit }}{% endif %}</span>
+            </div>
+            <div class="cp-limit__track">
+                <span class="cp-limit__fill {% if row.direction == 'min' %}{% if pct >= 100 %}cp-limit__fill--ok{% else %}cp-limit__fill--accent{% endif %}{% else %}{% if pct >= 100 %}cp-limit__fill--danger{% elif pct >= 80 %}cp-limit__fill--warning{% else %}cp-limit__fill--accent{% endif %}{% endif %}" style="width:{% if pct > 100 %}100{% else %}{{ pct }}{% endif %}%"></span>
+            </div>
+            <div class="cp-limit__foot">
+                <span class="cp-limit__hint">{% if row.direction == 'min' %}{% if pct >= 100 %}Target met{% else %}{{ pct }}% of target{% endif %}{% else %}{% if pct >= 100 %}Limit reached{% else %}{{ pct }}% of limit used{% endif %}{% endif %}</span>
+                {% if row.note %}<span class="cp-limit__note">{{ row.note }}</span>{% endif %}
+            </div>
+        </li>
+        {% endwith %}
+        {% endfor %}
+    </ul>
+    {% if caption %}<p class="cp-limit__caption">{{ caption }}</p>{% endif %}
+</figure>
+</div>

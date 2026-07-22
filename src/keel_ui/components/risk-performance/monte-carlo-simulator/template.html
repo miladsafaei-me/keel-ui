@@ -1,0 +1,59 @@
+<div class="cp-html-block cp-html-block-monte-carlo">
+<div class="cp-mc" id="{{ instance_id }}-root"
+     data-cp-paths="{{ paths_default|default:200 }}"
+     data-cp-trades="{{ trades_default|default:200 }}"
+     data-cp-wr="{{ win_rate_default|default:55 }}"
+     data-cp-rr="{{ rr_default|default:1.6 }}"
+     data-cp-risk="{{ risk_pct_default|default:1 }}"
+     data-cp-ruin="{{ ruin_threshold|default:25 }}">
+    <div class="cp-mc__header">
+        <div class="cp-mc__heading">
+            <h4 class="cp-mc__title">{{ title|default:"Monte Carlo: 200 equity paths, one edge" }}</h4>
+            <div class="cp-mc__edge" id="{{ instance_id }}-edge"></div>
+        </div>
+        <div class="cp-mc__controls">
+            <button id="{{ instance_id }}-run" class="cp-mc__btn cp-mc__btn--primary" type="button">
+                <span class="cp-mc__btn-ico" aria-hidden="true">&#9654;</span><span>Run</span>
+            </button>
+            <button id="{{ instance_id }}-reset" class="cp-mc__btn" type="button">
+                <span class="cp-mc__btn-ico" aria-hidden="true">&#8635;</span><span>Reset</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="cp-mc__canvas-wrap">
+        <svg class="cp-mc__svg" id="{{ instance_id }}-svg" viewBox="0 0 760 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Equity-curve fan of simulated trading outcomes"></svg>
+    </div>
+
+    <div class="cp-mc__legend">
+        <span class="cp-mc__legend-item cp-mc__legend-item--band">10th&ndash;90th percentile band</span>
+        <span class="cp-mc__legend-item cp-mc__legend-item--median">Median path</span>
+        <span class="cp-mc__legend-item cp-mc__legend-item--base">Break-even</span>
+    </div>
+
+    <div class="cp-mc__stats">
+        <div class="cp-mc__stat">
+            <div class="cp-mc__stat-label">Median return</div>
+            <div class="cp-mc__stat-value" id="{{ instance_id }}-med">&mdash;</div>
+            <div class="cp-mc__stat-sub">final equity, all paths</div>
+        </div>
+        <div class="cp-mc__stat">
+            <div class="cp-mc__stat-label">Profitable paths</div>
+            <div class="cp-mc__stat-value cp-mc__stat-value--accent" id="{{ instance_id }}-w">&mdash;</div>
+            <div class="cp-mc__stat-sub">finished above start</div>
+        </div>
+        <div class="cp-mc__stat">
+            <div class="cp-mc__stat-label">Worst drawdown</div>
+            <div class="cp-mc__stat-value cp-mc__stat-value--sell" id="{{ instance_id }}-dd">&mdash;</div>
+            <div class="cp-mc__stat-sub">deepest peak-to-trough</div>
+        </div>
+        <div class="cp-mc__stat">
+            <div class="cp-mc__stat-label">Risk of ruin</div>
+            <div class="cp-mc__stat-value cp-mc__stat-value--warn" id="{{ instance_id }}-ruin">&mdash;</div>
+            <div class="cp-mc__stat-sub">hit &minus;{{ ruin_threshold|default:25 }}% equity</div>
+        </div>
+    </div>
+
+    <p class="cp-mc__caption">{{ caption|default:"Same win rate, same reward-to-risk, 200 runs of 200 trades. The cone shows how wide real outcomes spread even with a genuine edge — several paths sit 20%+ underwater before recovering. Plan position size for the band, not the median." }}</p>
+</div>
+</div>

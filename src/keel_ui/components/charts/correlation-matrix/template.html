@@ -1,0 +1,24 @@
+<div class="cp-html-block cp-html-block-correlation">
+<div class="cp-corr" id="{{ instance_id }}-root">
+    <div class="cp-corr__head">
+        <h4 class="cp-corr__title">{{ title }}</h4>
+        <span class="cp-corr__badge">{{ symbols|length }}&times;{{ symbols|length }} matrix</span>
+    </div>
+    <div class="cp-corr__scroll">
+        <div class="cp-corr__grid" id="{{ instance_id }}-grid"
+             style="grid-template-columns: var(--cp-corr-axis) repeat({{ symbols|length }}, minmax(54px, 1fr));"></div>
+    </div>
+    <div class="cp-corr__legend">
+        <span class="cp-corr__legend-label cp-corr__legend-label--neg">Inverse</span>
+        <div class="cp-corr__legend-scale">
+            <div class="cp-corr__legend-bar"></div>
+            <div class="cp-corr__legend-ticks">
+                <span>-1.0</span><span>-0.5</span><span>0</span><span>+0.5</span><span>+1.0</span>
+            </div>
+        </div>
+        <span class="cp-corr__legend-label cp-corr__legend-label--pos">Aligned</span>
+    </div>
+    {% if caption %}<p class="cp-corr__caption">{{ caption }}</p>{% endif %}
+</div>
+<script type="application/json" id="{{ instance_id }}-data">{"symbols": {{ symbols|to_json }}, "matrix": {{ matrix|to_json }}}</script>
+</div>

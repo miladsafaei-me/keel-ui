@@ -1,0 +1,26 @@
+<figure class="cp-figure cp-figure-chart-interactive cp-stackbar" id="{{ instance_id }}-root">
+    <div class="cp-stackbar__card">
+        <div class="cp-stackbar__head">
+            <span class="cp-stackbar__eyebrow">Stacked breakdown</span>
+            {% if title %}<h4 class="cp-stackbar__title">{{ title }}</h4>{% endif %}
+        </div>
+
+        {% if summary %}
+        <div class="cp-stackbar__summary" role="list">
+            {% for stat in summary %}
+            <div class="cp-stackbar__stat cp-stackbar__stat--{{ stat.tone|default:'neutral' }}" role="listitem">
+                <span class="cp-stackbar__stat-label">{{ stat.label }}</span>
+                <span class="cp-stackbar__stat-value">{{ stat.value }}</span>
+                {% if stat.note %}<span class="cp-stackbar__stat-note">{{ stat.note }}</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="cp-stackbar__plot cp-chartjs-wrapper">
+            <canvas id="{{ instance_id }}"
+                    data-cp-chart="{% cp_stacked_bar_config '' labels datasets %}"></canvas>
+        </div>
+    </div>
+    {% if caption %}<figcaption>{{ caption }}</figcaption>{% endif %}
+</figure>

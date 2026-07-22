@@ -1,0 +1,7 @@
+{
+  "language": "pine",
+  "filename": "rsi_reversion_strategy.pine",
+  "show_line_numbers": true,
+  "code": "//@version=5\nstrategy(\"RSI Mean-Reversion\", overlay=true, default_qty_type=strategy.percent_of_equity, default_qty_value=2)\n\n// Inputs\nrsiLen   = input.int(14, \"RSI Length\")\noversold = input.int(30, \"Oversold\")\nbought   = input.int(70, \"Overbought\")\nriskPct  = input.float(1.0, \"Risk % per trade\", step=0.25)\n\n// Signals\nrsi      = ta.rsi(close, rsiLen)\nlongSig  = ta.crossover(rsi, oversold)\nexitSig  = ta.crossunder(rsi, bought)\n\n// Position sizing from a fixed % stop\nstopDist = ta.atr(14) * 1.5\nqty      = (strategy.equity * riskPct / 100) / stopDist\n\nif longSig and strategy.position_size == 0\n    strategy.entry(\"Long\", strategy.long, qty=qty)\n    strategy.exit(\"Stop\", \"Long\", stop=close - stopDist)\n\nif exitSig\n    strategy.close(\"Long\")\n\n// Fire a webhook alert SignalBots can route to your broker\nalertcondition(longSig, \"BUY\", '{\"side\":\"buy\",\"symbol\":\"{{ticker}}\"}')",
+  "caption": "A complete TradingView strategy: RSI crossover entry, ATR-based position sizing, and an alertcondition() whose JSON payload SignalBots forwards to your broker connector."
+}

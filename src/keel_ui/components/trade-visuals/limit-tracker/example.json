@@ -1,0 +1,10 @@
+{
+  "heading": "100K funded challenge — where you stand today",
+  "rows": [
+    { "label": "Profit target", "value": 6200, "limit": 10000, "unit": "$", "direction": "min", "note": "Need 10k to pass" },
+    { "label": "Max daily loss", "value": 1200, "limit": 5000, "unit": "$", "direction": "max", "note": "Resets at midnight" },
+    { "label": "Max total drawdown", "value": 8300, "limit": 10000, "unit": "$", "direction": "max", "note": "Hard breach = fail" },
+    { "label": "Minimum trading days", "value": 3, "limit": 4, "unit": "days", "direction": "min" }
+  ],
+  "caption": "Profit is past the halfway mark and daily loss is comfortable, but total drawdown at 83% of the cap is the rule to watch — one bad session here ends the challenge regardless of profit."
+}

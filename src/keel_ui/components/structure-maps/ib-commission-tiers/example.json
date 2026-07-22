@@ -1,0 +1,11 @@
+{
+  "title": "SignalBots IB rebate tiers (Forex, per standard lot)",
+  "threshold_label": "Referred monthly volume",
+  "payout_label": "Illustrative payout",
+  "tiers": [
+    { "name": "Tier 1 — Starter", "threshold": "0-100 lots / mo", "rate": "$3.0 / lot", "payout": "about $300 / mo" },
+    { "name": "Tier 2 — Growth", "threshold": "100-500 lots / mo", "rate": "$4.0 / lot", "payout": "about $2,000 / mo", "recommended": true },
+    { "name": "Tier 3 — Master IB", "threshold": "500+ lots / mo", "rate": "$5.0 / lot + sub-IB override", "payout": "about $2,500+ / mo" }
+  ],
+  "caption": "Rebates scale with the volume your referred traders generate; a Master IB also earns an override on every sub-IB's volume. Figures are illustrative, not promised income."
+}

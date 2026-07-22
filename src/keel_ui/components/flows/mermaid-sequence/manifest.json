@@ -1,0 +1,28 @@
+{
+  "id": "mermaid_sequence",
+  "name": "Sequence Diagram",
+  "category": "flows",
+  "version": 2,
+  "when_to_pick": "Show a time-ordered message exchange between 2-5 actors when the reader needs to understand WHO talks to WHOM, in what order, and what comes back. Ideal for execution flows (TradingView webhook -> bot -> broker API -> matching engine -> fill), API request/response chains, order lifecycles, and handshake/auth sequences. Use alt/else blocks to contrast a success path against a reject/error path. Prefer a flowchart when the logic is branching decisions rather than messages over time.",
+  "tags": ["diagram", "sequence", "message-flow", "execution-flow", "api", "webhook"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": ["mermaid"],
+  "schema": {
+    "type": "object",
+    "required": ["source"],
+    "properties": {
+      "source": {
+        "type": "string",
+        "minLength": 10,
+        "maxLength": 4000,
+        "pattern": "^\\s*sequenceDiagram",
+        "description": "Trusted raw Mermaid source, rendered with |safe so arrows (->>, -->>) and inline <br/> in notes survive. MUST start with 'sequenceDiagram'. Use 'autonumber' for step markers, 'Note over A,B: ...' for context, and an 'alt ... else ... end' block to show a success vs reject path. DENSITY (the #1 quality rule for this diagram): keep it readable — 3 actors is ideal, 4 is the max; each diagram column is narrow, and useMaxWidth scales the whole figure down to fit, so extra actors or long labels shrink everything until boxes and arrows overlap. Keep participant aliases short (1-2 words: 'SignalBots', not 'SignalBots execution engine') and message labels short (3-6 words: 'Place market order', not 'POST /orders market BUY 0.50 lot with HMAC'); push numeric detail into a Note instead. Do NOT use the '<' or '>' character inside message/note text (write 'under 120 ms', not '<120 ms') — the sequence parser rejects it. Do NOT add classDef/class lines: the sequence parser does not support them and will throw a parse error (actor and frame colors are themed automatically by the renderer's CSS in both light and dark, so no inline styling is needed)."
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 240,
+        "description": "One-line takeaway under the diagram — deliver the insight, not a restatement of the steps."
+      }
+    }
+  }
+}

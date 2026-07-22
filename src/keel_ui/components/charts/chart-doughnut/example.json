@@ -1,0 +1,9 @@
+{
+  "title": "Where a $5,000 trading account actually sits",
+  "caption": "Only 30% is ever at risk in open trades — the rest is dry powder and a hard cash buffer, which is what keeps one bad week from ending the account.",
+  "eyebrow": "Capital allocation",
+  "total_label": "Total account",
+  "value_prefix": "$",
+  "labels": ["Cash buffer", "Open positions", "Reserve margin", "Swing book", "Fees float"],
+  "values": [2000, 1500, 750, 600, 150]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Backtest vs. live win rate by strategy (%)",
+  "caption": "Every strategy decays once it meets real spreads and slippage. Mean reversion sheds 19 points live — the widest gap is your overfitting bill.",
+  "labels": ["Trend EMA", "Mean reversion", "Breakout", "Grid", "Scalping"],
+  "datasets": [
+    {
+      "label": "Backtest",
+      "data": [61, 78, 54, 69, 66],
+      "tone": "accent"
+    },
+    {
+      "label": "Live (90 days)",
+      "data": [55, 59, 49, 58, 52],
+      "tone": "danger"
+    }
+  ]
+}

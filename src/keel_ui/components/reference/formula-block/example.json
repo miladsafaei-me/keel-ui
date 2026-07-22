@@ -1,0 +1,5 @@
+{
+  "label": "Kelly criterion — optimal position size",
+  "body": "<var>f</var><sup>*</sup> = <var>p</var> &minus; <span class=\"cp-formula__op\">(</span>1 &minus; <var>p</var><span class=\"cp-formula__op\">)</span> / <var>b</var>",
+  "note": "<var>p</var> = historical win rate, <var>b</var> = average win &divide; average loss (reward-to-risk). Worked example: a setup winning 55% of the time (<var>p</var> = 0.55) at 1.5R (<var>b</var> = 1.5) gives <var>f</var><sup>*</sup> = 0.55 &minus; 0.45 / 1.5 = <strong>0.25</strong> — full Kelly risks 25% of equity per trade. Most desks size at half-Kelly (<var>f</var><sup>*</sup>/2 &asymp; 12.5%) because full-Kelly drawdowns are punishing."
+}

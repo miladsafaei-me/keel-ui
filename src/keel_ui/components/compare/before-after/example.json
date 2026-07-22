@@ -1,0 +1,7 @@
+{
+  "before_title": "Strategy v1 (overfit)",
+  "after_title": "Strategy v2 (after walk-forward optimization)",
+  "before": "<ul><li>In-sample Sharpe: <strong>3.4</strong></li><li>Out-of-sample Sharpe: <strong>0.2</strong></li><li>14 parameters tuned on the same window</li><li>Max drawdown OOS: <strong>62%</strong></li></ul>",
+  "after": "<ul><li>In-sample Sharpe: <strong>1.6</strong></li><li>Out-of-sample Sharpe: <strong>1.4</strong></li><li>4 parameters; rest pinned at defaults</li><li>Max drawdown OOS: <strong>18%</strong></li></ul>",
+  "caption": "Fewer knobs and a walk-forward window kill the curve-fit; the OOS Sharpe stops collapsing to noise."
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Monte Carlo: 200 equity paths from one edge",
+  "caption": "Same 52% win rate, 1:1.2 reward-to-risk, 2% risk per trade — 200 runs of 200 trades. The shaded cone is the 10th–90th-percentile band: a real positive edge still spreads outcomes from roughly +20% to +130%, every path tours a deep drawdown, and a handful break −25% first. Size for the band, not the median.",
+  "paths_default": 200,
+  "trades_default": 200,
+  "win_rate_default": 52,
+  "rr_default": 1.2,
+  "risk_pct_default": 2,
+  "ruin_threshold": 25
+}

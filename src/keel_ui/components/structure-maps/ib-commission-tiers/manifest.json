@@ -1,0 +1,37 @@
+{
+  "id": "ib_commission_tiers",
+  "name": "IB Commission Tiers",
+  "category": "structure-maps",
+  "version": 1,
+  "when_to_pick": "Show how an IB's (Introducing Broker's) earnings scale across volume or revenue-share tiers — the rate at each tier, what unlocks it, and an illustrative payout, with one tier flagged as the target/recommended tier. Pick it for IB & partnership content answering 'how much can I earn as an IB?', a rebate/commission rate card, or a Master-IB vs sub-IB split. For the IB org structure (who sits under whom) use hierarchy; for the IB recruitment drop-off use funnel; for an earnings what-if the reader computes live use calculator. Frame figures as illustrative examples, never promised income.",
+  "tags": ["ib", "master-ib", "commission", "rebate", "rev-share", "tiers", "partnership", "earnings"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["tiers"],
+    "properties": {
+      "title": { "type": "string", "maxLength": 90, "description": "Optional heading, e.g. 'SignalBots IB rebate tiers (Forex, per standard lot)'." },
+      "threshold_label": { "type": "string", "maxLength": 28, "default": "Monthly volume", "description": "Label for what unlocks each tier — change it for non-volume models (e.g. 'Referred traders', 'Deposits')." },
+      "payout_label": { "type": "string", "maxLength": 28, "default": "Example payout", "description": "Label for the per-tier illustrative earnings figure." },
+      "tiers": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 6,
+        "description": "Ordered tiers from entry to top, left to right.",
+        "items": {
+          "type": "object",
+          "required": ["name", "threshold", "rate"],
+          "properties": {
+            "name": { "type": "string", "maxLength": 32, "description": "Tier name, e.g. 'Tier 1 — Starter', 'Master IB'." },
+            "threshold": { "type": "string", "maxLength": 40, "description": "What unlocks this tier, e.g. '0-100 lots / mo'." },
+            "rate": { "type": "string", "maxLength": 36, "description": "The earning rate at this tier (the focal number), e.g. '$4.0 / lot' or '25% rev-share'." },
+            "payout": { "type": "string", "maxLength": 40, "description": "Optional illustrative earnings at this tier, e.g. 'about $2,000 / mo'." },
+            "recommended": { "type": "boolean", "default": false, "description": "Flag the target/recommended tier — gets an accent highlight + badge. Set on at most one tier." }
+          }
+        }
+      },
+      "caption": { "type": "string", "maxLength": 260, "description": "Optional one-line takeaway under the ladder." }
+    }
+  }
+}

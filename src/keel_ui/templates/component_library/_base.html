@@ -1,0 +1,34 @@
+{% extends "base_marketing.html" %}
+{% load static %}
+
+{% block title %}{% block cl_title %}Component Library{% endblock %} | SignalBots{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Interactive catalog of visual components used in SignalBots content pipeline.">
+    <meta name="robots" content="noindex,nofollow">
+{% endblock %}
+
+{% block extra_head %}
+    <meta name="color-scheme" content="light dark">
+{% endblock %}
+
+{% block body_class %}page-component-library{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'blog/css/content-pipeline.css' %}">
+    <link rel="stylesheet" href="{% static 'component_library/css/showcase.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cl-shell">
+    {% include "component_library/_sidebar.html" %}
+    <main class="cl-main">
+        {% block cl_main %}{% endblock %}
+    </main>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'blog/js/content-pipeline.js' %}" defer></script>
+    <script src="{% static 'component_library/js/showcase.js' %}" defer></script>
+{% endblock %}

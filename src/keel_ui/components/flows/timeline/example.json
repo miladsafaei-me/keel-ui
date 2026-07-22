@@ -1,0 +1,26 @@
+{
+  "steps": [
+    {
+      "title": "Week 0 — Paper trade.",
+      "body": "Run on a demo for 2–4 weeks. Goal: see at least one losing streak comparable to the backtest's max drawdown."
+    },
+    {
+      "title": "Week 1–2 — 5% live.",
+      "body": "Real money, but tiny. Cost discovery only — confirm slippage and commission match your model."
+    },
+    {
+      "title": "Week 3–4 — 50% size.",
+      "body": "Half intended size. Confirm win rate and R:R hold up at meaningful position sizes."
+    },
+    {
+      "title": "Week 5+ — Full deployment.",
+      "body": "Intended size, kill criteria written and active. Calendar reminder for monthly review."
+    },
+    {
+      "marker": "!",
+      "title": "Kill criteria.",
+      "body": "3 consecutive losing weeks → pause. Drawdown &gt; 1.5× backtested max → stop. Slippage doubles vs. trial → broker conditions changed.",
+      "tone": "danger"
+    }
+  ]
+}

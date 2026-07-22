@@ -1,0 +1,70 @@
+{
+  "id": "gauge_meter",
+  "name": "Gauge / Meter",
+  "category": "charts",
+  "version": 1,
+  "when_to_pick": "Show a single bounded number as a position on a colored semicircular arc — a speedometer-style gauge with low/medium/high (or sell/neutral/buy) zone bands, a needle pointing at the current value, and a large value readout with its zone label. Pick it whenever an article reduces a state to one score on a scale: market-sentiment / fear-and-greed indices (0–100), RSI or other bounded oscillators, a volatility or risk level, account-health or margin-usage percentage, prop-firm drawdown headroom, or a backtest confidence/quality score. Use it when the *one number and which band it falls in* is the takeaway; use a chart instead when the trend over time matters.",
+  "tags": ["gauge", "meter", "sentiment", "fear-and-greed", "score", "indicator", "speedometer", "rsi"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "label": {
+        "type": "string",
+        "maxLength": 60,
+        "description": "Name of the metric shown under the value readout, e.g. 'Market sentiment' or 'RSI (14)'."
+      },
+      "value": {
+        "type": "number",
+        "description": "Current value the needle points to. Clamped to [min, max] for display."
+      },
+      "min": {
+        "type": "number",
+        "default": 0,
+        "description": "Low end of the scale (left edge of the arc)."
+      },
+      "max": {
+        "type": "number",
+        "default": 100,
+        "description": "High end of the scale (right edge of the arc)."
+      },
+      "unit": {
+        "type": "string",
+        "maxLength": 8,
+        "description": "Optional short unit appended to the value readout, e.g. '%' or 'pts'. Omit for an index/score."
+      },
+      "zones": {
+        "type": "array",
+        "maxItems": 6,
+        "description": "Ordered colored bands along the arc, low-to-high. Each band runs from the previous band's upTo (or min) up to its own upTo. The last band's upTo should equal max. If omitted, the whole arc uses a single neutral accent band.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "upTo": {
+              "type": "number",
+              "description": "Upper bound of this band on the scale (inclusive). Must be within [min, max] and greater than the previous band's upTo."
+            },
+            "tone": {
+              "type": "string",
+              "enum": ["sell", "buy", "neutral", "success", "danger", "warning", "accent"],
+              "description": "Semantic color of the band. Use sell/danger for low/bearish, buy/success for high/bullish, neutral/accent/warning for the middle. sell=red, buy=green, danger=red, success=green, warning=amber, accent=blue, neutral=grey."
+            },
+            "label": {
+              "type": "string",
+              "maxLength": 28,
+              "description": "Optional short name for this band shown as the zone label when the needle lands in it, e.g. 'Extreme Greed'."
+            }
+          },
+          "required": ["upTo", "tone"]
+        }
+      },
+      "caption": {
+        "type": "string",
+        "maxLength": 260,
+        "description": "Optional one-line takeaway shown under the gauge (plain text)."
+      }
+    },
+    "required": ["label", "value"]
+  }
+}

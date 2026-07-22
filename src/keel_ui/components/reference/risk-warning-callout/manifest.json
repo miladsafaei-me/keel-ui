@@ -1,0 +1,33 @@
+{
+  "id": "risk_warning_callout",
+  "name": "Risk Warning Callout",
+  "category": "reference",
+  "version": 1,
+  "when_to_pick": "Drop in the mandated compliance risk disclosure on any post or glossary term that discusses signals, backtests, win rates, leverage, or live trading outcomes. Use it once near the relevant claim (not decoratively); it carries a warning-styled box and a required link to /risk-warning. Prefer this over a hand-written warning callout whenever the copy is a regulatory risk disclosure.",
+  "tags": ["compliance", "risk-warning", "disclosure", "callout", "warning"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "required": ["body"],
+    "properties": {
+      "heading": {
+        "type": "string",
+        "maxLength": 80,
+        "default": "Risk Warning",
+        "description": "Short callout title. Defaults to 'Risk Warning'."
+      },
+      "body": {
+        "type": "string",
+        "maxLength": 600,
+        "description": "The risk disclosure copy. Trusted inline HTML is allowed (rendered with |safe) — keep it to simple <strong>/<em> emphasis. Must avoid guaranteed-profit / risk-free / can't-lose language."
+      },
+      "link_text": {
+        "type": "string",
+        "maxLength": 60,
+        "default": "Read the full risk warning",
+        "description": "Anchor text for the mandatory link to /risk-warning. The href is hardcoded in the template."
+      }
+    }
+  }
+}

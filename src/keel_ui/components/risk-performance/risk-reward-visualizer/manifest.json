@@ -1,0 +1,23 @@
+{
+  "id": "risk_reward_visualizer",
+  "name": "Risk:Reward Visualizer",
+  "category": "risk-performance",
+  "version": 2,
+  "when_to_pick": "Show a trade's entry, stop-loss and take-profit as a proportional price ladder: the risk zone (entry → SL, red) and reward zone (entry → TP, green) are shaded to scale so the reader sees the asymmetry at a glance, with a prominent reward-to-risk readout and the break-even win rate it implies. Direction (long/short) is detected automatically. Inputs are editable, so the visual updates live as the reader experiments with stop placement. Pick it when explaining position sizing, R-multiples, stop discipline, or why a higher R:R lets a lower win rate stay profitable.",
+  "tags": ["risk-reward", "r-multiple", "visualizer", "trade-setup", "stop-loss", "take-profit"],
+  "audience_fit": ["forex", "crypto", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "title":         { "type": "string", "default": "Risk : Reward visualizer", "maxLength": 80, "description": "Heading above the visual." },
+      "instrument":    { "type": "string", "default": "EUR/USD", "maxLength": 24, "description": "Instrument symbol shown for context (display only; does not affect math)." },
+      "entry_default": { "type": "number", "default": 1.0850, "description": "Entry price." },
+      "sl_default":    { "type": "number", "default": 1.0820, "description": "Stop-loss price. Below entry = long, above entry = short (direction is auto-detected from SL/TP vs entry)." },
+      "tp_default":    { "type": "number", "default": 1.0910, "description": "Take-profit price." },
+      "decimals":      { "type": "integer", "minimum": 0, "maximum": 6, "default": 4, "description": "Price precision (e.g. 4 for FX majors, 2 for indices, 0 for JPY-quoted lots)." },
+      "caption":       { "type": "string", "maxLength": 260, "description": "Optional one-line takeaway shown under the visual (plain text)." }
+    },
+    "required": ["entry_default", "sl_default", "tp_default"]
+  }
+}

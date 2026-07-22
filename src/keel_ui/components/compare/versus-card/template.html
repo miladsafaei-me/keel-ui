@@ -1,0 +1,26 @@
+<div class="cp-html-block cp-html-block-versus">
+<div class="cp-vs" data-winner="{{ winner|default:'none' }}">
+    {% if heading %}<p class="cp-vs__heading">{{ heading }}</p>{% endif %}
+    <div class="cp-vs__arena">
+        <div class="cp-vs__side cp-vs__side--left{% if winner == 'left' %} cp-vs__side--win{% endif %}">
+            {% if winner == 'left' %}<span class="cp-vs__crown" aria-label="Recommended pick">Winner</span>{% endif %}
+            <h4 class="cp-vs__title">{{ left.title }}</h4>
+            <ul class="cp-vs__points">
+                {% for p in left.points %}<li class="cp-vs__point">{{ p }}</li>
+                {% endfor %}
+            </ul>
+            {% if left.verdict %}<p class="cp-vs__verdict">{{ left.verdict }}</p>{% endif %}
+        </div>
+        <div class="cp-vs__badge" aria-hidden="true"><span class="cp-vs__badge-text">VS</span></div>
+        <div class="cp-vs__side cp-vs__side--right{% if winner == 'right' %} cp-vs__side--win{% endif %}">
+            {% if winner == 'right' %}<span class="cp-vs__crown" aria-label="Recommended pick">Winner</span>{% endif %}
+            <h4 class="cp-vs__title">{{ right.title }}</h4>
+            <ul class="cp-vs__points">
+                {% for p in right.points %}<li class="cp-vs__point">{{ p }}</li>
+                {% endfor %}
+            </ul>
+            {% if right.verdict %}<p class="cp-vs__verdict">{{ right.verdict }}</p>{% endif %}
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,21 @@
+{
+  "heading": "How the SignalBots Master-IB structure pays out",
+  "apex": { "title": "SignalBots — Master IB", "note": "Negotiates top-tier broker rebates", "tone": "success" },
+  "levels": [
+    {
+      "label": "Sub-IBs",
+      "nodes": [
+        { "title": "Regional IB — Africa", "note": "Local-language support" },
+        { "title": "Regional IB — South Asia", "note": "Local-language support" },
+        { "title": "Niche IB — Binary", "note": "Highest-value segment" }
+      ]
+    },
+    {
+      "label": "Traders",
+      "nodes": [
+        { "title": "Their referred traders", "note": "Trade under the IB link", "tone": "accent" }
+      ]
+    }
+  ],
+  "caption": "Commission flows up: a trader's volume pays their sub-IB, and the Master-IB rebate sits on top — which is what funds the support and tools sub-IBs get back."
+}

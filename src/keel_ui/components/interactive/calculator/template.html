@@ -1,0 +1,53 @@
+<div class="cp-html-block cp-html-block-calculator">
+{% with cfgid=instance_id|add:"-cfg" %}
+<div class="cp-calc" id="{{ instance_id }}-root">
+    {% if title %}<p class="cp-calc__title">{{ title }}</p>{% endif %}
+    {% if intro %}<p class="cp-calc__intro">{{ intro }}</p>{% endif %}
+    <div class="cp-calc__inputs">
+        {% for f in inputs %}
+        <div class="cp-calc__field">
+            <span class="cp-calc__label-text">{{ f.label }}</span>
+            {% if f.type == "slider" %}
+            <div class="cp-calc__slider-row">
+                <input id="{{ instance_id }}-in-{{ f.key }}" data-cp-key="{{ f.key }}" data-cp-type="slider" data-cp-unit="{{ f.unit }}" data-cp-prefix="{{ f.prefix }}" type="range" class="cp-calc__slider" min="{{ f.min|default:0 }}" max="{{ f.max|default:100 }}" step="{{ f.step|default:1 }}" value="{{ f.default|default:0 }}">
+                <span id="{{ instance_id }}-inv-{{ f.key }}" class="cp-calc__slider-value"></span>
+            </div>
+            {% elif f.type == "segmented" %}
+            <div class="cp-calc__segmented" id="{{ instance_id }}-in-{{ f.key }}" data-cp-key="{{ f.key }}" data-cp-type="segmented">
+                {% for opt in f.options %}
+                <label class="cp-calc__segmented-opt"><input type="radio" name="{{ instance_id }}-{{ f.key }}" value="{{ opt.value }}"{% if forloop.first %} checked{% endif %}><span>{{ opt.label }}</span></label>
+                {% endfor %}
+            </div>
+            {% elif f.type == "toggle" %}
+            <label class="cp-calc__toggle">
+                <input id="{{ instance_id }}-in-{{ f.key }}" data-cp-key="{{ f.key }}" data-cp-type="toggle" data-cp-on="{{ f.on_value|default:1 }}" data-cp-off="{{ f.off_value|default:0 }}" type="checkbox">
+                <span class="cp-calc__toggle-track"></span>
+            </label>
+            {% elif f.type == "stepper" %}
+            <div class="cp-calc__stepper">
+                <button type="button" class="cp-calc__stepper-btn" data-cp-step="-1" aria-label="Decrease">&minus;</button>
+                <input id="{{ instance_id }}-in-{{ f.key }}" data-cp-key="{{ f.key }}" data-cp-type="stepper" data-cp-unit="{{ f.unit }}" type="number" class="cp-calc__stepper-input" min="{{ f.min|default:0 }}"{% if f.max %} max="{{ f.max }}"{% endif %} step="{{ f.step|default:1 }}" value="{{ f.default|default:0 }}">
+                <button type="button" class="cp-calc__stepper-btn" data-cp-step="1" aria-label="Increase">+</button>
+            </div>
+            {% else %}
+            <div class="cp-calc__input-row">
+                {% if f.prefix %}<span class="cp-calc__affix">{{ f.prefix }}</span>{% endif %}
+                <input id="{{ instance_id }}-in-{{ f.key }}" data-cp-key="{{ f.key }}" data-cp-type="number" type="number" class="cp-calc__input"{% if f.min %} min="{{ f.min }}"{% endif %}{% if f.max %} max="{{ f.max }}"{% endif %} step="{{ f.step|default:'any' }}" value="{{ f.default|default:0 }}">
+                {% if f.unit %}<span class="cp-calc__affix">{{ f.unit }}</span>{% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="cp-calc__outputs">
+        {% for o in outputs %}
+        <div class="cp-calc__output{% if o.featured %} cp-calc__output--featured{% endif %}">
+            <div class="cp-calc__output-label">{{ o.label }}</div>
+            <div id="{{ instance_id }}-out-{{ forloop.counter0 }}" class="cp-calc__output-value">&mdash;</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{{ outputs|json_script:cfgid }}
+{% endwith %}
+</div>

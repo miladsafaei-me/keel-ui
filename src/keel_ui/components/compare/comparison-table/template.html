@@ -1,0 +1,16 @@
+<table class="cp-table{% if variant == 'green_red' %} cp-table--green-red{% endif %}">
+    <thead>
+        <tr>
+            {% for col in columns %}<th>{{ col|safe }}</th>{% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            {% for cell in row.cells %}
+            <td>{% if cell.bold %}<strong>{% endif %}{% if cell.tone %}<span class="cp-{{ cell.tone }}-text">{{ cell.text|safe }}</span>{% else %}{{ cell.text|safe }}{% endif %}{% if cell.bold %}</strong>{% endif %}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

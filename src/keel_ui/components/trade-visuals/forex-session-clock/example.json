@@ -1,0 +1,14 @@
+{
+  "title": "When each FX session is open (UTC)",
+  "sessions": [
+    { "name": "Sydney",   "city": "AEDT",    "start": 21, "end": 6,  "tone": "sydney" },
+    { "name": "Tokyo",    "city": "JST",     "start": 0,  "end": 9,  "tone": "tokyo" },
+    { "name": "London",   "city": "GMT/BST", "start": 7,  "end": 16, "tone": "london" },
+    { "name": "New York", "city": "EST/EDT", "start": 12, "end": 21, "tone": "newyork" }
+  ],
+  "overlaps": [
+    { "label": "Tokyo + London",    "start": 7,  "end": 9,  "note": "Asian-European handover" },
+    { "label": "London + New York", "start": 12, "end": 16, "note": "Peak liquidity & volatility" }
+  ],
+  "caption": "The London + New York overlap (12:00-16:00 UTC) is the busiest window of the FX day: the two deepest order books are open at once, so EUR/USD and GBP/USD spreads tighten and intraday ranges widen. Most breakout setups are timed to it."
+}

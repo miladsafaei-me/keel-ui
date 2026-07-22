@@ -1,0 +1,54 @@
+<div class="cp-html-block cp-html-block-orderbook">
+<div class="cp-obl" id="{{ instance_id }}-root">
+  <div class="cp-obl__head">
+    <div class="cp-obl__id">
+      <span class="cp-obl__symbol">{{ symbol }}</span>
+      <span class="cp-obl__tag">Order Book</span>
+    </div>
+    <div class="cp-obl__last" id="{{ instance_id }}-last" data-cp-last="{{ last_price }}">{{ last_price }}</div>
+  </div>
+
+  <div class="cp-obl__cols">
+    <span class="cp-obl__col cp-obl__col--price">Price</span>
+    <span class="cp-obl__col cp-obl__col--size">Size</span>
+    <span class="cp-obl__col cp-obl__col--total">Total</span>
+  </div>
+
+  <div class="cp-obl__side cp-obl__side--ask" id="{{ instance_id }}-asks">
+    {% for a in asks reversed %}
+    <div class="cp-obl__row cp-obl__row--ask" data-cp-price="{{ a.price }}" data-cp-size="{{ a.size }}">
+      <span class="cp-obl__bar"></span>
+      <span class="cp-obl__cell cp-obl__cell--price">{{ a.price }}</span>
+      <span class="cp-obl__cell cp-obl__cell--size">{{ a.size }}</span>
+      <span class="cp-obl__cell cp-obl__cell--total">{{ a.size }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="cp-obl__mid" id="{{ instance_id }}-mid">
+    <span class="cp-obl__mid-price" id="{{ instance_id }}-midprice">{{ last_price }}</span>
+    <span class="cp-obl__mid-label">Mid Price</span>
+    <span class="cp-obl__spread" id="{{ instance_id }}-spread">
+      <span class="cp-obl__spread-dot"></span>
+      <span class="cp-obl__spread-val">spread</span>
+    </span>
+  </div>
+
+  <div class="cp-obl__side cp-obl__side--bid" id="{{ instance_id }}-bids">
+    {% for b in bids %}
+    <div class="cp-obl__row cp-obl__row--bid" data-cp-price="{{ b.price }}" data-cp-size="{{ b.size }}">
+      <span class="cp-obl__bar"></span>
+      <span class="cp-obl__cell cp-obl__cell--price">{{ b.price }}</span>
+      <span class="cp-obl__cell cp-obl__cell--size">{{ b.size }}</span>
+      <span class="cp-obl__cell cp-obl__cell--total">{{ b.size }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="cp-obl__foot">
+    <span class="cp-obl__legend cp-obl__legend--bid"><span class="cp-obl__swatch"></span>Bids</span>
+    <span class="cp-obl__legend cp-obl__legend--ask"><span class="cp-obl__swatch"></span>Asks</span>
+    <span class="cp-obl__foot-note">Static snapshot &middot; depth = cumulative size</span>
+  </div>
+</div>
+</div>

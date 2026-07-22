@@ -1,0 +1,18 @@
+{
+  "title": "Strategy: Mean-reversion EURUSD M15",
+  "period": "Jan 2024 — Apr 2026 (out-of-sample)",
+  "metrics": [
+    {"label": "Net return",        "value": "+58.4%", "verdict": "good"},
+    {"label": "Annualized return", "value": "+24.1%", "verdict": "good"},
+    {"label": "Sharpe ratio",      "value": "1.42",   "verdict": "good"},
+    {"label": "Sortino ratio",     "value": "2.08",   "verdict": "good"},
+    {"label": "Calmar ratio",      "value": "1.65",   "verdict": "good"},
+    {"label": "Max drawdown",      "value": "14.6%",  "verdict": "warn"},
+    {"label": "Recovery factor",   "value": "4.00",   "verdict": "good"},
+    {"label": "Profit factor",     "value": "1.84",   "verdict": "good"},
+    {"label": "Win rate",          "value": "62.4%",  "verdict": "neutral"},
+    {"label": "Avg trade",         "value": "+$28",   "verdict": "neutral"},
+    {"label": "Total trades",      "value": "4,872",  "verdict": "good"},
+    {"label": "Avg holding",       "value": "47 min", "verdict": "neutral"}
+  ]
+}

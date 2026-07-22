@@ -1,0 +1,23 @@
+{
+  "id": "monte_carlo_simulator",
+  "name": "Monte Carlo Simulator",
+  "category": "risk-performance",
+  "version": 1,
+  "when_to_pick": "Show how widely a single edge (win rate + reward-to-risk) spreads real outcomes. Renders an equity-curve fan of N (default 200) simulated runs with a 10th–90th-percentile band, a median path, and summary stats (median return, % profitable, worst drawdown, risk of ruin). A deterministic frame draws on load; Run re-rolls the seed, Reset returns to it. Use to set realistic expectations and to motivate position-sizing for the band, not the average. Pick this for the DISTRIBUTION of outcomes across many runs; for which win-rate x R:R combos are break-even use expectancy_grid; to watch a single run play out tick by tick use live_simulator_candlestick.",
+  "tags": ["monte-carlo", "simulator", "risk", "drawdown", "engagement"],
+  "audience_fit": ["forex", "crypto", "prop-firm"],
+  "dependencies": [],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "title": { "type": "string", "default": "Monte Carlo: 200 equity paths, one edge", "maxLength": 80 },
+      "caption": { "type": "string", "maxLength": 320, "description": "Italic takeaway shown under the chart. Explain the aha in plain language." },
+      "paths_default": { "type": "integer", "minimum": 20, "maximum": 500, "default": 200 },
+      "trades_default": { "type": "integer", "minimum": 50, "maximum": 1000, "default": 200 },
+      "win_rate_default": { "type": "number", "minimum": 30, "maximum": 90, "default": 52 },
+      "rr_default": { "type": "number", "minimum": 0.5, "maximum": 4, "default": 1.2 },
+      "risk_pct_default": { "type": "number", "minimum": 0.25, "maximum": 5, "default": 2, "description": "Risk per trade as a percent of equity." },
+      "ruin_threshold": { "type": "integer", "minimum": 10, "maximum": 90, "default": 25, "description": "Equity-drop percent that counts as 'ruin' for the risk-of-ruin stat label." }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<div class="cp-html-block cp-html-block-scenario">
+<figure class="cp-scn" id="{{ instance_id }}-root">
+    {% if heading %}<figcaption class="cp-scn__heading">{{ heading }}</figcaption>{% endif %}
+    <div class="cp-scn__grid" data-count="{{ scenarios|length }}">
+        {% for s in scenarios %}
+        <div class="cp-scn__card cp-scn__card--{{ s.tone|default:'neutral' }}">
+            <div class="cp-scn__top">
+                <span class="cp-scn__label">{{ s.label }}</span>
+                {% if s.probability or s.probability == 0 %}<span class="cp-scn__prob">{{ s.probability }}%</span>{% endif %}
+            </div>
+            <div class="cp-scn__target">{{ s.target }}</div>
+            {% if s.points %}
+            <ul class="cp-scn__points">
+                {% for p in s.points %}<li class="cp-scn__point">{{ p }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% if caption %}<p class="cp-scn__caption">{{ caption }}</p>{% endif %}
+</figure>
+</div>

@@ -1,0 +1,66 @@
+<div class="cp-html-block cp-html-block-closing-loop">
+<article class="cp-close cp-close--{{ variant }}">
+
+  <div class="cp-close__loop-line">
+    <span class="cp-close__loop-arrow" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 7a4 4 0 11-4-4M11 2v3h-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <span>
+      {% if loop_lead %}{{ loop_lead }}{% elif variant == "informational" %}We started with{% else %}You came in{% endif %}
+      <span class="cp-close__opening">&ldquo;{{ loop_from }}&rdquo;</span>
+      {% if loop_mid %}{{ loop_mid }}{% elif variant == "informational" %}and arrived at{% else %}and ended at{% endif %}
+      <span class="cp-close__closing">{{ loop_to }}</span>.
+    </span>
+  </div>
+
+  {% if variant == "informational" %}
+    <h3 class="cp-close__title">{{ title|safe }}</h3>
+    <p class="cp-close__body">{{ body|safe }}</p>
+    <div class="cp-close__deeper">
+      <span class="cp-close__deeper-label">{{ links_label|default:"Continue your research" }}</span>
+      {% for link in links %}
+      <a class="cp-close__deeper-link" href="{{ link.href }}">
+        <span class="cp-close__deeper-link-icon" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="10" height="8" rx="1"/><path d="M4 6h6M4 8h4" stroke-linecap="round"/></svg>
+        </span>
+        <span class="cp-close__deeper-link-text">
+          <span class="cp-close__deeper-link-title">{{ link.title }}</span>
+          {% if link.meta %}<span class="cp-close__deeper-link-sub">{{ link.meta }}</span>{% endif %}
+        </span>
+        <span class="cp-close__deeper-link-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      {% endfor %}
+    </div>
+
+  {% elif variant == "commercial" %}
+    <h3 class="cp-close__title">{{ title|safe }}</h3>
+    <div class="cp-close__decide">
+      {% if decide.logo %}<div class="cp-close__decide-logo">{{ decide.logo }}</div>{% endif %}
+      <div class="cp-close__decide-body">
+        <h4 class="cp-close__decide-name">{{ decide.name }}</h4>
+        <p class="cp-close__decide-reason">{{ decide.reason|safe }}</p>
+      </div>
+      <a class="cp-close__decide-cta" href="{{ decide.cta.href }}">
+        {{ decide.cta.label }}
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 7h8M8 3l4 4-4 4"/></svg>
+      </a>
+    </div>
+    {% if alt %}<p class="cp-close__alt">{{ alt|safe }}</p>{% endif %}
+
+  {% elif variant == "transactional" %}
+    <h2 class="cp-close__title">{{ title|safe }}</h2>
+    <p class="cp-close__sub">{{ sub }}</p>
+    <a class="cp-close__cta" href="{{ cta.href }}">
+      {{ cta.label }}
+      <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 7h8M8 3l4 4-4 4"/></svg>
+    </a>
+    {% if sub_cta %}<span class="cp-close__sub-cta">{{ sub_cta|safe }}</span>{% endif %}
+    <div class="cp-close__trust-row">
+      {% for mark in trust %}
+      <span class="cp-close__trust-mark">{% if mark.icon %}<span class="cp-close__trust-icon" aria-hidden="true">{{ mark.icon }}</span> {% endif %}<strong>{{ mark.metric }}</strong> {{ mark.label }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+</article>
+</div>

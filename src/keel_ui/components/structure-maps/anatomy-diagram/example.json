@@ -1,0 +1,44 @@
+{
+  "title": "Anatomy of a Candlestick",
+  "subtitle": "Every candle encodes four prices for one time period — open, high, low, and close.",
+  "subject": "candlestick",
+  "subject_label": "Bullish candle (close above open)",
+  "parts": [
+    {
+      "label": "Upper wick",
+      "description": "The thin line above the body. Its top marks the highest price traded during the period.",
+      "position": "top-right",
+      "tone": "default"
+    },
+    {
+      "label": "High",
+      "description": "The peak of the upper wick — the most buyers were willing to pay before sellers pushed back.",
+      "position": "top-left",
+      "tone": "accent"
+    },
+    {
+      "label": "Close",
+      "description": "Where price settled at the end of the period. On a green candle it sits at the top of the body.",
+      "position": "right",
+      "tone": "buy"
+    },
+    {
+      "label": "Open",
+      "description": "Where price started. Below the close here, so the body is filled green to show net buying.",
+      "position": "left",
+      "tone": "sell"
+    },
+    {
+      "label": "Real body",
+      "description": "The thick rectangle between open and close. Its height shows how decisively price moved.",
+      "position": "bottom-right",
+      "tone": "default"
+    },
+    {
+      "label": "Lower wick",
+      "description": "The line below the body; its bottom marks the lowest price traded.",
+      "position": "bottom-left",
+      "tone": "default"
+    }
+  ]
+}

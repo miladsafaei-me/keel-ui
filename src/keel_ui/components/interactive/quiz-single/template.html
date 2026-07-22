@@ -1,0 +1,25 @@
+<div class="cp-html-block cp-html-block-quiz">
+<div class="cp-quiz" id="{{ instance_id }}-root" data-answered="false">
+    <div class="cp-quiz__head">
+        <span class="cp-quiz__eyebrow">Knowledge check</span>
+        <h4 class="cp-quiz__question">{{ question }}</h4>
+    </div>
+    <div class="cp-quiz__options" role="group" aria-label="Answer choices">
+        {% for o in options %}
+        <button type="button" class="cp-quiz__option" data-correct="{% if o.correct %}1{% else %}0{% endif %}">
+            <span class="cp-quiz__marker" aria-hidden="true">{{ forloop.counter0|add:65|stringformat:"c" }}</span>
+            <span class="cp-quiz__text">{{ o.text|safe }}</span>
+            <span class="cp-quiz__icon" aria-hidden="true"></span>
+        </button>
+        {% endfor %}
+    </div>
+    <div class="cp-quiz__result" role="status" aria-live="polite">
+        <span class="cp-quiz__result-icon" aria-hidden="true"></span>
+        <span class="cp-quiz__result-text"></span>
+    </div>
+    <div class="cp-quiz__explain">
+        <span class="cp-quiz__explain-label">Why</span>
+        <div class="cp-quiz__explain-body">{{ explanation|safe }}</div>
+    </div>
+</div>
+</div>

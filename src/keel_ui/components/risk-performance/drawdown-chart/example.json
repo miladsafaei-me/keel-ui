@@ -1,0 +1,7 @@
+{
+  "title": "Underwater equity (12-month backtest)",
+  "caption": "Two visible drawdowns: a 14% dip in month 4 and a 22% dip in month 9. The latter took 3 months to recover.",
+  "y_label": "Drawdown (%)",
+  "labels": ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10", "M11", "M12"],
+  "values": [0, -3, -5, -14, -7, -2, 0, -4, -22, -16, -8, 0]
+}

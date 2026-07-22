@@ -1,0 +1,39 @@
+{
+  "id": "chart_area",
+  "name": "Line / Area Chart (Trend)",
+  "category": "charts",
+  "version": 2,
+  "when_to_pick": "Show how a metric moves across an ordered axis (time, or any continuous progression) — an equity curve, cumulative P&L, account balance, drawdown vs recovery, slippage vs spread. Pass a single `values` series for one filled area, OR pass `datasets` (1-4 series) to overlay/compare lines on the same axis. This is THE trend-over-an-ordered-axis chart (it absorbed the old standalone line chart). Reach for chart_bar when the x-axis is discrete categories rather than an ordered progression; for the underwater equity view use drawdown_chart; for a single bounded score use gauge_meter.",
+  "tags": ["chart", "equity-curve", "trend", "line", "area", "quantitative"],
+  "audience_fit": ["forex", "crypto", "binary", "prop-firm"],
+  "dependencies": ["chartjs"],
+  "schema": {
+    "type": "object",
+    "required": ["title", "labels"],
+    "properties": {
+      "title":   { "type": "string", "maxLength": 120 },
+      "caption": { "type": "string", "maxLength": 240 },
+      "y_label": { "type": "string", "default": "" },
+      "tone":    { "type": "string", "enum": ["accent", "success", "danger", "warning"], "default": "success", "description": "Fill/line colour for the SINGLE-series form (when you pass `values`). Ignored when you pass multi-series `datasets`." },
+      "labels":  { "type": "array", "minItems": 2, "items": { "type": "string" } },
+      "values":  { "type": "array", "minItems": 2, "items": { "type": "number" }, "description": "Single-series form: one number per label, drawn as a filled area. Use this OR `datasets`, not both." },
+      "datasets": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 4,
+        "description": "Multi-series form: 1-4 lines to overlay/compare on the same axis. Use this OR `values`.",
+        "items": {
+          "type": "object",
+          "required": ["label", "data"],
+          "properties": {
+            "label": { "type": "string" },
+            "data": { "type": "array", "items": { "type": "number" } },
+            "tone": { "type": "string", "enum": ["accent", "success", "danger", "warning", "neutral"], "default": "accent" },
+            "fill": { "type": "boolean", "default": true },
+            "tension": { "type": "number", "default": 0.35 }
+          }
+        }
+      }
+    }
+  }
+}
