@@ -4,7 +4,7 @@
  * Architecture:
  *   - All visual elements wear cp-* classes; CSS variables are scoped to those.
  *   - Dark is the marketing-surface default; the light defaults below apply only
- *     when the user toggles light (html[data-sb-theme="light"], which also loads
+ *     when the user toggles light (html[data-keel-theme="light"], which also loads
  *     light-theme.css). A class="dark" ancestor (TailAdmin/Tailwind 4) also forces
  *     dark. Theme is NOT driven by OS prefers-color-scheme — that disagrees with
  *     the manual toggle. Keep in sync with isDark() in content-pipeline.js.
@@ -68,20 +68,20 @@
 }
 
 /* ─── Design tokens (dark = marketing default) ───────────────────────── */
-/* The marketing surface is dark by default — <html> carries no data-sb-theme
+/* The marketing surface is dark by default — <html> carries no data-keel-theme
  * until the user toggles light mode (then light-theme.css loads and the light
  * defaults above apply). So the dark token set is keyed on "NOT explicitly
  * light", NOT on the OS prefers-color-scheme — which disagrees with a manual
  * toggle and previously left light-OS visitors with light cards on the dark
  * surface. Keep this trigger in sync with isDark() in content-pipeline.js. */
-html:not([data-sb-theme="light"]) .cp-figure,
-html:not([data-sb-theme="light"]) .cp-html-block,
-html:not([data-sb-theme="light"]) .cp-chartjs-wrapper,
-html:not([data-sb-theme="light"]) .cp-mermaid-wrapper,
-html:not([data-sb-theme="light"]) .cp-calc,
-html:not([data-sb-theme="light"]) .cp-sim,
-html:not([data-sb-theme="light"]) .cp-heatmap-wrap,
-html:not([data-sb-theme="light"]) .cp-table {
+html:not([data-keel-theme="light"]) .cp-figure,
+html:not([data-keel-theme="light"]) .cp-html-block,
+html:not([data-keel-theme="light"]) .cp-chartjs-wrapper,
+html:not([data-keel-theme="light"]) .cp-mermaid-wrapper,
+html:not([data-keel-theme="light"]) .cp-calc,
+html:not([data-keel-theme="light"]) .cp-sim,
+html:not([data-keel-theme="light"]) .cp-heatmap-wrap,
+html:not([data-keel-theme="light"]) .cp-table {
   /* Layered backgrounds: page < card < input < input-focus, each one step lighter
    * so cards stand out from page and inputs from cards. Contrast vs --cp-text > 12:1. */
   --cp-bg-card: #131c30;
@@ -5218,7 +5218,7 @@ html:not([data-sb-theme="light"]) .cp-table {
   color: var(--cp-text-muted);
 }
 
-html:not([data-sb-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
+html:not([data-keel-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
 .dark .cp-html-block-session-clock .cp-fxsc {
   --fxsc-sydney: #22d3ee;
   --fxsc-tokyo: #c4b5fd;
@@ -5232,7 +5232,7 @@ html:not([data-sb-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
     --fxsc-london: #7dd3fc;
     --fxsc-newyork: #fbbf24;
   }
-  [data-sb-theme="light"] .cp-html-block-session-clock .cp-fxsc {
+  [data-keel-theme="light"] .cp-html-block-session-clock .cp-fxsc {
     --fxsc-sydney: #0891b2;
     --fxsc-tokyo: #a78bfa;
     --fxsc-london: #2563eb;
@@ -6919,7 +6919,7 @@ html:not([data-sb-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
  * .cp-figure-seq so flowcharts/state diagrams are untouched. Token-based only:
  * every color comes from a --cp-* custom property, so the rules are correct in
  * BOTH light and dark with no separate dark block (tokens auto-switch on
- * prefers-color-scheme and on a .dark / [data-sb-theme] ancestor).
+ * prefers-color-scheme and on a .dark / [data-keel-theme] ancestor).
  *
  * THE DENSITY FIX: with mermaid's sequence config (useMaxWidth:true) the SVG is
  * emitted as width="100%" + inline max-width:<natural>px, so a wide diagram

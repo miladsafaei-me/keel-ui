@@ -2,6 +2,7 @@
   "id": "beat_section",
   "name": "Beat Section (Emotional-Beat Chrome)",
   "category": "structure",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Render a full article section whose chrome itself encodes the section's emotional beat — a colored left rail, a labeled beat tag with an icon, and a variant-specific callout — so a scanning reader instantly feels whether they are hearing about a problem, a complication, partial progress, the essential answer, or a call to act. Reach for this when a section's narrative role matters as much as its text and you want the surface to carry that role. Pick the variant by beat: 'problem_named' for an opening or stakes-naming section (red rail + a single hard stat callout); 'tension_rises' for a mid-article 'yes but' complication (amber rail + a bold pull-quote); 'partial_resolution' for one step of a multi-step methodology (accent rail + a step-progress bar and a 3-up workflow strip); 'full_payoff' for the section that delivers the article's essential answer (green frame + a result/metric answer card); 'next_action' for a closing or 'do this now' section (accent frame + numbered steps and a CTA). Use a plain callout component instead when the section carries no narrative-beat meaning.",
   "tags": [

@@ -2,6 +2,7 @@
   "id": "before_after",
   "name": "Before / After Split",
   "category": "compare",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Show two states side-by-side — strategy before/after an optimization, broker A vs broker B execution quality, bad vs good risk management. Each side can contain inline HTML (lists, mini-tables, callouts).",
   "tags": ["before-after", "comparison", "transformation"],

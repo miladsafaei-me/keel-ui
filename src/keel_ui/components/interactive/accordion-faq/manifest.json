@@ -2,6 +2,7 @@
   "id": "accordion_faq",
   "name": "Accordion FAQ",
   "category": "interactive",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Surface 3-10 question-answer pairs at the end of an article. Each row is collapsed by default; click to expand. Search engines pick this up as FAQPage schema when wrapped in JSON-LD (article-level concern, not component-level).",
   "tags": ["faq", "accordion", "qa"],

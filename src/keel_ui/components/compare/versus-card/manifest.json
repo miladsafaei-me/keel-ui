@@ -2,6 +2,7 @@
   "id": "versus_card",
   "name": "Versus Card (Head-to-Head)",
   "category": "compare",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Frame a binary choice the reader is weighing as a direct face-off — two named options, A vs B, with a central VS badge, 2-5 short points per side, and a one-line verdict each. Use it when the post pits two concrete things against each other (manual signals vs automated bot, market order vs limit order, scalping vs swing, ECN vs market-maker broker) and you want the contrast to read instantly. Set winner to crown a recommended side. For more than ~5 attributes per side, or when you need cell-by-cell attribute alignment, prefer comparison_table; for two states of one thing (before vs after) use before_after.",
   "tags": ["versus", "vs", "head-to-head", "comparison", "decision-aid"],

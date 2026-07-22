@@ -2,6 +2,7 @@
   "id": "comparison_table",
   "name": "Comparison Table",
   "category": "compare",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Compare 2-6 items across 2-8 dimensions so the reader can scan side-by-side. Use the `green_red` variant when there are exactly two columns representing 'good' vs 'bad'. Cells support an optional tone ('success' / 'danger' / 'warning') for inline emphasis.",
   "tags": ["comparison", "table", "decision-aid"],

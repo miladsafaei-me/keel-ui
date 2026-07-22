@@ -3,7 +3,8 @@
   "name": "Risk Warning Callout",
   "category": "reference",
   "version": 1,
-  "when_to_pick": "Drop in the mandated compliance risk disclosure on any post or glossary term that discusses signals, backtests, win rates, leverage, or live trading outcomes. Use it once near the relevant claim (not decoratively); it carries a warning-styled box and a required link to /risk-warning. Prefer this over a hand-written warning callout whenever the copy is a regulatory risk disclosure.",
+  "pack": "trading",
+  "when_to_pick": "Drop in the mandated compliance risk disclosure on any post or glossary term that discusses signals, backtests, win rates, leverage, or live trading outcomes. Use it once near the relevant claim (not decoratively); it carries a warning-styled box and a required link to the host's risk-warning page. Prefer this over a hand-written warning callout whenever the copy is a regulatory risk disclosure.",
   "tags": ["compliance", "risk-warning", "disclosure", "callout", "warning"],
   "audience_fit": ["forex", "crypto", "binary", "prop-firm", "stocks"],
   "dependencies": [],
@@ -26,7 +27,7 @@
         "type": "string",
         "maxLength": 60,
         "default": "Read the full risk warning",
-        "description": "Anchor text for the mandatory link to /risk-warning. The href is hardcoded in the template."
+        "description": "Anchor text for the mandatory risk-warning link. The href comes from the host's KEEL_UI['risk_warning_url'] config (defaults to /risk-warning)."
       }
     }
   }

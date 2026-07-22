@@ -2,6 +2,7 @@
   "id": "scenario_cards",
   "name": "Scenario Cards (Bull / Base / Bear)",
   "category": "compare",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Lay out a forecast or outlook as 2-4 side-by-side scenarios — classically bearish / base / bullish — each with a price target or outcome, an optional probability, and the drivers that would make it play out. Pick this for any market-forecast, price-projection or 'what could happen next' section where the point is the RANGE of outcomes and what tips the balance, not a single number. Tone each card by direction (bullish=up/green, bearish=down/red, neutral=base). For a head-to-head of two named options use versus_card; for many rows of attributes use comparison_table.",
   "tags": ["scenario", "forecast", "outlook", "bull-bear", "price-target", "projection", "probability"],

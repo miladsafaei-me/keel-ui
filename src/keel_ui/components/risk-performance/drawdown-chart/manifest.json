@@ -2,6 +2,7 @@
   "id": "drawdown_chart",
   "name": "Drawdown Chart",
   "category": "risk-performance",
+  "pack": "trading",
   "version": 1,
   "when_to_pick": "Show the underwater equity curve — how deep and how long each drawdown lasted. Use after the article has discussed the difference between average return and worst-case drawdown. Always renders below zero with red fill.",
   "tags": ["chart", "drawdown", "risk", "underwater"],

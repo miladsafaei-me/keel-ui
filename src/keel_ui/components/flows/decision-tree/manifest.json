@@ -2,6 +2,7 @@
   "id": "decision_tree",
   "name": "Decision Tree Diagram",
   "category": "flows",
+  "pack": "core",
   "version": 2,
   "when_to_pick": "Show a branching trading decision as a fully-rendered top-down tree the reader can take in at a glance: a root decision, labelled branches (e.g. Yes / No, conditions met / not met), and terminal verdict cards toned success (take the trade / favourable path) or danger (skip it / risk path). Use to turn an 'it depends' rule into a visible flowchart of every path and outcome. This is a static HTML/CSS tree (no Mermaid), so it renders identically in print, RSS, and dark/light themes.",
   "tags": ["decision-tree", "flowchart", "branching", "checklist", "rules"],

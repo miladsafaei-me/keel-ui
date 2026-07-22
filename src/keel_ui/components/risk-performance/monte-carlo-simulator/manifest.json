@@ -2,6 +2,7 @@
   "id": "monte_carlo_simulator",
   "name": "Monte Carlo Simulator",
   "category": "risk-performance",
+  "pack": "trading",
   "version": 1,
   "when_to_pick": "Show how widely a single edge (win rate + reward-to-risk) spreads real outcomes. Renders an equity-curve fan of N (default 200) simulated runs with a 10th–90th-percentile band, a median path, and summary stats (median return, % profitable, worst drawdown, risk of ruin). A deterministic frame draws on load; Run re-rolls the seed, Reset returns to it. Use to set realistic expectations and to motivate position-sizing for the band, not the average. Pick this for the DISTRIBUTION of outcomes across many runs; for which win-rate x R:R combos are break-even use expectancy_grid; to watch a single run play out tick by tick use live_simulator_candlestick.",
   "tags": ["monte-carlo", "simulator", "risk", "drawdown", "engagement"],

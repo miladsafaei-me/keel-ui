@@ -2,6 +2,7 @@
   "id": "mermaid_flowchart",
   "name": "Flowchart",
   "category": "flows",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Visualize a decision tree or branching process with 4-15 nodes. Best for 'how do you decide X' content where the reader benefits from following arrows. Use classDef accept/reject/warn (defined as 8-digit hex fills, never rgba) to highlight terminal nodes.",
   "tags": ["diagram", "flowchart", "decision"],

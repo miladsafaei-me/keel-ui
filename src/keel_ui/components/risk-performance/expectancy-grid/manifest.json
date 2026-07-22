@@ -2,6 +2,7 @@
   "id": "expectancy_grid",
   "name": "Expectancy (EV) Grid",
   "category": "risk-performance",
+  "pack": "trading",
   "version": 1,
   "when_to_pick": "Show where a strategy crosses from negative to positive EXPECTANCY across the win-rate × reward-to-risk (R:R) plane — a coloured grid where each cell is the expected value per $100 risked. Use it to prove that a high win rate alone is not enough: a 60% win rate at 0.5:1 R:R still loses money over time. The reader hovers any cell to read its exact EV. Theme-aware fills via window.cpTheme. Pick this when the takeaway is 'which win-rate × R:R combinations are actually profitable'; for a single trade's R:R ladder use risk_reward_visualizer. For the spread of outcomes from ONE edge over many simulated runs use monte_carlo_simulator; to watch trades open and close tick by tick use live_simulator_candlestick.",
   "tags": ["expectancy", "ev", "win-rate", "reward-to-risk", "grid", "interactive", "decision-aid"],

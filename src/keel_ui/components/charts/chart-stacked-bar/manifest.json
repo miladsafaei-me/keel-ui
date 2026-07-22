@@ -2,6 +2,7 @@
   "id": "chart_stacked_bar",
   "name": "Stacked Bar Chart",
   "category": "charts",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Show how a running total breaks down into stacked components across a time axis or discrete categories — monthly net P&L decomposed into gross pips vs commissions vs slippage, equity contribution by strategy, or cost composition over time. Best when BOTH the cumulative total and the share of each part carry the point; the optional summary strip lets you headline the net result the stack proves.",
   "tags": ["chart", "stacked", "composition", "cumulative", "comparison", "pnl"],

@@ -2,6 +2,7 @@
   "id": "ib_commission_tiers",
   "name": "IB Commission Tiers",
   "category": "structure-maps",
+  "pack": "trading",
   "version": 1,
   "when_to_pick": "Show how an IB's (Introducing Broker's) earnings scale across volume or revenue-share tiers — the rate at each tier, what unlocks it, and an illustrative payout, with one tier flagged as the target/recommended tier. Pick it for IB & partnership content answering 'how much can I earn as an IB?', a rebate/commission rate card, or a Master-IB vs sub-IB split. For the IB org structure (who sits under whom) use hierarchy; for the IB recruitment drop-off use funnel; for an earnings what-if the reader computes live use calculator. Frame figures as illustrative examples, never promised income.",
   "tags": ["ib", "master-ib", "commission", "rebate", "rev-share", "tiers", "partnership", "earnings"],
@@ -11,7 +12,7 @@
     "type": "object",
     "required": ["tiers"],
     "properties": {
-      "title": { "type": "string", "maxLength": 90, "description": "Optional heading, e.g. 'SignalBots IB rebate tiers (Forex, per standard lot)'." },
+      "title": { "type": "string", "maxLength": 90, "description": "Optional heading, e.g. 'IB rebate tiers (Forex, per standard lot)'." },
       "threshold_label": { "type": "string", "maxLength": 28, "default": "Monthly volume", "description": "Label for what unlocks each tier — change it for non-volume models (e.g. 'Referred traders', 'Deposits')." },
       "payout_label": { "type": "string", "maxLength": 28, "default": "Example payout", "description": "Label for the per-tier illustrative earnings figure." },
       "tiers": {

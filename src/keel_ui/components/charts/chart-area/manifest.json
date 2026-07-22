@@ -2,6 +2,7 @@
   "id": "chart_area",
   "name": "Line / Area Chart (Trend)",
   "category": "charts",
+  "pack": "core",
   "version": 2,
   "when_to_pick": "Show how a metric moves across an ordered axis (time, or any continuous progression) — an equity curve, cumulative P&L, account balance, drawdown vs recovery, slippage vs spread. Pass a single `values` series for one filled area, OR pass `datasets` (1-4 series) to overlay/compare lines on the same axis. This is THE trend-over-an-ordered-axis chart (it absorbed the old standalone line chart). Reach for chart_bar when the x-axis is discrete categories rather than an ordered progression; for the underwater equity view use drawdown_chart; for a single bounded score use gauge_meter.",
   "tags": ["chart", "equity-curve", "trend", "line", "area", "quantitative"],

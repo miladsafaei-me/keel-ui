@@ -7,13 +7,13 @@
       "icon": "signal"
     },
     {
-      "title": "Webhook posts to SignalBots",
-      "body": "TradingView sends the alert as a JSON webhook to your unique SignalBots endpoint, authenticated by a secret key.",
+      "title": "Webhook posts to the platform",
+      "body": "TradingView sends the alert as a JSON webhook to your unique platform endpoint, authenticated by a secret key.",
       "icon": "webhook"
     },
     {
       "title": "Risk filter validates the order",
-      "body": "SignalBots checks lot size, max open positions and daily-loss limits, rejecting anything outside your rules before it ever leaves.",
+      "body": "The platform checks lot size, max open positions and daily-loss limits, rejecting anything outside your rules before it ever leaves.",
       "icon": "shield"
     },
     {

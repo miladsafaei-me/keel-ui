@@ -2,6 +2,7 @@
   "id": "trade_log_table",
   "name": "Trade Log Table",
   "category": "risk-performance",
+  "pack": "trading",
   "version": 1,
   "when_to_pick": "Show a realistic sample of a bot's trade log so readers see what win/loss distribution actually looks like — not just summary stats. Columns: date, symbol, side, entry, exit, pips, P&L. Highlights buy/sell tags and per-row P&L tone.",
   "tags": ["table", "trade-log", "track-record"],

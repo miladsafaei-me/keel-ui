@@ -2,6 +2,7 @@
   "id": "checklist",
   "name": "Interactive Checklist",
   "category": "interactive",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "A before-deploy or pre-trade checklist the reader actually ticks off. Each tick draws a check mark and advances a progress fill bar; ticking the last item unlocks a 'complete' state, so readers feel rewarded for finishing. Use as a closer for actionable how-to articles. Keep items short, imperative, and verifiable (something the reader can confirm 'yes/no'). For a single misconception-trap question with one right answer use quiz_single instead.",
   "tags": ["checklist", "pre-flight", "actionable"],

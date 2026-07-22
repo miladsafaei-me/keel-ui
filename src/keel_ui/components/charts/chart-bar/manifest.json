@@ -2,6 +2,7 @@
   "id": "chart_bar",
   "name": "Bar Chart",
   "category": "charts",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Compare one numeric metric across 2-8 discrete categories, ideally with two series side-by-side per category so the gap between them is the story (e.g., backtest vs. live win rate per strategy, p50 vs. p99 latency per broker type, or expected vs. realized return per asset). Reach for chart_area instead when the x-axis is time or a continuous progression; use chart_stacked_bar when the series sum to a whole.",
   "tags": ["chart", "comparison", "quantitative", "two-series", "gap"],

@@ -2,8 +2,9 @@
   "id": "intent_hero",
   "name": "Intent Hero (Search-Intent Intro)",
   "category": "structure",
+  "pack": "core",
   "version": 1,
-  "when_to_pick": "Open an article with an above-the-fold hero matched to what the searcher actually came for, instead of a generic featured image. Choose the 'variant' from the post's search intent: 'informational' (answer-first) when the user wants one discrete fact NOW — current price, today's win rate, latency stat: it shows the question, a huge numeric answer with delta, a 4-cell context grid, an inline sparkline from a numbers array, and a source line. 'commercial' (top-pick + why) for 'best X' / 'X vs Y' / 'top N' comparison queries: a pain line, a crowned editor's-pick card with name, 1-5 reasons and an optional short QUALITATIVE verdict badge (what it's best FOR — never a fabricated numeric rating), up to 4 runner-up rows, and a meta/CTA footer. 'transactional' (CTA-first) for signup / free-trial / upgrade pages where the user has decided to act: eyebrow, headline (em-emphasis allowed), subline, a presentational email field + button (NO real submit), a reassurance line, and up to 4 trust items. 'navigational' (destination card) when the user searched for a known place ('SignalBots admin panel'): breadcrumb, title, description, a primary CTA, and a row of related links. Use exactly once per article, at the very top. For mid-article calls-to-action use a callout; for plain headline stats use kpi_sparkline_card.",
+  "when_to_pick": "Open an article with an above-the-fold hero matched to what the searcher actually came for, instead of a generic featured image. Choose the 'variant' from the post's search intent: 'informational' (answer-first) when the user wants one discrete fact NOW — current price, today's win rate, latency stat: it shows the question, a huge numeric answer with delta, a 4-cell context grid, an inline sparkline from a numbers array, and a source line. 'commercial' (top-pick + why) for 'best X' / 'X vs Y' / 'top N' comparison queries: a pain line, a crowned editor's-pick card with name, 1-5 reasons and an optional short QUALITATIVE verdict badge (what it's best FOR — never a fabricated numeric rating), up to 4 runner-up rows, and a meta/CTA footer. 'transactional' (CTA-first) for signup / free-trial / upgrade pages where the user has decided to act: eyebrow, headline (em-emphasis allowed), subline, a presentational email field + button (NO real submit), a reassurance line, and up to 4 trust items. 'navigational' (destination card) when the user searched for a known place ('the product admin panel'): breadcrumb, title, description, a primary CTA, and a row of related links. Use exactly once per article, at the very top. For mid-article calls-to-action use a callout; for plain headline stats use kpi_sparkline_card.",
   "tags": [
     "hero",
     "intro",
@@ -148,7 +149,7 @@
               "name": {
                 "type": "string",
                 "maxLength": 48,
-                "description": "Name of the recommended pick, e.g. 'SignalBots Pro'."
+                "description": "Name of the recommended pick, e.g. 'Acme Pro'."
               },
               "name_suffix": {
                 "type": "string",
@@ -304,7 +305,7 @@
               "type": "string",
               "maxLength": 40
             },
-            "description": "Optional breadcrumb segments, root first, e.g. ['signalbots.ai', 'admin-os', 'cms']."
+            "description": "Optional breadcrumb segments, root first, e.g. ['example.com', 'admin', 'cms']."
           },
           "title": {
             "type": "string",

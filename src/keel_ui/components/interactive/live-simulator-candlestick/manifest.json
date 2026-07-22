@@ -2,6 +2,7 @@
   "id": "live_simulator_candlestick",
   "name": "Live Candlestick Simulator",
   "category": "interactive",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "The marquee interactive widget for long-form articles: a bot opens and closes trades against a random-walk candlestick series while live stats (trade count, win rate, avg win/loss, net P&L) update tick by tick. It renders a full ghost-preview of the upcoming series at rest, so it looks alive before Play is pressed. Best for explaining strategy expectancy, why win rate varies run-to-run, or how TP/SL/hold rules behave. Pure SVG + JS, no external libraries. Pick this to WATCH trades open and close in real time; for the outcome spread across many runs use monte_carlo_simulator; for the EV map across the win-rate x R:R plane use expectancy_grid.",
   "tags": ["interactive", "simulator", "candlestick", "engagement", "expectancy"],

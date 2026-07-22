@@ -2,6 +2,7 @@
   "id": "gauge_meter",
   "name": "Gauge / Meter",
   "category": "charts",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Show a single bounded number as a position on a colored semicircular arc — a speedometer-style gauge with low/medium/high (or sell/neutral/buy) zone bands, a needle pointing at the current value, and a large value readout with its zone label. Pick it whenever an article reduces a state to one score on a scale: market-sentiment / fear-and-greed indices (0–100), RSI or other bounded oscillators, a volatility or risk level, account-health or margin-usage percentage, prop-firm drawdown headroom, or a backtest confidence/quality score. Use it when the *one number and which band it falls in* is the takeaway; use a chart instead when the trend over time matters.",
   "tags": ["gauge", "meter", "sentiment", "fear-and-greed", "score", "indicator", "speedometer", "rsi"],

@@ -2,6 +2,7 @@
   "id": "risk_reward_visualizer",
   "name": "Risk:Reward Visualizer",
   "category": "risk-performance",
+  "pack": "trading",
   "version": 2,
   "when_to_pick": "Show a trade's entry, stop-loss and take-profit as a proportional price ladder: the risk zone (entry → SL, red) and reward zone (entry → TP, green) are shaded to scale so the reader sees the asymmetry at a glance, with a prominent reward-to-risk readout and the break-even win rate it implies. Direction (long/short) is detected automatically. Inputs are editable, so the visual updates live as the reader experiments with stop placement. Pick it when explaining position sizing, R-multiples, stop discipline, or why a higher R:R lets a lower win rate stay profitable.",
   "tags": ["risk-reward", "r-multiple", "visualizer", "trade-setup", "stop-loss", "take-profit"],

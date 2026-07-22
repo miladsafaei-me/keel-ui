@@ -2,6 +2,7 @@
   "id": "quiz_single",
   "name": "Single-Question Quiz",
   "category": "interactive",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Insert a one-question check at the end of a tricky section to confirm the reader actually internalized the concept. Best for misconception traps where the intuitive answer is wrong. After the reader picks, it marks the correct option green and their wrong pick red, shows a pass/fail result line, and reveals a 'Why' explanation. Use when there is exactly one right answer and the wrong answers represent real, tempting mistakes.",
   "tags": ["quiz", "knowledge-check", "engagement"],

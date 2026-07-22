@@ -2,6 +2,7 @@
   "id": "forex_session_clock",
   "name": "Forex Session Clock",
   "category": "trade-visuals",
+  "pack": "trading",
   "version": 2,
   "when_to_pick": "A 24-hour UTC timeline of the four FX trading sessions (Sydney / Tokyo / London / New York) shown as colored bands on one track, with the high-liquidity OVERLAP windows highlighted (the Tokyo+Sydney and especially the London+New York overlap). A live vertical marker sweeps to the current UTC time and the open sessions are called out. The bands render server-side, so the timeline is fully readable even before JS runs. Use it to explain why intraday FX strategies cluster around the London/NY overlap, when liquidity and volatility peak, and which hours are dead.",
   "tags": ["forex", "sessions", "timeline", "overlap", "liquidity", "utc"],

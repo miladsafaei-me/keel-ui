@@ -2,6 +2,7 @@
   "id": "chart_doughnut",
   "name": "Doughnut Chart",
   "category": "charts",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Show how one whole splits into parts when the relative SHARE of each part is the story, not its exact value — capital allocation across instruments, where a monthly trading budget goes, win/loss/break-even mix, or risk spread across strategies. The card frames a crisp HTML title, a center total in the hole, and a legible value+share legend so the reader gets the composition at a glance. Cap at 6 slices; reach for chart_bar when you need to compare two series, or chart_stacked_bar when parts also accumulate across a time axis.",
   "tags": ["chart", "composition", "share", "allocation", "donut"],

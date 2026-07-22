@@ -2,6 +2,7 @@
   "id": "funnel",
   "name": "Conversion Funnel",
   "category": "structure-maps",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Show how a population shrinks across the ordered stages of a journey — visitors -> sign-ups -> funded accounts -> active traders, signal-views -> broker clicks -> registrations -> deposits, or an IB recruitment funnel (leads -> calls -> sign-ups -> producing sub-IBs). Each stage is a proportional bar (width = its share of the top stage) with the count and the percent of the entry that survives to it, so the drop-off between steps is obvious. Pick this when the STORY is attrition through a sequence; for a non-shrinking ordered process use how_it_works_steps, and for parts of one whole use chart_doughnut.",
   "tags": ["funnel", "conversion", "drop-off", "acquisition", "ib", "journey", "attrition"],

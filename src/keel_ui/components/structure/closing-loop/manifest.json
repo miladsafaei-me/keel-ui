@@ -2,6 +2,7 @@
   "id": "closing_loop",
   "name": "Closing Loop",
   "category": "structure",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "The article's final block. Always loops back to the opening pain point and hands the reader one concrete next move, with the shape matched to the article's intent class. Pick variant='informational' when the reader's journey continues across pages (a loop line, a short synthesis paragraph, and 2-3 deeper-reading links). Pick variant='commercial' when the conclusion IS a recommendation (a loop line, one 'decide' card carrying logo+name+reason+CTA, plus an honest alt-path escape hatch for readers who can't take the pick). Pick variant='transactional' when the explicit goal is conversion (a centered loop line, a bold value reaffirmation, one big CTA, and a row of trust marks that mirror the transactional hero at the top of the article). Use exactly once, as the last visual in the piece.",
   "tags": [

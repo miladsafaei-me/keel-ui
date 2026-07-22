@@ -10,7 +10,7 @@
   <div class="cp-riskwarn__main">
     <p class="cp-riskwarn__heading" id="{{ instance_id }}-title">{{ heading|default:"Risk Warning" }}</p>
     <div class="cp-riskwarn__body">{{ body|safe }}</div>
-    <a class="cp-riskwarn__link" href="/risk-warning">
+    <a class="cp-riskwarn__link" href="{{ keel_config.risk_warning_url }}">
       <span class="cp-riskwarn__link-text">{{ link_text|default:"Read the full risk warning" }}</span>
       <svg class="cp-riskwarn__link-arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
         <path d="M3.2 8h9.2M8.4 3.6 12.8 8l-4.4 4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>

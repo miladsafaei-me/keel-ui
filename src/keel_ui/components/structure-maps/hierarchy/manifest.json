@@ -2,6 +2,7 @@
   "id": "hierarchy",
   "name": "Hierarchy / Tier Diagram",
   "category": "structure-maps",
+  "pack": "trading",
   "version": 2,
   "when_to_pick": "Show a top-down structure of who sits above whom, or how tiers stack — most useful for the IB model (a Master IB above several sub-IBs above their traders), a partnership/commission hierarchy, account or membership tiers (Bronze -> Silver -> Gold), or a prop-firm progression of account sizes. An optional single apex node sits at the top; each level below is a row of one or more nodes, joined by branching connector lines. Pick this when the relationship is hierarchical (levels of an org/tier); for a sequence of actions use how_it_works_steps, for branching decisions use decision-tree, and for attrition through stages use funnel.",
   "tags": ["hierarchy", "tier", "org-chart", "ib", "master-ib", "structure", "levels", "pyramid"],

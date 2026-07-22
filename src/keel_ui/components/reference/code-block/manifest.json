@@ -2,6 +2,7 @@
   "id": "code_block",
   "name": "Code Block",
   "category": "reference",
+  "pack": "core",
   "version": 2,
   "when_to_pick": "Show actual code the reader can copy and run — MQL4/5 expert-advisor snippets, TradingView Pine Script, Python ccxt order placement, a webhook payload, a CLI command. Use for a focused excerpt (a function, a loop, a config), not a whole file; long programs belong in a gist. The polished header carries a language chip + optional filename; readers get a one-click copy button, and optional line numbers help you reference specific lines in the surrounding prose.",
   "tags": ["code", "snippet", "reference", "pine-script", "python", "mql", "copy"],

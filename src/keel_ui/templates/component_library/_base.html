@@ -1,34 +1,25 @@
-{% extends "base_marketing.html" %}
-{% load static %}
-
-{% block title %}{% block cl_title %}Component Library{% endblock %} | SignalBots{% endblock %}
-
-{% block meta %}
-    <meta name="description" content="Interactive catalog of visual components used in SignalBots content pipeline.">
+{% load static %}<!DOCTYPE html>
+<html lang="en" data-keel-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block cl_title %}Component Library{% endblock %} | Keel UI</title>
+    <meta name="description" content="Interactive catalog of the Keel UI (cp-*) visual content components.">
     <meta name="robots" content="noindex,nofollow">
-{% endblock %}
-
-{% block extra_head %}
     <meta name="color-scheme" content="light dark">
-{% endblock %}
-
-{% block body_class %}page-component-library{% endblock %}
-
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'blog/css/content-pipeline.css' %}">
+    <link rel="stylesheet" href="{% static 'keel_ui/css/content-pipeline.css' %}">
     <link rel="stylesheet" href="{% static 'component_library/css/showcase.css' %}">
-{% endblock %}
-
-{% block content %}
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="page-component-library">
 <div class="cl-shell">
     {% include "component_library/_sidebar.html" %}
     <main class="cl-main">
         {% block cl_main %}{% endblock %}
     </main>
 </div>
-{% endblock %}
-
-{% block extra_js %}
-    <script src="{% static 'blog/js/content-pipeline.js' %}" defer></script>
-    <script src="{% static 'component_library/js/showcase.js' %}" defer></script>
-{% endblock %}
+<script src="{% static 'keel_ui/js/content-pipeline.js' %}" defer></script>
+<script src="{% static 'component_library/js/showcase.js' %}" defer></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

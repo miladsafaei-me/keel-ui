@@ -2,6 +2,7 @@
   "id": "anatomy_diagram",
   "name": "Anatomy Diagram (labeled breakdown)",
   "category": "structure-maps",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Teach the parts of a single visual subject by labeling them. A central inline-SVG subject (e.g. a candlestick, an order ticket, a chart pattern) sits in the middle and callout cards point to its parts with leader lines. Best for 'anatomy of X' / 'parts of a Y' explainers where the reader must connect each named part to its location on the picture. Pick the built-in 'candlestick' subject for OHLC explainers, or supply your own inline SVG via subject_svg for any other object.",
   "tags": ["anatomy", "diagram", "labeled", "breakdown", "callouts", "candlestick", "explainer"],

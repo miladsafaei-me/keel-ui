@@ -2,6 +2,7 @@
   "id": "timeline",
   "name": "Timeline",
   "category": "flows",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Walk the reader through a sequenced process with phases. Set orientation='vertical' (default) for a stacked list that holds longer bodies and a marker per step — best for rollouts, multi-week plans, or step-by-step procedures; the last step can be toned 'danger'/'warning' to call out kill-criteria / stop conditions. Set orientation='horizontal' for a compact left-to-right band of 3-6 short phases that read as a flow (e.g. a trading day: premarket -> London open -> NY close); keep titles and bodies short in this mode. For discrete numbered actions (do this, then that) use how_it_works_steps; for branching logic use decision-tree.",
   "tags": ["timeline", "process", "steps", "horizontal", "vertical", "phases"],

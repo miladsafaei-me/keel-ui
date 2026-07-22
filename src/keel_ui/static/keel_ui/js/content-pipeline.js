@@ -13,6 +13,13 @@
 (function () {
   'use strict';
 
+  // Host config seam: the theme signal attribute name is configurable so the
+  // library reads whatever attribute the host carries its light/dark state in.
+  // Default is the Keel-neutral `data-keel-theme`; a host can point it at an
+  // existing attribute via `window.KEEL_UI_CONFIG = { themeAttribute: '...' }`.
+  var KEEL_CFG = (typeof window !== 'undefined' && window.KEEL_UI_CONFIG) || {};
+  var THEME_ATTR = KEEL_CFG.themeAttribute || 'data-keel-theme';
+
   // Relative luminance (0..1) of an element's resolved background-color, or null
   // when fully transparent / unparseable.
   function bgLuminance(el) {
@@ -24,14 +31,14 @@
   }
 
   function isDark() {
-    // The marketing surface owns theme via <html data-sb-theme>: absent = dark
-    // (the default), "light" = the user toggled light mode. This is the
-    // authoritative signal — check it before OS preference so a manual toggle
-    // that disagrees with the OS still themes the visuals correctly. Keep in
-    // sync with the cp-token cascade in content-pipeline.css.
-    var sbTheme = document.documentElement.getAttribute('data-sb-theme');
-    if (sbTheme === 'light') return false;
-    if (sbTheme === 'dark') return true;
+    // The host carries theme via <html [THEME_ATTR]>: absent = dark (the
+    // default), "light" = light mode. This is the authoritative signal — check
+    // it before OS preference so a manual toggle that disagrees with the OS
+    // still themes the visuals correctly. Keep in sync with the cp-token
+    // cascade in content-pipeline.css (which keys on the same attribute name).
+    var hostTheme = document.documentElement.getAttribute(THEME_ATTR);
+    if (hostTheme === 'light') return false;
+    if (hostTheme === 'dark') return true;
     if (document.documentElement.classList.contains('dark')) return true;
     if (document.body.classList.contains('dark')) return true;
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return true;

@@ -2,6 +2,7 @@
   "id": "limit_tracker",
   "name": "Limit / Headroom Tracker",
   "category": "trade-visuals",
+  "pack": "trading",
   "version": 1,
   "when_to_pick": "Track one or more current values against the limits they must respect, with a bar per rule showing how much headroom is left before a breach. Built for prop-firm / funded-account rules (daily-loss limit, max total drawdown, profit target, minimum trading days) but works for any value-vs-threshold read: margin usage, weekly risk budget used, exposure caps. Each row colours by how close it is. Set direction='max' (default) for a ceiling the value must stay UNDER (e.g. daily loss, drawdown), or 'min' for a floor/target it must reach (e.g. profit target, minimum trading days). Pick this when the takeaway is 'how close am I to breaking — or hitting — a rule'; for a single bounded score use gauge_meter.",
   "tags": ["limit", "headroom", "prop-firm", "drawdown", "risk", "threshold", "margin", "rules"],

@@ -2,6 +2,7 @@
   "id": "chart_radar",
   "name": "Radar Chart",
   "category": "compare",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Compare 2-4 candidates across 4-8 dimensions on the same 0-100 scale — bot scoring across latency / cost / customizability / win rate / drawdown / ease-of-use. Best when each axis is normalized to the same unit.",
   "tags": ["chart", "multi-axis", "comparison"],

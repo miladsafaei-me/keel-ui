@@ -2,6 +2,7 @@
   "id": "element_card",
   "name": "Element Card",
   "category": "structure",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Render a single content element with its role in the article made instantly legible. Pick variant 'essential' for the answer the searcher actually came for: an always-open, green-accented card with a role badge, the question it answers, a prominent answer heading, an optional label/value detail grid, and an optional source-attribution line — lift it into any section, an FAQ slot, or a TL;DR block. Pick variant 'complementary' for optional context that some readers want but most don't: a collapsible card with an 'Optional' role badge, a toggle title, body prose, and an optional supporting note; it stays collapsed by default (set open_by_default true to ship it expanded). Reach for this when you want one self-contained element whose importance is visually obvious, rather than a generic callout or a multi-row accordion (use accordion_faq for 3+ Q&A pairs).",
   "tags": [

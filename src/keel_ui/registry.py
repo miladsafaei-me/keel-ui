@@ -25,6 +25,7 @@ class Component:
     id: str
     name: str
     category: str
+    pack: str
     version: int
     when_to_pick: str
     tags: tuple[str, ...]
@@ -79,6 +80,7 @@ def _load_component(folder: Path, category: str) -> Component:
         id=manifest["id"],
         name=manifest["name"],
         category=manifest["category"],
+        pack=manifest.get("pack", "core"),
         version=int(manifest["version"]),
         when_to_pick=manifest["when_to_pick"],
         tags=tuple(manifest.get("tags") or ()),
@@ -105,8 +107,30 @@ class Registry:
 _CACHED: Registry | None = None
 
 
+def _enabled_packs() -> set[str] | None:
+    """Return the set of packs the host enabled, or None to mean 'all packs'.
+
+    Reads ``KEEL_UI['enabled_packs']`` from Django settings. Resilient by design:
+    if Django is not configured (e.g. a standalone registry inspection) the config
+    read fails and we fall back to no filtering, so every component still loads.
+    """
+    try:
+        from .config import get_config
+
+        packs = get_config().get("enabled_packs")
+    except Exception:  # noqa: BLE001 - any config/Django failure means "no filtering"
+        return None
+    if not packs:
+        return None
+    return set(packs)
+
+
 def load_registry(*, reload: bool = False) -> Registry:
-    """Build (or return cached) registry of every component on disk."""
+    """Build (or return cached) registry of every component on disk.
+
+    Components whose ``pack`` is not in the host's ``KEEL_UI['enabled_packs']`` are
+    skipped, so a non-trading host can exclude the trading pack entirely.
+    """
     global _CACHED
     if _CACHED is not None and not reload:
         return _CACHED
@@ -117,10 +141,13 @@ def load_registry(*, reload: bool = False) -> Registry:
         _CACHED = reg
         return reg
 
+    enabled = _enabled_packs()
     for category_dir in sorted(p for p in root.iterdir() if p.is_dir()):
         category = category_dir.name
         for comp_dir in sorted(p for p in category_dir.iterdir() if p.is_dir()):
             comp = _load_component(comp_dir, category)
+            if enabled is not None and comp.pack not in enabled:
+                continue
             if comp.id in reg.components:
                 raise ValueError(
                     f"duplicate component id {comp.id!r}: "

@@ -2,6 +2,7 @@
   "id": "copy_trade_flow",
   "name": "Copy-Trade Flow",
   "category": "structure-maps",
+  "pack": "trading",
   "version": 1,
   "when_to_pick": "Show how a copy-trading (mirror-trading) relationship works: one leader/strategy account places a trade, and it is mirrored to each follower's account scaled to THEIR balance/risk — so the reader sees the proportional one-to-many mirroring, not just an org chart. The leader card shows the master trade; each follower card shows the position that trade becomes on that account. Pick it for copy-trading / mirror-trading / PAMM-style content explaining how copying allocates and scales. For a generic org/tier structure use hierarchy; for the step-by-step setup use how_it_works_steps.",
   "tags": ["copy-trading", "mirror-trading", "leader", "follower", "pamm", "allocation", "scaling"],

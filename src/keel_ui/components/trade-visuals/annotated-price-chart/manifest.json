@@ -2,6 +2,7 @@
   "id": "annotated_price_chart",
   "name": "Annotated Price Chart",
   "category": "trade-visuals",
+  "pack": "trading",
   "version": 1,
   "when_to_pick": "Show a worked trade setup on a real-looking price chart: a price series (line or candlesticks) overlaid with annotation lines and zones — an entry level, a stop-loss line or zone (red/sell), a take-profit line or zone (green/buy), plus optional support/resistance levels and free-floating text callouts pinned to a candle. Pick it when you are walking the reader through a specific setup (a breakout long, a range fade, a pullback entry) and you want them to SEE where entry, risk and reward sit relative to structure — not just read numbers in a table. Static, dependency-free inline SVG: it renders the full chart on first paint with no chart library and no blank frame. Use the risk_reward_visualizer instead when you only need the proportional entry/SL/TP ladder without price action; use a Chart.js line/area chart when the point is the data trend itself rather than an annotated setup.",
   "tags": ["price-chart", "annotation", "trade-setup", "entry", "stop-loss", "take-profit", "support-resistance", "breakout", "candlestick", "svg"],

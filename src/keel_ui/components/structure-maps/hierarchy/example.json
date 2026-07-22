@@ -1,6 +1,6 @@
 {
-  "heading": "How the SignalBots Master-IB structure pays out",
-  "apex": { "title": "SignalBots — Master IB", "note": "Negotiates top-tier broker rebates", "tone": "success" },
+  "heading": "How a Master-IB structure pays out",
+  "apex": { "title": "Master IB", "note": "Negotiates top-tier broker rebates", "tone": "success" },
   "levels": [
     {
       "label": "Sub-IBs",

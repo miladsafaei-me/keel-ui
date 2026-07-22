@@ -2,6 +2,7 @@
   "id": "correlation_matrix",
   "name": "Correlation Matrix",
   "category": "charts",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Show the pairwise correlations between 3-10 instruments (FX pairs, crypto, indices, metals) as a heatmap. Use it to expose hidden over-exposure — e.g. long EUR/USD + long GBP/USD at +0.86 is really one EUR-weighted bet, not diversification. Cells use a theme-aware diverging scale: green for positive (aligned) correlation, red for negative (inverse), faint neutral near zero, with an axis legend. Pass a square matrix whose rows/cols match the symbols order; the diagonal is always 1.",
   "tags": ["correlation", "matrix", "heatmap", "diversification", "risk"],

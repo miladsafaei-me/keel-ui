@@ -2,6 +2,7 @@
   "id": "order_book_ladder",
   "name": "Order Book Ladder",
   "category": "trade-visuals",
+  "pack": "trading",
   "version": 2,
   "when_to_pick": "Show a static snapshot of an order book (bid ladder + ask ladder + last price). Use when explaining liquidity, spread, market impact, or how a bot's order interacts with the book. Static data (mock) — no live feed.",
   "tags": ["order-book", "market-depth", "liquidity"],

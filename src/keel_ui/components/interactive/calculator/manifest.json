@@ -2,6 +2,7 @@
   "id": "calculator",
   "name": "Interactive Calculator",
   "category": "interactive",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "ANY time the reader should plug in their own numbers and watch a result update live — position size, pip value, payout, break-even, expectancy, compounding, risk-of-ruin, spread cost, drawdown, leverage, anything. This is the ONE calculator component: you declare the inputs (number / slider / stepper / segmented / toggle), the output formulas (plain arithmetic over the input keys, with min/max/abs/round/clamp/sqrt/pow available), and how each result is formatted. The component builds the calculator for THAT specific need. Do not look for a pre-made calculator per topic — there is exactly one, and you shape it.",
   "tags": ["calculator", "interactive", "what-if", "builder"],

@@ -2,6 +2,7 @@
   "id": "formula_block",
   "name": "Formula Block",
   "category": "reference",
+  "pack": "core",
   "version": 1,
   "when_to_pick": "Display a single key formula — Kelly fraction, expected value, Sharpe ratio, position size, R-multiple, pip value — as a standout reference block. Use when one equation is the centerpiece and deserves large monospace typography, an accent rail, and a 'where' note defining its variables. For a runnable code snippet use code_block instead; for multiple stacked equations use one formula_block per equation.",
   "tags": ["formula", "math", "equation", "reference"],

@@ -27,6 +27,7 @@ from django.template import Context, Template
 from django.template.exceptions import TemplateSyntaxError
 from jsonschema import Draft202012Validator, ValidationError, validators
 
+from .config import get_config
 from .registry import Component, get_component
 
 log = logging.getLogger(__name__)
@@ -266,7 +267,17 @@ def render(
     validate_spec(component, spec)
 
     iid = instance_id or _make_instance_id()
-    ctx = Context({**spec, "instance_id": iid, "component_id": component.id})
+    cfg = get_config()
+    ctx = Context({
+        **spec,
+        "instance_id": iid,
+        "component_id": component.id,
+        # Host-config values available to any template (CONFIG-CONTRACT seam).
+        # Namespaced under `keel_config` so it never collides with a spec key.
+        "keel_config": {
+            "risk_warning_url": cfg.get("risk_warning_url") or "/risk-warning",
+        },
+    })
 
     load_prefix = "{% load cp_components %}"
 
