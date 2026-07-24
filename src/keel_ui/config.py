@@ -17,8 +17,9 @@ projects override only what they need.
         "risk_warning_url": None,
 
         # Which component packs load from the registry. "core" = format-agnostic
-        # visuals reusable anywhere; "trading" = buy/sell + IB/copy-trade domain.
-        "enabled_packs": ["core", "trading"],
+        # visuals reusable anywhere; "trading" = buy/sell + IB/copy-trade domain. The
+        # neutral default is core-only; a trading host adds "trading".
+        "enabled_packs": ["core"],
     }
 """
 

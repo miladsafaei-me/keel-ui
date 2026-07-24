@@ -37,12 +37,15 @@ INSTALLED_APPS = [
     "keel_ui",
 ]
 
-# Optional host config (all keys have neutral defaults):
+# Optional host config — every key shown here is already the neutral default, so a
+# host only sets the ones it needs to change:
 KEEL_UI = {
-    "theme_attribute": "data-sb-theme",   # attr on <html> carrying light/dark
+    "theme_attribute": "data-keel-theme",  # attr on <html> carrying light/dark; a host
+                                           # with its own signal sets e.g. "data-sb-theme"
     "theme_default_dark": True,
-    "risk_warning_url": "/risk-warning",  # target for the trading risk callout
-    "enabled_packs": ["core", "trading"],
+    "risk_warning_url": None,              # set (e.g. "/risk-warning") only on a trading
+                                           # host that renders the risk callout
+    "enabled_packs": ["core"],             # add "trading" on a trading host
 }
 ```
 
