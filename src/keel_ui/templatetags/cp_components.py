@@ -31,6 +31,78 @@ def to_json(value: Any) -> str:
     return mark_safe(json.dumps(value, ensure_ascii=False))
 
 
+@register.simple_tag(name="cp_rrv_geometry")
+def cp_rrv_geometry(entry: Any, sl: Any, tp: Any, decimals: Any = 4) -> dict:
+    """Compute the Risk:Reward visualizer's static-fallback geometry server-side.
+
+    Mirrors the arithmetic in ``risk-reward-visualizer/template.js`` so the pre-JS
+    (and no-JS / scraper) fallback ladder, bands and summary always match the
+    widget's own entry/sl/tp inputs — instead of a hardcoded EUR/USD placeholder
+    that contradicts the instrument the spec actually carries (e.g. a silver or
+    BTC setup rendering EUR/USD 4-decimal prices before the script runs).
+    """
+    try:
+        entry_f, sl_f, tp_f = float(entry), float(sl), float(tp)
+    except (TypeError, ValueError):
+        entry_f, sl_f, tp_f = 1.0850, 1.0820, 1.0910
+    try:
+        dec = int(decimals)
+    except (TypeError, ValueError):
+        dec = 4
+    if dec < 0 or dec > 6:
+        dec = 4
+
+    is_long = tp_f >= entry_f
+    risk = abs(entry_f - sl_f)
+    reward = abs(tp_f - entry_f)
+    rr = reward / risk if risk > 0 else 0.0
+    be_wr = (1.0 / (rr + 1.0)) * 100.0 if rr > 0 else 100.0
+
+    top = max(tp_f, sl_f, entry_f)
+    bot = min(tp_f, sl_f, entry_f)
+    rng = top - bot
+
+    def pos(price: float) -> float:
+        return ((top - price) / rng) * 100.0 if rng > 0 else 50.0
+
+    entry_pct = pos(entry_f)
+    reward_top = pos(tp_f) if is_long else entry_pct
+    reward_h = (entry_pct - pos(tp_f)) if is_long else (pos(tp_f) - entry_pct)
+    risk_top = entry_pct if is_long else pos(sl_f)
+    risk_h = (pos(sl_f) - entry_pct) if is_long else (entry_pct - pos(sl_f))
+
+    def fmt(n: float) -> str:
+        return f"{n:.{dec}f}"
+
+    if rr >= 1:
+        note = f"You aim for {rr:.2f}x what you risk"
+    elif rr > 0:
+        note = "Reward is smaller than risk"
+    else:
+        note = "Set a stop to define risk"
+
+    return {
+        "dir_label": "Long setup" if is_long else "Short setup",
+        "dir_attr": "long" if is_long else "short",
+        "risk": fmt(risk),
+        "reward": fmt(reward),
+        "rr": f"{rr:.2f}",
+        "be": f"{be_wr:.1f}",
+        "good": "true" if rr >= 1 else "false",
+        "note": note,
+        "reward_top": f"{reward_top:.3f}",
+        "reward_h": f"{max(reward_h, 0.0):.3f}",
+        "risk_top": f"{risk_top:.3f}",
+        "risk_h": f"{max(risk_h, 0.0):.3f}",
+        "tp_pos": f"{pos(tp_f):.3f}",
+        "entry_pos": f"{entry_pct:.3f}",
+        "sl_pos": f"{pos(sl_f):.3f}",
+        "tp_label": f"TP {fmt(tp_f)}",
+        "entry_label": f"Entry {fmt(entry_f)}",
+        "sl_label": f"SL {fmt(sl_f)}",
+    }
+
+
 # Categorical slice palette for doughnut / pie / polar-area. Mirrors the
 # window.cpTheme series() palette (content-pipeline.js) so slice charts match
 # every other multi-series chart. Deliberately carries NO trade-semantic red or

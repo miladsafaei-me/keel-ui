@@ -1,3 +1,4 @@
+{% cp_rrv_geometry entry_default|default:'1.0850' sl_default|default:'1.0820' tp_default|default:'1.0910' decimals|default:4 as g %}
 <div class="cp-html-block cp-html-block-rrv">
 <div class="cp-rrv" id="{{ instance_id }}-root"
      data-cp-dec="{{ decimals|default:4 }}"
@@ -7,7 +8,7 @@
      data-cp-instrument="{{ instrument|default:'EUR/USD' }}">
     <div class="cp-rrv__head">
         <h4 class="cp-rrv__title">{{ title|default:"Risk : Reward visualizer" }}</h4>
-        <span class="cp-rrv__dir" id="{{ instance_id }}-dir" data-dir="long">Long setup</span>
+        <span class="cp-rrv__dir" id="{{ instance_id }}-dir" data-dir="{{ g.dir_attr }}">{{ g.dir_label }}</span>
     </div>
 
     <div class="cp-calc__inputs cp-rrv__inputs">
@@ -27,43 +28,43 @@
 
     <div class="cp-rrv__stage">
         <div class="cp-rrv__bands" id="{{ instance_id }}-bands">
-            {% comment %} Static fallback geometry (EUR/USD long, R:R ≈ 1:2) so the figure is never blank before JS runs. JS recomputes for live inputs. {% endcomment %}
-            <div class="cp-rrv__band cp-rrv__band--reward" style="top:0%;height:66.67%">
+            {% comment %} Static fallback geometry is computed server-side from the same entry/sl/tp the JS uses (cp_rrv_geometry), so the pre-JS figure always matches the widget's own instrument instead of a hardcoded EUR/USD placeholder. JS recomputes live for editable inputs. {% endcomment %}
+            <div class="cp-rrv__band cp-rrv__band--reward" style="top:{{ g.reward_top }}%;height:{{ g.reward_h }}%">
                 <span class="cp-rrv__band-tag">Reward zone</span>
-                <span class="cp-rrv__band-amt">+0.0060</span>
+                <span class="cp-rrv__band-amt">+{{ g.reward }}</span>
             </div>
-            <div class="cp-rrv__band cp-rrv__band--risk" style="top:66.67%;height:33.33%">
+            <div class="cp-rrv__band cp-rrv__band--risk" style="top:{{ g.risk_top }}%;height:{{ g.risk_h }}%">
                 <span class="cp-rrv__band-tag">Risk zone</span>
-                <span class="cp-rrv__band-amt">−0.0030</span>
+                <span class="cp-rrv__band-amt">−{{ g.risk }}</span>
             </div>
         </div>
         <div class="cp-rrv__ladder" id="{{ instance_id }}-ladder">
-            <div class="cp-rrv__line cp-rrv__line--tp" style="top:0%"><span class="cp-rrv__pill">TP 1.0910</span></div>
-            <div class="cp-rrv__line cp-rrv__line--entry" style="top:66.67%"><span class="cp-rrv__pill">Entry 1.0850</span></div>
-            <div class="cp-rrv__line cp-rrv__line--sl" style="top:100%"><span class="cp-rrv__pill">SL 1.0820</span></div>
+            <div class="cp-rrv__line cp-rrv__line--tp" style="top:{{ g.tp_pos }}%"><span class="cp-rrv__pill">{{ g.tp_label }}</span></div>
+            <div class="cp-rrv__line cp-rrv__line--entry" style="top:{{ g.entry_pos }}%"><span class="cp-rrv__pill">{{ g.entry_label }}</span></div>
+            <div class="cp-rrv__line cp-rrv__line--sl" style="top:{{ g.sl_pos }}%"><span class="cp-rrv__pill">{{ g.sl_label }}</span></div>
         </div>
     </div>
 
-    <div class="cp-rrv__ratio" id="{{ instance_id }}-ratiowrap" data-good="true">
+    <div class="cp-rrv__ratio" id="{{ instance_id }}-ratiowrap" data-good="{{ g.good }}">
         <div class="cp-rrv__ratio-meta">
             <span class="cp-rrv__ratio-label">Reward-to-risk ratio</span>
-            <span class="cp-rrv__ratio-note" id="{{ instance_id }}-note">You make 2.0x what you risk</span>
+            <span class="cp-rrv__ratio-note" id="{{ instance_id }}-note">{{ g.note }}</span>
         </div>
-        <div class="cp-rrv__ratio-value" id="{{ instance_id }}-rr">1 : 2.00</div>
+        <div class="cp-rrv__ratio-value" id="{{ instance_id }}-rr">1 : {{ g.rr }}</div>
     </div>
 
     <div class="cp-rrv__summary">
         <div class="cp-rrv__cell cp-rrv__cell--risk">
             <div class="cp-rrv__cell-label">Risk (1R)</div>
-            <div class="cp-rrv__cell-value" id="{{ instance_id }}-risk">0.0030</div>
+            <div class="cp-rrv__cell-value" id="{{ instance_id }}-risk">{{ g.risk }}</div>
         </div>
         <div class="cp-rrv__cell cp-rrv__cell--reward">
             <div class="cp-rrv__cell-label">Reward</div>
-            <div class="cp-rrv__cell-value" id="{{ instance_id }}-reward">0.0060</div>
+            <div class="cp-rrv__cell-value" id="{{ instance_id }}-reward">{{ g.reward }}</div>
         </div>
         <div class="cp-rrv__cell">
             <div class="cp-rrv__cell-label">Break-even win rate</div>
-            <div class="cp-rrv__cell-value" id="{{ instance_id }}-be">33.3%</div>
+            <div class="cp-rrv__cell-value" id="{{ instance_id }}-be">{{ g.be }}%</div>
         </div>
     </div>
 
