@@ -41,7 +41,7 @@
       },
       "info": {
         "type": "object",
-        "description": "Fields for variant 'informational' (answer-first hero).",
+        "description": "Fields for variant 'informational' (answer-first hero). The big 'answer' must be a concrete value the article actually reports (a price, win rate, latency) and 'sparkline' must be that metric's real recent series. NEVER pair a qualitative answer ('The process', 'Rule-based ones') with an invented rising sparkline — a fabricated trend implying data the article does not have. No real number with a real trend → the article is not 'informational'.",
         "required": [
           "question",
           "answer",
@@ -124,7 +124,7 @@
       },
       "commercial": {
         "type": "object",
-        "description": "Fields for variant 'commercial' (top-pick + why hero).",
+        "description": "Fields for variant 'commercial' (top-pick + why hero). Use ONLY when the article has a genuine single top pick. For a balanced 'X vs Y' comparison whose thesis is that neither wins, do NOT force a ranked winner here — use 'informational' (if there is a real discrete answer) or no hero.",
         "required": [
           "pick"
         ],
@@ -149,7 +149,7 @@
               "name": {
                 "type": "string",
                 "maxLength": 48,
-                "description": "Name of the recommended pick, e.g. 'Acme Pro'."
+                "description": "Name of the recommended pick — a specific named broker/product/platform, e.g. 'Interactive Brokers'. NEVER a generic category ('A true ECN/STP account') or a descriptive sentence ('The broker whose account mode fits your EA'): the pick card is the implicit #1, so a concept here makes the ranked list read as 'where is #1?'. If the honest recommendation is an account TYPE, put that angle in name_suffix/reasons and still name the concrete top broker here."
               },
               "name_suffix": {
                 "type": "string",
