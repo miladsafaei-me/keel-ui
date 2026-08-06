@@ -5558,32 +5558,41 @@ html:not([data-keel-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
   color: var(--cp-text-strong);
   letter-spacing: -0.01em;
 }
+/* Vertical rail by default (mobile-first). A stacked timeline — numbered badge on
+ * a left rail, full-width card to its right — is the only legible layout for 4+
+ * steps inside the ~760px article column, where a 4/5-up horizontal row crushes
+ * each card to an unreadable sliver. Counts of 2–3 promote to a horizontal
+ * connected row on wide viewports (see the min-width block after the cards). */
 .cp-steps__list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1.75rem;
+  grid-template-columns: 1fr;
+  gap: 0;
   counter-reset: cp-steps;
 }
 .cp-steps__item {
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding-top: 0.4rem;
+  flex-direction: row;
+  align-items: stretch;
+  text-align: left;
+  gap: 0.85rem;
+  padding-bottom: 0.85rem;
 }
-/* horizontal connector: runs from this node's badge to the next, behind badges */
+.cp-steps__item:last-child {
+  padding-bottom: 0;
+}
+/* vertical connector: runs down the badge column, from this node to the next */
 .cp-steps__item::before {
   content: "";
   position: absolute;
-  top: calc(0.4rem + 21px);
-  left: calc(50% + 24px);
-  width: calc(100% - 48px + 1.5rem);
-  height: 2px;
-  background: linear-gradient(90deg, var(--cp-border-strong), var(--cp-accent-soft));
+  top: calc(42px + 0.2rem);
+  left: 21px;
+  width: 2px;
+  height: calc(100% - 42px - 0.2rem);
+  background: linear-gradient(180deg, var(--cp-border-strong), var(--cp-accent-soft));
   z-index: 0;
 }
 .cp-steps__item:last-child::before {
@@ -5592,7 +5601,8 @@ html:not([data-keel-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
 .cp-steps__node {
   position: relative;
   z-index: 1;
-  margin-bottom: 0.7rem;
+  flex: 0 0 auto;
+  padding-top: 0.2rem;
 }
 .cp-steps__badge {
   position: relative;
@@ -5637,6 +5647,7 @@ html:not([data-keel-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
 .cp-steps__card {
   position: relative;
   z-index: 1;
+  flex: 1 1 auto;
   width: 100%;
   background: var(--cp-bg-card);
   border: 1px solid var(--cp-border);
@@ -5648,7 +5659,6 @@ html:not([data-keel-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
 .cp-steps__item:hover .cp-steps__card {
   border-color: var(--cp-border-strong);
   box-shadow: var(--cp-shadow-md);
-  transform: translateY(-2px);
 }
 .cp-steps__item:hover .cp-steps__badge {
   border-color: var(--cp-accent-strong);
@@ -5667,43 +5677,45 @@ html:not([data-keel-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
   line-height: 1.55;
   color: var(--cp-text-muted);
 }
-/* narrow / mid columns: a 4-up row crushes each step to an unreadable sliver, so
- * below the blog content width (~720px) stack vertically with a left rail down the
- * badge centers — far more legible than 3+1 reflow or 180px columns. */
-@media (max-width: 768px) {
-  .cp-steps__list {
-    grid-template-columns: 1fr;
+/* Horizontal connected row — only for 2–3 steps, and only on viewports wide
+ * enough to give each card a legible width. 4+ steps intentionally stay on the
+ * vertical rail (see the base rules above): a 4/5-up row in the article column
+ * degrades to unreadable slivers, which is the failure this component avoids. */
+@media (min-width: 769px) {
+  .cp-steps__list[data-count="2"] {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+  .cp-steps__list[data-count="3"] {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+  .cp-steps__list[data-count="2"] .cp-steps__item,
+  .cp-steps__list[data-count="3"] .cp-steps__item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 0;
-  }
-  .cp-steps__item {
-    flex-direction: row;
-    align-items: stretch;
-    text-align: left;
-    gap: 0.85rem;
-    padding-top: 0;
-    padding-bottom: 0.85rem;
-  }
-  .cp-steps__item:last-child {
+    padding-top: 0.4rem;
     padding-bottom: 0;
   }
-  /* vertical connector down the badge column */
-  .cp-steps__item::before {
-    top: calc(42px + 0.2rem);
-    left: 21px;
-    width: 2px;
-    height: calc(100% - 42px - 0.2rem);
-    background: linear-gradient(180deg, var(--cp-border-strong), var(--cp-accent-soft));
+  /* horizontal connector: runs from this node's badge to the next, behind badges */
+  .cp-steps__list[data-count="2"] .cp-steps__item::before,
+  .cp-steps__list[data-count="3"] .cp-steps__item::before {
+    top: calc(0.4rem + 21px);
+    left: calc(50% + 24px);
+    width: calc(100% - 48px + 1.5rem);
+    height: 2px;
+    background: linear-gradient(90deg, var(--cp-border-strong), var(--cp-accent-soft));
   }
-  .cp-steps__node {
-    flex: 0 0 auto;
-    margin-bottom: 0;
-    padding-top: 0.2rem;
+  .cp-steps__list[data-count="2"] .cp-steps__node,
+  .cp-steps__list[data-count="3"] .cp-steps__node {
+    margin-bottom: 0.7rem;
+    padding-top: 0;
   }
-  .cp-steps__card {
-    flex: 1 1 auto;
-  }
-  .cp-steps__item:hover .cp-steps__card {
-    transform: none;
+  .cp-steps__list[data-count="2"] .cp-steps__item:hover .cp-steps__card,
+  .cp-steps__list[data-count="3"] .cp-steps__item:hover .cp-steps__card {
+    transform: translateY(-2px);
   }
 }
 
@@ -8719,12 +8731,3 @@ html:not([data-keel-theme="light"]) .cp-html-block-session-clock .cp-fxsc,
 .cp-calc__output-value { font-size: 1.55rem; }
 .cp-calc__output--featured { background: var(--cp-success-soft) !important; border-color: var(--cp-success); }
 
-/* How-it-works steps — even rows by step count (kills the 3+1 orphan); mobile stacks below) */
-.cp-steps__list[data-count="2"] { grid-template-columns: repeat(2, 1fr); }
-.cp-steps__list[data-count="3"] { grid-template-columns: repeat(3, 1fr); }
-.cp-steps__list[data-count="4"] { grid-template-columns: repeat(4, 1fr); }
-.cp-steps__list[data-count="5"] { grid-template-columns: repeat(5, 1fr); }
-.cp-steps__list[data-count="6"] { grid-template-columns: repeat(3, 1fr); }
-@media (max-width: 720px) {
-  .cp-steps__list[data-count] { grid-template-columns: 1fr; }
-}
