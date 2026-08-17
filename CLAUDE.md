@@ -6,6 +6,10 @@ The Keel platform constitution (`PLATFORM.md` in keel-kit) and the personal/glob
 rules in `~/.claude/CLAUDE.md` apply here unchanged; this file records what is
 specific to this package.
 
+## Task tracking
+
+Remaining and follow-up work for this project is tracked in [TODO.md](TODO.md), not in chat memory. Every pending task — priority, prerequisites/dependencies, enough context to resume cold — goes there before starting new work; remove a task from TODO.md the moment it's done.
+
 ## What this package is
 
 The `cp-*` visual component library: a typed on-disk registry + a Django-template
