@@ -17,6 +17,18 @@
   // library reads whatever attribute the host carries its light/dark state in.
   // Default is the Keel-neutral `data-keel-theme`; a host can point it at an
   // existing attribute via `window.KEEL_UI_CONFIG = { themeAttribute: '...' }`.
+  //
+  // The same object also carries palette overrides, because a host that has
+  // re-pointed the cp-* CSS tokens at its own design system would otherwise be
+  // left with charts still drawn in the library's default blues — canvas colours
+  // come from JS, not from the stylesheet, so a CSS-only skin stops at the edge
+  // of every Chart.js figure. Shape:
+  //
+  //   window.KEEL_UI_CONFIG = { palette: { light: { accent: '#...',
+  //                                                series: ['#...', ...] },
+  //                                        dark:  { ... } } };
+  //
+  // Only the keys given are replaced; everything else keeps the library default.
   var KEEL_CFG = (typeof window !== 'undefined' && window.KEEL_UI_CONFIG) || {};
   var THEME_ATTR = KEEL_CFG.themeAttribute || 'data-keel-theme';
 
@@ -89,6 +101,16 @@
     tooltipBg:     'rgba(40,52,85,0.96)',
     series: ['#7dd3fc', '#5eead4', '#c4b5fd', '#fbbf24', '#f9a8d4', '#6ee7b7']
   };
+
+  // Fold the host's overrides in once, at load, so no drawing path pays for it.
+  (function applyHostPalette() {
+    var over = KEEL_CFG.palette || {};
+    [[LIGHT, over.light], [DARK, over.dark]].forEach(function (pair) {
+      var target = pair[0], src = pair[1];
+      if (!src) { return; }
+      Object.keys(src).forEach(function (k) { target[k] = src[k]; });
+    });
+  }());
 
   function palette() { return isDark() ? DARK : LIGHT; }
   function series() { return palette().series.slice(); }
