@@ -1,0 +1,254 @@
+/* Select menu: the look of keel_ui/js/select-menu.js.
+ *
+ * Every value is a --keel-select-* custom property with a neutral default, so a host
+ * skins the control by pointing those names at its own tokens on any ancestor (the
+ * page's <main>, a section, a dialog) and never restyles the selectors below. The
+ * panel is a popover in the top layer, but custom properties still inherit through
+ * the DOM, so a token set on an ancestor reaches it.
+ */
+:root {
+  --keel-select-font-size: 0.875rem;
+  --keel-select-font-weight: 600;
+  --keel-select-height: 44px;
+  --keel-select-pad-x: 14px;
+  --keel-select-gap: 10px;
+  --keel-select-radius: 10px;
+  --keel-select-border-width: 1px;
+  --keel-select-bg: #ffffff;
+  --keel-select-bg-hover: #f5f6f8;
+  --keel-select-ink: #111318;
+  --keel-select-muted: #5d6676;
+  --keel-select-border: rgba(10, 15, 30, 0.16);
+  --keel-select-border-hover: rgba(10, 15, 30, 0.32);
+  --keel-select-border-open: #111318;
+  --keel-select-focus: #2563eb;
+  --keel-select-shadow: 0 1px 2px rgba(10, 15, 30, 0.05);
+  --keel-select-panel-bg: #ffffff;
+  --keel-select-panel-border: rgba(10, 15, 30, 0.12);
+  --keel-select-panel-radius: 12px;
+  --keel-select-panel-pad: 6px;
+  --keel-select-panel-shadow: 0 18px 44px -10px rgba(10, 15, 30, 0.22), 0 4px 12px -4px rgba(10, 15, 30, 0.08);
+  --keel-select-panel-max-width: 22rem;
+  --keel-select-option-height: 40px;
+  --keel-select-option-radius: 8px;
+  --keel-select-option-hover: #f1f3f7;
+  --keel-select-option-selected-bg: transparent;
+  --keel-select-option-selected-ink: #111318;
+  --keel-select-accent: #2563eb;
+  --keel-select-z: 2147483000;
+  --keel-select-speed: 0.16s;
+}
+
+.keel-select {
+  position: relative;
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.keel-select__native {
+  position: absolute;
+  inset: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  clip-path: inset(50%);
+}
+
+.keel-select__trigger {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--keel-select-gap);
+  min-width: 0;
+  min-height: var(--keel-select-height);
+  margin: 0;
+  padding-block: 0;
+  padding-inline: var(--keel-select-pad-x);
+  border: var(--keel-select-border-width) solid var(--keel-select-border);
+  border-radius: var(--keel-select-radius);
+  background: var(--keel-select-bg);
+  box-shadow: var(--keel-select-shadow);
+  color: var(--keel-select-ink);
+  font: inherit;
+  font-size: var(--keel-select-font-size);
+  font-weight: var(--keel-select-font-weight);
+  letter-spacing: normal;
+  line-height: 1.3;
+  text-align: start;
+  text-transform: none;
+  cursor: pointer;
+  transition: border-color var(--keel-select-speed) ease, background-color var(--keel-select-speed) ease, box-shadow var(--keel-select-speed) ease;
+}
+
+.keel-select__trigger:hover {
+  border-color: var(--keel-select-border-hover);
+  background: var(--keel-select-bg-hover);
+  color: var(--keel-select-ink);
+}
+
+.keel-select__trigger:focus-visible {
+  outline: 2px solid var(--keel-select-focus);
+  outline-offset: 2px;
+}
+
+.keel-select--open .keel-select__trigger {
+  border-color: var(--keel-select-border-open);
+  background: var(--keel-select-bg);
+}
+
+.keel-select__trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* The value and one invisible copy of every option share a single grid cell, so the
+   button takes the width of its longest option. */
+.keel-select__value-box {
+  display: grid;
+  min-width: 0;
+}
+
+.keel-select__value,
+.keel-select__sizer {
+  grid-area: 1 / 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.keel-select__sizer {
+  height: 0;
+  visibility: hidden;
+}
+
+.keel-select__chevron {
+  flex: none;
+  width: 0.5em;
+  height: 0.5em;
+  margin-block-start: -0.25em;
+  border-inline-end: 2px solid var(--keel-select-muted);
+  border-block-end: 2px solid var(--keel-select-muted);
+  transform: rotate(45deg);
+  transition: transform var(--keel-select-speed) ease, margin var(--keel-select-speed) ease;
+}
+
+.keel-select--open .keel-select__chevron {
+  margin-block-start: 0.25em;
+  transform: rotate(-135deg);
+}
+
+.keel-select__list {
+  position: fixed;
+  inset: auto;
+  z-index: var(--keel-select-z);
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(var(--keel-select-panel-max-width), calc(100vw - 16px));
+  margin: 0;
+  padding: var(--keel-select-panel-pad);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  border: 1px solid var(--keel-select-panel-border);
+  border-radius: var(--keel-select-panel-radius);
+  background: var(--keel-select-panel-bg);
+  box-shadow: var(--keel-select-panel-shadow);
+  color: var(--keel-select-ink);
+  font-size: var(--keel-select-font-size);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.keel-select__list:popover-open {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .keel-select__list:popover-open {
+    animation: keel-select-in var(--keel-select-speed) ease-out;
+  }
+}
+
+@keyframes keel-select-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.keel-select--up .keel-select__list:popover-open {
+  animation-name: keel-select-in-up;
+}
+
+@keyframes keel-select-in-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.keel-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: var(--keel-select-option-height);
+  margin: 0;
+  padding-block: 0;
+  padding-inline: 10px;
+  border-radius: var(--keel-select-option-radius);
+  color: var(--keel-select-ink);
+  cursor: pointer;
+  user-select: none;
+}
+
+.keel-select__option.is-active {
+  background: var(--keel-select-option-hover);
+}
+
+.keel-select__option[aria-selected="true"] {
+  background: var(--keel-select-option-selected-bg);
+  color: var(--keel-select-option-selected-ink);
+  font-weight: 700;
+}
+
+.keel-select__option[aria-selected="true"].is-active {
+  background: var(--keel-select-option-hover);
+}
+
+.keel-select__option[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.keel-select__option-label {
+  white-space: nowrap;
+}
+
+.keel-select__check {
+  flex: none;
+  width: 0.35em;
+  height: 0.7em;
+  margin-block-start: -0.15em;
+  margin-inline-end: 0.2em;
+  border-inline-end: 2px solid transparent;
+  border-block-end: 2px solid transparent;
+  transform: rotate(45deg);
+}
+
+.keel-select__option[aria-selected="true"] .keel-select__check {
+  border-color: var(--keel-select-accent);
+}
+
+@media (forced-colors: active) {
+  .keel-select__option.is-active {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

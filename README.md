@@ -74,3 +74,39 @@ any host brand tokens — so a host themes the library by overriding `--cp-*` al
   reference, structure). Reusable in any project.
 - **trading** — buy/sell + IB/copy-trade domain visuals (trade-visuals,
   risk-performance, IB tiers). For trading hosts. Select via `KEEL_UI["enabled_packs"]`.
+
+## Select menu — a styled native `<select>`
+
+Beside the content components, the package ships one site widget: a dropdown that
+enhances a native `<select>` in place. The select stays in the DOM, visually hidden, so
+forms submit it, `change` listeners keep firing and code that reads or writes
+`select.value` keeps working (writes repaint the button). The button follows the WAI-ARIA
+select-only combobox pattern (arrow keys, Home/End, PageUp/PageDown, type-ahead, Enter,
+Escape, Tab) and the options open in a popover, so no `overflow: hidden` ancestor or modal
+`<dialog>` can clip them. A browser without the Popover API keeps the native control.
+
+```html
+<link rel="stylesheet" href="{% static 'keel_ui/css/select-menu.css' %}">
+<script src="{% static 'keel_ui/js/select-menu.js' %}" defer></script>
+
+<label>Account size <select name="size" data-keel-select>…</select></label>
+```
+
+Opt in per element with `data-keel-select`. Selects added after load:
+`window.keelSelectMenu.enhance(root)`.
+
+**Skinning.** Every colour, radius, size and shadow is a `--keel-select-*` custom property
+with a neutral default in `select-menu.css`. Point them at your own tokens on any ancestor
+(the page's `<main>`, a section, a dialog); never restyle the `.keel-select__*` selectors.
+Custom properties inherit through the DOM, so a value set on an ancestor reaches the panel
+even though it renders in the top layer.
+
+| Property | Drives |
+|---|---|
+| `--keel-select-bg`, `-bg-hover`, `-ink`, `-muted` | the button's ground, its hover ground, the value, the chevron |
+| `--keel-select-border`, `-border-hover`, `-border-open`, `-focus` | the button's edge at rest, hovered, open, and the focus ring |
+| `--keel-select-height`, `-pad-x`, `-radius`, `-font-size`, `-font-weight`, `-shadow` | the button's shape |
+| `--keel-select-panel-bg`, `-panel-border`, `-panel-radius`, `-panel-shadow`, `-panel-pad`, `-panel-max-width` | the options panel |
+| `--keel-select-option-hover`, `-option-selected-bg`, `-option-selected-ink`, `-option-height`, `-option-radius`, `-accent` | an option: active, selected, the check mark |
+
+The host must have `keel_ui` in `INSTALLED_APPS` for `collectstatic` to find both files.
