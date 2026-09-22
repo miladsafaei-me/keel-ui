@@ -34,26 +34,26 @@
     <div class="cp-mc__stats">
         <div class="cp-mc__stat">
             <div class="cp-mc__stat-label">Median return</div>
-            <div class="cp-mc__stat-value" id="{{ instance_id }}-med">&mdash;</div>
+            <div class="cp-mc__stat-value" id="{{ instance_id }}-med">-</div>
             <div class="cp-mc__stat-sub">final equity, all paths</div>
         </div>
         <div class="cp-mc__stat">
             <div class="cp-mc__stat-label">Profitable paths</div>
-            <div class="cp-mc__stat-value cp-mc__stat-value--accent" id="{{ instance_id }}-w">&mdash;</div>
+            <div class="cp-mc__stat-value cp-mc__stat-value--accent" id="{{ instance_id }}-w">-</div>
             <div class="cp-mc__stat-sub">finished above start</div>
         </div>
         <div class="cp-mc__stat">
             <div class="cp-mc__stat-label">Worst drawdown</div>
-            <div class="cp-mc__stat-value cp-mc__stat-value--sell" id="{{ instance_id }}-dd">&mdash;</div>
+            <div class="cp-mc__stat-value cp-mc__stat-value--sell" id="{{ instance_id }}-dd">-</div>
             <div class="cp-mc__stat-sub">deepest peak-to-trough</div>
         </div>
         <div class="cp-mc__stat">
             <div class="cp-mc__stat-label">Risk of ruin</div>
-            <div class="cp-mc__stat-value cp-mc__stat-value--warn" id="{{ instance_id }}-ruin">&mdash;</div>
+            <div class="cp-mc__stat-value cp-mc__stat-value--warn" id="{{ instance_id }}-ruin">-</div>
             <div class="cp-mc__stat-sub">hit &minus;{{ ruin_threshold|default:25 }}% equity</div>
         </div>
     </div>
 
-    <p class="cp-mc__caption">{{ caption|default:"Same win rate, same reward-to-risk, 200 runs of 200 trades. The cone shows how wide real outcomes spread even with a genuine edge — several paths sit 20%+ underwater before recovering. Plan position size for the band, not the median." }}</p>
+    <p class="cp-mc__caption">{{ caption|default:"Same win rate, same reward-to-risk, 200 runs of 200 trades. The cone shows how wide real outcomes spread even with a genuine edge: several paths sit 20%+ underwater before recovering. Plan position size for the band, not the median." }}</p>
 </div>
 </div>

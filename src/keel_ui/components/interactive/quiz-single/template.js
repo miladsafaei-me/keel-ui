@@ -21,7 +21,7 @@ if (root) {
             });
             if (resultText) {
                 resultText.textContent = chosenCorrect
-                    ? 'Correct — nice read.'
+                    ? 'Correct, nice read.'
                     : 'Not quite. The right answer is highlighted in green.';
             }
         });

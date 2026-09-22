@@ -33,11 +33,11 @@
     </div>
     <div class="cp-sim__stats">
         <div class="cp-sim__stat"><div class="cp-sim__stat-label">Trades</div><div id="{{ instance_id }}-trades" class="cp-sim__stat-value">0</div></div>
-        <div class="cp-sim__stat"><div class="cp-sim__stat-label">Win rate</div><div id="{{ instance_id }}-wr" class="cp-sim__stat-value cp-sim__stat-value--accent">—</div></div>
+        <div class="cp-sim__stat"><div class="cp-sim__stat-label">Win rate</div><div id="{{ instance_id }}-wr" class="cp-sim__stat-value cp-sim__stat-value--accent">-</div></div>
         <div class="cp-sim__stat"><div class="cp-sim__stat-label">Avg win</div><div id="{{ instance_id }}-aw" class="cp-sim__stat-value cp-sim__stat-value--buy">0</div></div>
         <div class="cp-sim__stat"><div class="cp-sim__stat-label">Avg loss</div><div id="{{ instance_id }}-al" class="cp-sim__stat-value cp-sim__stat-value--sell">0</div></div>
         <div class="cp-sim__stat cp-sim__stat--wide"><div class="cp-sim__stat-label">Net P&amp;L (pips)</div><div id="{{ instance_id }}-pnl" class="cp-sim__stat-value">0</div></div>
     </div>
-    <p class="cp-sim__caption">{{ caption|default:"Same bot, same rules. Random price walk — win rate and P&L converge to the strategy's expected value only over many runs." }}</p>
+    <p class="cp-sim__caption">{{ caption|default:"Same bot, same rules. Random price walk: win rate and P&L converge to the strategy's expected value only over many runs." }}</p>
 </div>
 </div>

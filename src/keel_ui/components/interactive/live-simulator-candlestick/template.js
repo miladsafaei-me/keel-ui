@@ -170,7 +170,7 @@ function updateStats(){
     var avgLoss = losses.length ? losses.reduce(function(a, t){ return a + t.pips; }, 0) / losses.length : 0;
     var pnl = state.trades.reduce(function(a, t){ return a + t.pips; }, 0);
     el('-trades').textContent = n;
-    el('-wr').textContent = n ? (wins.length/n*100).toFixed(0) + '%' : '—';
+    el('-wr').textContent = n ? (wins.length/n*100).toFixed(0) + '%' : '-';
     el('-aw').textContent = '+' + avgWin.toFixed(1);
     el('-al').textContent = avgLoss.toFixed(1);
     var pnlEl = el('-pnl');

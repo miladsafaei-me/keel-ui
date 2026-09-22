@@ -43,7 +43,7 @@
         {% for o in outputs %}
         <div class="cp-calc__output{% if o.featured %} cp-calc__output--featured{% endif %}">
             <div class="cp-calc__output-label">{{ o.label }}</div>
-            <div id="{{ instance_id }}-out-{{ forloop.counter0 }}" class="cp-calc__output-value">&mdash;</div>
+            <div id="{{ instance_id }}-out-{{ forloop.counter0 }}" class="cp-calc__output-value">-</div>
         </div>
         {% endfor %}
     </div>
