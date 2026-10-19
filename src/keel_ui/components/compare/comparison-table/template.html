@@ -8,7 +8,8 @@
         {% for row in rows %}
         <tr>
             {% for cell in row.cells %}
-            <td>{% if cell.bold %}<strong>{% endif %}{% if cell.tone %}<span class="cp-{{ cell.tone }}-text">{{ cell.text|safe }}</span>{% else %}{{ cell.text|safe }}{% endif %}{% if cell.bold %}</strong>{% endif %}</td>
+            {% comment %}The first cell names its row, so it is the row's header: without it a table whose corner header is empty leaves the first column with no header at all (axe td-has-header).{% endcomment %}
+            <{% if forloop.first %}th scope="row"{% else %}td{% endif %}>{% if cell.bold %}<strong>{% endif %}{% if cell.tone %}<span class="cp-{{ cell.tone }}-text">{{ cell.text|safe }}</span>{% else %}{{ cell.text|safe }}{% endif %}{% if cell.bold %}</strong>{% endif %}</{% if forloop.first %}th{% else %}td{% endif %}>
             {% endfor %}
         </tr>
         {% endfor %}
