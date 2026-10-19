@@ -8,9 +8,10 @@ build step splits it into ``static/keel_ui/css/cp/``:
 - ``base.css``: rules that name no component (tokens, keyframes, globals) and
   the components keel-ui's own scripts add at runtime (ALWAYS);
 - ``<block>.css``: every rule of one component block (``cp-steps__title`` and
-  ``cp-steps--wide`` belong to ``cp-steps``), in source order. A rule naming
-  several blocks goes to the block that first appears latest in the source,
-  so it still loads after the rules it was written to follow;
+  ``cp-steps--wide`` belong to ``cp-steps``), in source order. A selector
+  naming several blocks goes to the block that first appears latest in the
+  source, so it still loads after the rules it was written to follow; a
+  selector list spanning several blocks is shared, and goes to base.css;
 - ``manifest.json``: the files in load order (base, then blocks by where
   they first appear in the source) and the block each file serves.
 
@@ -102,23 +103,35 @@ def _rules(css: str, media: str | None = None):
             yield media, prelude, body, pos
 
 
+def _part_blocks(part: str) -> set[str]:
+    blocks = {block_of(c) for c in _CLASS.findall(part)}
+    return blocks - {WRAPPER} or blocks
+
+
 def _assign(rules):
     first: dict[str, int] = {}
     parsed = []
     for media, sel, body, pos in rules:
-        blocks = {block_of(c) for c in _CLASS.findall(sel)} if sel else set()
-        for b in blocks:
-            first.setdefault(b, pos)
-        parsed.append((media, sel, body, blocks))
+        parts = [_part_blocks(p) for p in sel.split(",")] if sel else []
+        for blocks in parts:
+            for b in blocks:
+                first.setdefault(b, pos)
+        parsed.append((media, sel, body, parts))
     out = []
-    for media, sel, body, blocks in parsed:
-        named = blocks - {WRAPPER} or blocks
-        if not named or named <= ALWAYS:
-            home = "base"
-        else:
-            home = max(named - ALWAYS or named, key=lambda b: first[b])
-            if home in ALWAYS:
-                home = "base"
+    for media, sel, body, parts in parsed:
+        # Each selector in the list belongs to one block: the one among those
+        # it names that first appears latest (a descendant selector such as
+        # .cp-x .cp-y__z is written to follow both). A list whose selectors
+        # belong to different blocks is shared by all of them (the colour
+        # tokens on .cp-figure, .cp-html-block, .cp-table ...), so it goes to
+        # base.css, which every page loads.
+        homes = set()
+        for named in parts:
+            if not named or named <= ALWAYS:
+                homes.add("base")
+            else:
+                homes.add(max(named - ALWAYS or named, key=lambda b: first[b]))
+        home = homes.pop() if len(homes) == 1 else "base"
         out.append((home, media, sel, body))
     return out, first
 

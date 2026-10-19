@@ -18,15 +18,7 @@
   font-size: 0.86rem;
   letter-spacing: 0.01em;}
 .cp-table tbody{background: var(--cp-bg-card) !important;}
-.cp-table tbody :is(td, th){border-bottom: 1px solid var(--cp-border);
-  padding: 0.75rem 0.95rem;
-  color: var(--cp-text) !important;
-  vertical-align: middle;}
-.cp-table tbody tr :is(td, th) strong{color: var(--cp-text-strong) !important;}
 .cp-table tbody th{text-align: left; font-weight: inherit;}
 .cp-table tbody tr{transition: background var(--cp-transition);}
-.cp-table tbody tr:nth-child(even) :is(td, th){background: var(--cp-bg-output-soft);}
-.cp-table tbody tr:hover :is(td, th){background: var(--cp-bg-row-hover);}
-.cp-table tbody tr:last-child :is(td, th){border-bottom: 0;}
 .cp-table--green-red thead th:first-child{background: var(--cp-success-soft); color: var(--cp-success-strong);}
 .cp-table--green-red thead th:last-child{background: var(--cp-danger-soft); color: var(--cp-danger-strong);}
