@@ -61,3 +61,13 @@ the manifest `category`. Re-run `sync_component_catalog` after.
 
 Bump `version` in `pyproject.toml`, tag `vX.Y.Z`. Consumers re-pin `keel-ui==X.Y.Z`
 in their image requirements; local dev picks it up live via the editable install.
+
+## Per-component CSS split
+
+`static/keel_ui/css/content-pipeline.css` is the single source for cp-* styles,
+and `static/keel_ui/css/cp/` is generated from it (`keel_ui/cp_css.py`): one
+sheet per component block plus `base.css` and `manifest.json`. After editing
+content-pipeline.css, run `python3 src/keel_ui/cp_css.py build` and commit the
+regenerated files; `python3 src/keel_ui/cp_css.py check` exits 1 when they are
+stale. Hosts link `{% cp_stylesheets body_html as sheets %}` instead of the
+monolith so a page loads only the components its body draws.

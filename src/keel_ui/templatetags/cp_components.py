@@ -410,3 +410,13 @@ def cp_chart_config(chart_type: str, title: str, labels: list, datasets: list) -
         },
     }
     return mark_safe(html.escape(json.dumps(config, ensure_ascii=False), quote=True))
+
+
+@register.simple_tag
+def cp_stylesheets(body_html: Any) -> list[str]:
+    """Static paths of the per-component sheets a rendered body needs, in load
+    order (keel_ui.cp_css). Link these instead of content-pipeline.css so a
+    page downloads only the components it draws."""
+    from keel_ui.cp_css import stylesheets_for
+
+    return stylesheets_for(str(body_html or ""))
