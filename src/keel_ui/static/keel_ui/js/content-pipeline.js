@@ -594,11 +594,19 @@
         if (e.isIntersecting) { e.target.classList.add('cp-revealed'); io.unobserve(e.target); }
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-    nodes.forEach(function (n) {
-      if (n.getBoundingClientRect().top < vh * 0.92) return; // above/near fold: leave visible
-      n.classList.add('cp-reveal');
-      io.observe(n);
+    // Where each node sits is read from a probe observer's first callback, which
+    // the browser delivers with the box already measured. Reading
+    // getBoundingClientRect() here, between one node's class write and the next
+    // node's read, forced a layout per node (PageSpeed "Forced reflow").
+    var probe = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        probe.unobserve(e.target);
+        if (e.boundingClientRect.top < vh * 0.92) return; // above/near fold: leave visible
+        e.target.classList.add('cp-reveal');
+        io.observe(e.target);
+      });
     });
+    nodes.forEach(function (n) { probe.observe(n); });
   }
 
   function boot() { bootMermaid(); bootChartjs(); bootReveal(); }
